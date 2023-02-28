@@ -1,0 +1,457 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:46
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap08.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 8</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap07.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap09.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 8</H1></FONT>
+<A NAME="Heading115"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create three <B>const</B> <B>int </B>values, then add them
+together to produce a value that determines the size of an array in an array
+definition. Try to compile the same code in C and see what happens (you can
+generally force your C++ compiler to run as a C compiler by using a command-line
+flag).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading116"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Prove to yourself that the C and C++ compilers really do treat
+constants differently. Create a global <B>const</B> and use it in a global
+constant expression; then compile it under both C and C++.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S08:GlobalConst.cpp</font>
+
+<font color=#0000ff>const</font> <font color=#0000ff>int</font> n = 100;
+<font color=#0000ff>const</font> <font color=#0000ff>int</font> m = n + 2;
+
+<font color=#0000ff>int</font> main() {
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>While this is a legal C++ program, C doesn&#146;t allow
+expressions with <B>const</B> variables at the global level, so the above code
+will not compile in C. If you move the declaration of <B>m</B> inside of
+<B>main(&#160;)</B>, however, it works fine in C. But don&#146;t let this make
+you think that you can do this for array declarations. Exercise 1 shows that you
+cannot use a <B>const</B> variable as an array dimension in C under any
+circumstances.<BR></P></DIV>
+<A NAME="Heading117"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create example <B>const</B> definitions for all the built-in
+types and their variants. Use these in expressions with other <B>const</B>s to
+make new <B>const </B>definitions. Make sure they compile
+successfully.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading118"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>const</B> definition in a header file, include
+that header file in two <B>.cpp</B> files, then compile those files and link
+them. You should not get any errors. Now try the same experiment with
+C.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading119"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>const</B> whose value is determined at runtime by
+reading the time when the program starts (you&#146;ll have to use the
+<B>&lt;ctime&gt;</B> standard header). Later in the program, try to read a
+second value of the time into your <B>const</B> and see what happens.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S08:ConstTime.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;ctime&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    
+<font color=#0000ff>const</font> time_t now = time(0);
+
+<font color=#0000ff>int</font> main() {
+    cout &lt;&lt; <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>long</font>&gt;(now) &lt;&lt; endl;
+<font color=#009900>//  now = time(0);</font>
+<font color=#009900>//  cout &lt;&lt; static_cast&lt;long&gt;(now) &lt;&lt; endl;</font>
+}
+
+<font color=#009900>/* Output:
+949180534
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The first commented line is illegal because you can&#146;t
+assign to <B>const</B> variables &#150; they can only be initialized. I made
+the variable <B>now</B> global to emphasize an important difference between C
+and C++: you can initialize automatic variables at runtime in C, but not
+globals, like you can in C++. For example, the following C program works just
+fine:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S08:ConstTime.c</font>
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>const</font> time_t now = time(0);
+    printf(<font color=#004488>"%ld"</font>, now);
+}
+
+<font color=#009900>/* Output:
+949180534
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>If you move the definition of <B>now</B> outside of
+<B>main(&#160;),</B> a C compiler will complain.<BR></P></DIV>
+<A NAME="Heading120"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>const</B> array of <B>char</B>, then try to change
+one of the <B>char</B>s.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading121"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create an <B>extern const</B> declaration in one file, and put
+a <B>main(&#160;)</B> in that file that prints the value of the <B>extern
+const</B>. Provide an <B>extern const</B> definition in a second file, then
+compile and link the two files together.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading122"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write two pointers to <B>const</B> <B>long </B>using both
+forms of the declaration. Point one of them to an array of <B>long</B>.
+Demonstrate that you can increment or decrement the pointer, but you can&#146;t
+change what it points to.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading123"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a <B>const</B> pointer to a <B>double</B>, and point it
+at an array of <B>double</B>. Show that you can change what the pointer points
+to, but you can&#146;t increment or decrement the pointer.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading124"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a <B>const</B> pointer to a <B>const</B> object. Show
+that you can only read the value that the pointer points to, but you can&#146;t
+change the pointer or what it points to.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading125"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Remove the comment on the error-generating line of code in
+<B>PointerAssignment.cpp</B> to see the error that your compiler
+generates.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading126"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a character array literal with a pointer that points to
+the beginning of the array. Now use the pointer to modify elements in the array.
+Does your compiler report this as an error? Should it? If it doesn&#146;t, why
+do you think that is?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S08:StringLiteral.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>char</font>* word = <font color=#004488>"hello"</font>;
+    *word = 'j';
+    cout &lt;&lt; word &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+jello
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>As explained in the book, even though string literals are
+arrays of <B>const char</B>, for compatibility with C you can assign them to a
+<B>char*</B> (&#147;pointer to a non-const char&#148;). You&#146;re not
+supposed to be able to change a string literal (the standard says that any such
+attempt has undefined results), but most compilers run the program above the
+same. It&#146;s certainly not a recommend practice.<BR></P></DIV>
+<A NAME="Heading127"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a function that takes an argument by value as a
+<B>const</B>; then try to change that argument in the function body.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading128"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a function that takes a <B>float</B> by value. Inside
+the function, bind a <B>const float&amp;</B> to the argument, and only use the
+reference from then on to ensure that the argument is not changed.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading129"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-15</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>ConstReturnValues.cpp</B> removing comments on the
+error-causing lines one at a time, to see what error messages your compiler
+generates.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading130"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-16</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>ConstPointer.cpp</B> removing comments on the
+error-causing lines one at a time, to see what error messages your compiler
+generates.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading131"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-17</H2></FONT>
+<DIV ALIGN="LEFT"><P>Make a new version of <B>ConstPointer.cpp</B> called
+<B>ConstReference.cpp</B> which demonstrates references instead of pointers (you
+may need to look forward to Chapter 11).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S08:ConstReference.cpp</font>
+<font color=#009900>// Constant reference arg/return</font>
+
+<font color=#0000ff>void</font> t(<font color=#0000ff>int</font>&amp;) {}
+
+<font color=#0000ff>void</font> u(<font color=#0000ff>const</font> <font color=#0000ff>int</font>&amp; cir) {
+    <font color=#0000ff>int</font> i = cir;
+}
+
+<font color=#0000ff>const</font> <font color=#0000ff>int</font>&amp; w() {
+    <font color=#0000ff>static</font> <font color=#0000ff>int</font> i;
+    <font color=#0000ff>return</font> i;
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>int</font> x = 0;
+    <font color=#0000ff>int</font>&amp; ir = x;
+    <font color=#0000ff>const</font> <font color=#0000ff>int</font>&amp; cir = x;
+    
+    t(ir);
+    <font color=#009900>//! t(cir);         // Not OK</font>
+    
+    u(ir);
+    u(cir);
+    
+    <font color=#009900>//! int&amp; ip2 = w(); // Not OK</font>
+    <font color=#0000ff>const</font> <font color=#0000ff>int</font>&amp; cir2 = w();
+    <font color=#009900>//! w() = 1;        // Not OK</font>
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>When comparing this program to <B>ConstPointer.cpp</B> in the
+book, notice first the omission of those statements that qualify the reference
+itself as <B>const</B>. While you can declare a pointer itself to be
+<B>const</B> (as opposed to a pointer-to-const), all references are implicitly
+<B>const</B>, because once bound to an object you can&#146;t change that
+binding (more in Chapter 11). The commented-out statements are all <B>const</B>
+violations (i.e., you can&#146;t assign via a
+reference-to-<B>const</B>).<BR></P></DIV>
+<A NAME="Heading132"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-18</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>ConstTemporary.cpp</B> removing the comment on the
+error-causing line to see what error messages your compiler generates.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading133"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-19</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class containing both a <B>const</B> and a
+non-<B>const</B> <B>float</B>. Initialize these using the constructor
+initializer list.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S08:InitList.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> HasFloats {
+    <font color=#0000ff>const</font> <font color=#0000ff>float</font> x_;
+    <font color=#0000ff>float</font> y_;
+<font color=#0000ff>public</font>:
+    HasFloats(<font color=#0000ff>float</font> x, <font color=#0000ff>float</font> y)
+        : x_(x), y_(y)
+    {}
+    <font color=#0000ff>void</font> display() <font color=#0000ff>const</font> {
+        cout &lt;&lt; <font color=#004488>"x == "</font> &lt;&lt; x_ &lt;&lt; <font color=#004488>", y == "</font> &lt;&lt; y_ &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    HasFloats h(3,4);
+    h.display();
+}
+
+<font color=#009900>/* Output:
+x == 3, y == 4
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>You can initialize <B>y_</B> in the body of the constructor if
+you wish, but <B>const</B> members like <B>x_</B> must be initialized in the
+initializer list.<BR></P></DIV>
+<A NAME="Heading134"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-20</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class called <B>MyString</B> which contains a
+<B>string</B> and has a constructor that initializes the <B>string</B>, and a<B>
+print(&#160;)</B> function. Modify <B>StringStack.cpp</B> so that the container
+holds <B>MyString</B> objects, and <B>main(&#160;)</B> so it prints
+them.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading135"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-21</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class containing a <B>const</B> member that you
+initialize in the constructor initializer list and an untagged enumeration that
+you use to determine an array size.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading136"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-22</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>ConstMember.cpp</B>, remove the <B>const</B> specifier
+on the member function definition, but leave it on the declaration, to see what
+kind of compiler error message you get.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading137"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-23</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with both <B>const</B> and non-<B>const</B>
+member functions. Create <B>const</B> and non-<B>const</B> objects of this
+class, and try calling the different types of member functions for the different
+types of objects.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading138"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-24</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with both <B>const</B> and non-<B>const</B>
+member functions. Try to call a non-<B>const</B> member function from a
+<B>const</B> member function to see what kind of compiler error message you
+get.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading139"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-25</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>Mutable.cpp</B>, remove the comment on the error-causing
+line to see what sort of error message your compiler produces.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading140"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-26</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Quoter.cpp</B> by making <B>quote(&#160;)</B> a
+<B>const</B> member function and <B>lastquote</B> <B>mutable</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Here&#146;s the modified class definition:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S08:Quoter.cpp {O}</font>
+#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;ctime&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Quoter {
+  <font color=#0000ff>mutable</font> <font color=#0000ff>int</font> lastquote;
+<font color=#0000ff>public</font>:
+  Quoter();
+  <font color=#0000ff>int</font> lastQuote() <font color=#0000ff>const</font>;
+  <font color=#0000ff>const</font> <font color=#0000ff>char</font>* quote() <font color=#0000ff>const</font>;
+}; <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Don&#146;t forget to add a <B>const</B> suffix to the
+definition of <B>Quoter::quote(&#160;)</B> also. No other changes are
+necessary.<BR></P></DIV>
+<A NAME="Heading141"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-27</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with a <B>volatile</B> data member. Create both
+<B>volatile</B> and non-<B>volatile</B> member functions that modify the
+<B>volatile</B> data member, and see what the compiler says. Create both
+<B>volatile</B> and non-<B>volatile</B> objects of your class and try calling
+both the <B>volatile</B> and non-<B>volatile</B> member functions to see what is
+successful and what kind of error messages the compiler produces.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S08:Volatile.cpp</font>
+<font color=#0000ff>class</font> Volatile {
+    <font color=#0000ff>volatile</font> <font color=#0000ff>int</font> x;
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> mod1(<font color=#0000ff>int</font> x) {
+        <font color=#0000ff>this</font>-&gt;x = x;
+    }
+    <font color=#0000ff>void</font> mod2(<font color=#0000ff>int</font> x) <font color=#0000ff>volatile</font> {
+        <font color=#0000ff>this</font>-&gt;x = x;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    Volatile v1;
+    <font color=#0000ff>volatile</font> Volatile v2;
+    v1.mod1(1);
+    v1.mod2(2);
+    <font color=#009900>//! v2.mod1(3);  // Error</font>
+    v2.mod2(4);
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The only error is in attempting to call a non-<B>volatile</B>
+function for a <B>volatile</B> object. You might think that <B>mod1(&#160;)</B>
+would have trouble compiling, but it doesn&#146;t. <B>volatile</B> is not
+exactly the same as <B>const</B>. Just remember that <B>volatile</B> means that
+something outside what is visible in the source code may modify an object (and
+so <B>volatile</B> declarations usually are pointers). There&#146;s no problem
+with your code also modifying a <B>volatile</B> object like <B>mod1(&#160;)</B>
+does.<BR></P></DIV>
+<A NAME="Heading142"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+8-28</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class called <B>bird</B> that can <B>fly(&#160;)</B>
+and a class <B>rock</B> that can&#146;t. Create a <B>rock</B> object, take its
+address, and assign that to a <B>void*</B>. Now take the <B>void*</B>, assign it
+to a <B>bird*</B> (you&#146;ll have to use a cast), and call <B>fly(&#160;)</B>
+through that pointer. Is it clear why C&#146;s permission to openly assign via
+a <B>void*</B> (without a cast) is a &#147;hole&#148; in the language, which
+couldn&#146;t be propagated into C++?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This is the whole point of C++&#146;s type system! You
+shouldn&#146;t be able to accidentally misuse an object through pointer
+gyrations. If this were allowed, you could indirectly call any function at all
+for any object at all without the compiler complaining. Not a smart way to
+program.<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap07.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap09.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

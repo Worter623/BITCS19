@@ -1,0 +1,655 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:47
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap13.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 13</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap12.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap14.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 13</H1></FONT>
+<A NAME="Heading265"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>class Counted</B> that contains an <B>int id</B>
+and a <B>static int count</B>.  The default constructor should begin: 
+<B>Counted( ) : id(count++) {.</B>  It should print its <B>id</B> and that
+it&#146;s being created.  The destructor should print that it&#146;s being
+destroyed and its <B>id</B>.  Test your class.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading266"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Prove to yourself that <B>new</B> and <B>delete</B> always
+call the constructors and destructors by creating an object of <B>class Counted
+</B>(from Exercise 1) with <B>new</B> and destroying it with <B>delete</B>. Also
+create and destroy an array of these objects on the heap.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S13:Counted.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Counted {
+    <font color=#0000ff>int</font> id;
+    <font color=#0000ff>static</font> <font color=#0000ff>int</font> count;
+<font color=#0000ff>public</font>:
+    Counted() : id(count++) {
+        cout &lt;&lt; <font color=#004488>"Creating Counted("</font> &lt;&lt; id &lt;&lt; <font color=#004488>")\n"</font>;
+    }
+    ~Counted() {
+        cout &lt;&lt; <font color=#004488>"Destroying Counted("</font> &lt;&lt; id &lt;&lt; <font color=#004488>")\n"</font>;
+    }
+};
+
+<font color=#0000ff>int</font> Counted::count = 0;
+
+<font color=#0000ff>int</font> main() {
+    Counted* c = <font color=#0000ff>new</font> Counted;
+    <font color=#0000ff>delete</font> c;
+    
+    Counted * <font color=#0000ff>const</font> a = <font color=#0000ff>new</font> Counted[3];
+    <font color=#0000ff>delete</font> [] a;
+}
+
+<font color=#009900>/* Output:
+Creating Counted(0)
+Destroying Counted(0)
+Creating Counted(1)
+Creating Counted(2)
+Creating Counted(3)
+Destroying Counted(3)
+Destroying Counted(2)
+Destroying Counted(1)
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Just for fun I followed Bruce&#146;s advice and declared a to
+be a const pointer above (I usually forget). Remember to use the <B>delete
+[]</B> operator when freeing an array.<BR></P></DIV>
+<A NAME="Heading267"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repeat Exercise 4, but add a member function <B>f(&#160;)</B>
+to <B>Counted</B> that prints a message. Move through the <B>vector</B> and call
+<B>f(&#160;)</B> for each object.<BR></P></DIV>
+<A NAME="Heading268"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repeat Exercise 5 using a <B>PStash</B>.<BR></P></DIV>
+<A NAME="Heading269"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repeat Exercise 4, but add a member function <B>f(&#160;)</B>
+to <B>Counted</B> that prints a message. Move through the <B>vector</B> and call
+<B>f(&#160;)</B> for each object.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S13:CountedVector.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Counted {
+    <font color=#0000ff>int</font> id;
+    <font color=#0000ff>static</font> <font color=#0000ff>int</font> count;
+<font color=#0000ff>public</font>:
+    Counted() : id(count++) {
+        cout &lt;&lt; <font color=#004488>"Creating Counted("</font> &lt;&lt; id &lt;&lt; <font color=#004488>")\n"</font>;
+    }
+    ~Counted() {
+        cout &lt;&lt; <font color=#004488>"Destroying Counted("</font> &lt;&lt; id &lt;&lt; <font color=#004488>")\n"</font>;
+    }
+    <font color=#0000ff>void</font> f() {
+        cout &lt;&lt; <font color=#004488>"Hi! I'm #"</font> &lt;&lt; id &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>int</font> Counted::count = 0;
+
+<font color=#0000ff>int</font> main() {
+    vector&lt;Counted*&gt; v;
+    <font color=#0000ff>for</font> (size_t i = 0; i &lt; 3; ++i)
+        v.push_back(<font color=#0000ff>new</font> Counted);
+
+    <font color=#0000ff>for</font> (size_t i = 0; i &lt; v.size(); ++i)
+        v[i]-&gt;f();
+
+    <font color=#0000ff>for</font> (size_t i = 0; i &lt; v.size(); ++i)
+        <font color=#0000ff>delete</font> v[i];
+}
+
+<font color=#009900>/* Output:
+Creating Counted(0)
+Creating Counted(1)
+Creating Counted(2)
+Hi! I'm #0
+Hi! I'm #1
+Hi! I'm #2
+Destroying Counted(0)
+Destroying Counted(1)
+Destroying Counted(2)
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>I use <B>size_t</B> for <B>i</B> above because that&#146;s
+what <B>vector&lt;T&gt;::size(&#160;)</B> returns, and I didn&#146;t want any
+signed-to-unsigned comparison warnings from my compiler. In Volume 2
+you&#146;ll see better ways of applying a function to elements in a
+container.<BR></P></DIV>
+<A NAME="Heading270"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Dynamically create an array of objects of <B>class Counted
+</B>(from Exercise 1). Call <B>delete</B> for the resulting pointer, <I>without
+the square brackets</I>. Explain the results.<BR></P></DIV>
+<A NAME="Heading271"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create an object of <B>class Counted </B>(from Exercise 1)
+using <B>new</B>, cast the resulting pointer to a <B>void*</B>, and delete that.
+Explain the results.<BR></P></DIV>
+<A NAME="Heading272"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Dynamically create an array of objects of <B>class Counted
+</B>(from Exercise 1). Call <B>delete</B> for the resulting pointer, <I>without
+the square brackets</I>. Explain the results.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S13:WrongDelete.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Counted {
+    <font color=#0000ff>int</font> id;
+    <font color=#0000ff>static</font> <font color=#0000ff>int</font> count;
+<font color=#0000ff>public</font>:
+    Counted() : id(count++) {
+        cout &lt;&lt; <font color=#004488>"Creating Counted("</font> &lt;&lt; id &lt;&lt; <font color=#004488>")\n"</font>;
+    }
+    ~Counted() {
+        cout &lt;&lt; <font color=#004488>"Destroying Counted("</font> &lt;&lt; id &lt;&lt; <font color=#004488>")\n"</font>;
+    }
+    <font color=#0000ff>void</font> f() {
+        cout &lt;&lt; <font color=#004488>"Hi! I'm #"</font> &lt;&lt; id &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>int</font> Counted::count = 0;
+
+<font color=#0000ff>int</font> main() {
+    Counted *<font color=#0000ff>const</font> a = <font color=#0000ff>new</font> Counted[3];
+    <font color=#0000ff>delete</font> a;
+}
+
+<font color=#009900>/* Output:
+Creating Counted(0)
+Creating Counted(1)
+Creating Counted(2)
+Destroying Counted(0)
+&lt;access violation !!!&gt;
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Another compiler caused my machine to hang when I ran this
+program! If <B>a</B> was created as an array, it must be deleted as an array,
+since more work needs to be done than just destroying a single element. Each
+compiler can do this however it wants; you just need to be sure that whenever
+you use brackets in the <B>new</B> operation, you must also use <B>delete []</B>
+to destroy the objects. There are even different library functions called to
+free scalar memory (<B>operator delete(&#160;)</B>) vs. array memory
+(<B>operator delete[](&#160;)</B>), and you override them separately.<BR></P></DIV>
+<A NAME="Heading273"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create an object of <B>class Counted </B>(from Exercise 1)
+using <B>new</B>, cast the resulting pointer to a <B>void*</B>, and delete that.
+Explain the results.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S13:WrongPointer.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Counted {
+    <font color=#0000ff>int</font> id;
+    <font color=#0000ff>static</font> <font color=#0000ff>int</font> count;
+<font color=#0000ff>public</font>:
+    Counted() : id(count++) {
+        cout &lt;&lt; <font color=#004488>"Creating Counted("</font> &lt;&lt; id &lt;&lt; <font color=#004488>")\n"</font>;
+    }
+    ~Counted() {
+        cout &lt;&lt; <font color=#004488>"Destroying Counted("</font> &lt;&lt; id &lt;&lt; <font color=#004488>")\n"</font>;
+    }
+    <font color=#0000ff>void</font> f() {
+        cout &lt;&lt; <font color=#004488>"Hi! I'm #"</font> &lt;&lt; id &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>int</font> Counted::count = 0;
+
+<font color=#0000ff>int</font> main() {
+    Counted* c = <font color=#0000ff>new</font> Counted;
+    <font color=#0000ff>void</font>* p = c;
+    <font color=#0000ff>delete</font> p;
+}
+
+<font color=#009900>/* Output:
+Creating Counted(0)
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>I chose to define a <B>void*</B> variable in a separate step
+instead of casting the <B>new</B> expression, but the results are the same: when
+you <B>delete</B> a <B>void*</B>, no destructor is called, which is almost
+always bad news.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=4><B><I>13-10</I></B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Devise a test for <B>Framis.cpp</B> to show yourself
+approximately how much faster the custom <B>new</B> and <B>delete</B> run than
+the global <B>new</B> and <B>delete</B>.<BR></P></DIV>
+<A NAME="Heading274"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with an overloaded operator <B>new</B> and
+<B>delete</B>, both the single-object versions and the array versions.
+Demonstrate that both versions work.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S13:ClassHeap.cpp</font>
+#include &lt;cstdio&gt;
+#include &lt;<font color=#0000ff>new</font>&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> OwnHeap {
+<font color=#0000ff>public</font>:
+    OwnHeap() {
+        printf(<font color=#004488>"OwnHeap::OwnHeap()\n"</font>);
+    }
+    ~OwnHeap() {
+        printf(<font color=#004488>"OwnHeap::~OwnHeap()\n"</font>);
+    }
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font>* <font color=#0000ff>operator</font> <font color=#0000ff>new</font>(size_t) <font color=#0000ff>throw</font>(bad_alloc);
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font> <font color=#0000ff>operator</font> <font color=#0000ff>delete</font>(<font color=#0000ff>void</font>*, size_t);
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font>* <font color=#0000ff>operator</font> <font color=#0000ff>new</font>[](size_t sz) <font color=#0000ff>throw</font>(bad_alloc);
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font> <font color=#0000ff>operator</font> <font color=#0000ff>delete</font>[](<font color=#0000ff>void</font>* p, size_t);
+};
+
+<font color=#0000ff>void</font>* OwnHeap::<font color=#0000ff>operator</font> <font color=#0000ff>new</font>(size_t size) <font color=#0000ff>throw</font>(bad_alloc) {
+    <font color=#0000ff>for</font> (;;) {
+        <font color=#0000ff>void</font>* block = ::<font color=#0000ff>operator</font> <font color=#0000ff>new</font>(size);
+        
+        <font color=#0000ff>if</font> (block) {
+            printf(<font color=#004488>"OwnHeap::operator new() allocating "</font>
+                   <font color=#004488>"%lu bytes in %p\n"</font>,
+                   <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>unsigned</font> <font color=#0000ff>long</font>&gt;(size), block);
+            <font color=#0000ff>return</font> block;
+        }
+        
+        new_handler globalHandler = set_new_handler(0);
+        set_new_handler(globalHandler);
+        
+        <font color=#0000ff>if</font> (globalHandler)
+            globalHandler();
+        <font color=#0000ff>else</font>
+            <font color=#0000ff>throw</font> bad_alloc();
+    }
+}
+
+<font color=#0000ff>void</font> OwnHeap::<font color=#0000ff>operator</font> <font color=#0000ff>delete</font>(<font color=#0000ff>void</font>* p, size_t size) {
+    printf(<font color=#004488>"OwnHeap::operator delete freeing %lu bytes in %p\n"</font>,
+           <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>unsigned</font> <font color=#0000ff>long</font>&gt;(size), p);
+    ::<font color=#0000ff>operator</font> <font color=#0000ff>delete</font>(p);
+}
+
+<font color=#0000ff>void</font>* OwnHeap::<font color=#0000ff>operator</font> <font color=#0000ff>new</font>[](size_t size) <font color=#0000ff>throw</font>(bad_alloc) {
+    printf(<font color=#004488>"OwnHeap::operator new[]() calling "</font>
+           <font color=#004488>"OwnHeap::operator new(%lu)\n"</font>,
+           <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>unsigned</font> <font color=#0000ff>long</font>&gt;(size));
+    <font color=#0000ff>return</font> <font color=#0000ff>operator</font> <font color=#0000ff>new</font>(size);
+}
+
+<font color=#0000ff>void</font> OwnHeap::<font color=#0000ff>operator</font> <font color=#0000ff>delete</font>[](<font color=#0000ff>void</font>* p, size_t size) {
+    printf(<font color=#004488>"OwnHeap::operator delete[]() calling "</font>
+           <font color=#004488>"OwnHeap::operator delete(%p, %lu)\n"</font>,
+           p, <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>unsigned</font> <font color=#0000ff>long</font>&gt;(size));
+    <font color=#0000ff>operator</font> <font color=#0000ff>delete</font>(p, size);
+}
+
+<font color=#0000ff>int</font> main() {
+    OwnHeap* p = <font color=#0000ff>new</font> OwnHeap;
+    OwnHeap* pa = <font color=#0000ff>new</font> OwnHeap[2];
+    <font color=#0000ff>delete</font> p;
+    <font color=#0000ff>delete</font> [] pa;
+}
+
+<font color=#009900>/* Output (yours may vary):
+OwnHeap::operator new() allocating 1 bytes in 0x804a7e8
+OwnHeap::OwnHeap()
+OwnHeap::operator new[]() calling OwnHeap::operator new(6)
+OwnHeap::operator new() allocating 6 bytes in 0x804a7f8
+OwnHeap::OwnHeap()
+OwnHeap::OwnHeap()
+OwnHeap::~OwnHeap()
+OwnHeap::operator delete freeing 1 bytes in 0x804a7e8
+OwnHeap::~OwnHeap()
+OwnHeap::~OwnHeap()
+OwnHeap::operator delete[]() calling OwnHeap::operator delete(0x804a7f8, 6)
+OwnHeap::operator delete freeing 6 bytes in 0x804a7f8 
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>When you define class-based <B>operator</B> <B>new</B> and
+<B>delete</B> functions, they are static member functions, whether or not you
+declare them so, but it&#146;s good style to be explicit about it. There are
+quite a number of allocation-related functions defined in the standard C++
+library. In fact, here are all the prototypes:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>void</font>* <font color=#0000ff>operator</font> <font color=#0000ff>new</font>(std::size_t size) <font color=#0000ff>throw</font>(std::bad_alloc);
+<font color=#0000ff>void</font>* <font color=#0000ff>operator</font> <font color=#0000ff>new</font>(std::size_t size, <font color=#0000ff>const</font> std::nothrow_t&amp;) 
+    <font color=#0000ff>throw</font>();
+<font color=#0000ff>void</font>  <font color=#0000ff>operator</font> <font color=#0000ff>delete</font>(<font color=#0000ff>void</font>* ptr) <font color=#0000ff>throw</font>();
+<font color=#0000ff>void</font>  <font color=#0000ff>operator</font> <font color=#0000ff>delete</font>(<font color=#0000ff>void</font>* ptr, <font color=#0000ff>const</font> std::nothrow_t&amp;) 
+    <font color=#0000ff>throw</font>();
+<font color=#0000ff>void</font>* <font color=#0000ff>operator</font> <font color=#0000ff>new</font>[](std::size_t size) 
+    <font color=#0000ff>throw</font>(std::bad_alloc);
+<font color=#0000ff>void</font>* <font color=#0000ff>operator</font> <font color=#0000ff>new</font>[](std::size_t size,
+                     <font color=#0000ff>const</font> std::nothrow_t&amp;) <font color=#0000ff>throw</font>();
+<font color=#0000ff>void</font>  <font color=#0000ff>operator</font> <font color=#0000ff>delete</font>[](<font color=#0000ff>void</font>* ptr) <font color=#0000ff>throw</font>();
+<font color=#0000ff>void</font>  <font color=#0000ff>operator</font> <font color=#0000ff>delete</font>[](<font color=#0000ff>void</font>* ptr, <font color=#0000ff>const</font> std::nothrow_t&amp;) 
+    <font color=#0000ff>throw</font>();
+<font color=#0000ff>void</font>* <font color=#0000ff>operator</font> <font color=#0000ff>new</font>  (std::size_t size, <font color=#0000ff>void</font>* ptr) <font color=#0000ff>throw</font>();
+<font color=#0000ff>void</font>* <font color=#0000ff>operator</font> <font color=#0000ff>new</font>[](std::size_t size, <font color=#0000ff>void</font>* ptr) <font color=#0000ff>throw</font>();
+<font color=#0000ff>void</font>  <font color=#0000ff>operator</font> <font color=#0000ff>delete</font>  (<font color=#0000ff>void</font>* ptr, <font color=#0000ff>void</font>*) <font color=#0000ff>throw</font>();
+<font color=#0000ff>void</font>  <font color=#0000ff>operator</font> <font color=#0000ff>delete</font>[](<font color=#0000ff>void</font>* ptr, <font color=#0000ff>void</font>*) <font color=#0000ff>throw</font>();</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P>
+<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>All except the placement versions that take an extra
+<B>void*</B> parameter (the last four above) can be overridden either globally
+or on a class basis. The <B>nothrow</B> versions return a null pointer if memory
+fails; the others throw a <B>bad_alloc</B> exception. I patterned the
+implementation of <B>OwnHeap::operator new</B> after the global one, which
+basically has a loop, and throws a <B>bad_alloc</B> exception if there is no new
+handler defined (which is the default case). Here is an excerpt from the C++
+Standard describing the global <B>operator new</B>:<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Executes a loop: Within the loop, the function first attempts
+to allocate the requested storage. Whether the attempt involves a call to the
+Standard C library function <TT><FONT FACE="Courier New">malloc</FONT></TT> is
+unspecified. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Returns a pointer to the allocated storage if the attempt is
+successful. Otherwise, if the last argument to
+<TT><FONT FACE="Courier New">set_new_handler()</FONT></TT> was a null pointer,
+throw <TT><FONT FACE="Courier New">bad_alloc</FONT></TT>. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Otherwise, the function calls the current <I>new_handler</I>.
+If the called function returns, the loop repeats. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The loop terminates when an attempt to allocate the requested
+storage is successful or when a called <I>new_handler</I> function does not
+return. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The only difference between the above and <B>OwnHeap::operator
+new</B> is that the latter calls the global <B>operator new</B> to allocate the
+storage.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Note that there are two versions of <B>operator delete</B>:
+one that takes a second <B>size_t</B> parameter, and one that doesn&#146;t. The
+two-parameter version allows you to capture the number of bytes that are going
+to be deleted. This is the version that I defined in this solution. Don&#146;t
+be too alarmed if your compiler doesn&#146;t delete the same amount of memory
+that was allocated for the array of <B>OwnHeap</B> objects. Most of the
+compilers I used didn&#146;t. Go figure.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Since I didn&#146;t have anything unique to do for the array
+versions, I just had them call the scalar versions to do their work. The
+important thing is that these functions were called when allocating arrays, so
+you can provide special processing if you need to.<BR></P></DIV>
+<A NAME="Heading275"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with a placement <B>new</B> with a second
+argument of type <B>string</B>. The class should contain a <B>static
+vector&lt;string&gt; </B>where the second <B>new </B>argument is stored. The
+placement <B>new </B>should allocate storage as normal. In <B>main(&#160;)</B>,
+make calls to your placement <B>new</B> with <B>string</B> arguments that
+describe the calls (you may want to use the preprocessor&#146;s <B>__FILE__</B>
+and <B>__LINE__</B> macros).<BR></P></DIV>
+<A NAME="Heading276"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>ArrayOperatorNew.cpp</B> by adding a <B>static
+vector&lt;Widget*&gt;</B> that adds each <B>Widget</B> address that is allocated
+in <B>operator new( )</B> and removes it when it is released via <B>operator
+delete( )</B>. (You may need to look up information about <B>vector</B> in your
+Standard C++ Library documentation or in the 2<SUP>nd</SUP> volume of this book,
+available at the Web site.) Create a second class called <B>MemoryChecker
+</B>that has a destructor that prints out the number of <B>Widget</B> pointers
+in your <B>vector</B>. Create a program with a single global instance of
+<B>MemoryChecker</B> and in <B>main(&#160;)</B>, dynamically allocate and
+destroy several objects and arrays of <B>Widget</B>. Show that
+<B>MemoryChecker</B> reveals memory leaks.<BR></P></DIV>
+<A NAME="Heading277"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with a placement <B>new</B> with a second
+argument of type <B>string</B>. The class should contain a <B>static
+vector&lt;string&gt; </B>where the second <B>new</B> argument is stored. The
+placement <B>new </B>should allocate storage as normal. In <B>main(&#160;)</B>,
+make calls to your placement <B>new</B> with <B>string</B> arguments that
+describe the calls (you may want to use the preprocessor&#146;s <B>__FILE__</B>
+and <B>__LINE__</B> macros).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S13:PlacementNew.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+#include &lt;<font color=#0000ff>new</font>&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Track {
+    <font color=#0000ff>static</font> vector&lt;string&gt; allocs;
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font>* <font color=#0000ff>operator</font> <font color=#0000ff>new</font>(size_t size, <font color=#0000ff>const</font> <font color=#0000ff>char</font>* file,
+                              <font color=#0000ff>int</font> line);
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font> display();
+};
+
+vector&lt;string&gt; Track::allocs;
+
+<font color=#0000ff>void</font>* Track::<font color=#0000ff>operator</font> <font color=#0000ff>new</font>(size_t size, <font color=#0000ff>const</font> <font color=#0000ff>char</font>* file,
+                          <font color=#0000ff>int</font> line) {
+    ostringstream os;
+    os &lt;&lt; file &lt;&lt; <font color=#004488>", line "</font> &lt;&lt; line;
+    allocs.push_back(os.str());
+    <font color=#0000ff>return</font> ::<font color=#0000ff>operator</font> <font color=#0000ff>new</font>(size);
+}
+
+<font color=#0000ff>void</font> Track::display() {
+    <font color=#0000ff>for</font> (size_t i = 0; i &lt; allocs.size(); ++i)
+        cout &lt;&lt; allocs[i] &lt;&lt; endl;
+}
+
+<font color=#009900>// Preprocessor trick:</font>
+#define <font color=#0000ff>new</font> <font color=#0000ff>new</font> (__FILE__, __LINE__)
+
+<font color=#0000ff>int</font> main() {
+    Track* t1 = <font color=#0000ff>new</font> Track;
+    Track* t2 = <font color=#0000ff>new</font> Track;
+    Track* t3 = <font color=#0000ff>new</font> Track;
+    Track::display();
+    <font color=#0000ff>delete</font> t3;
+    <font color=#0000ff>delete</font> t2;
+    <font color=#0000ff>delete</font> t1;
+}
+
+<font color=#009900>/* Output:
+x14.cpp, line 34
+x14.cpp, line 35
+x14.cpp, line 36
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This is an interesting problem! The class-based
+<B>Track::operator new(&#160;)</B> is just a wrapper for the global <B>operator
+new(&#160;)</B>, except that it records the file name and line number where the
+<B>new</B> operation took place in the static vector before returning the space
+for the object (which in this case will probably be 1 byte, not zero, so every
+address returned by the <B>new</B> operator will be distinct). I used an
+<B>ostringstream</B> to build the string but you could use
+<B>sprintf(&#160;)</B> if you wanted to. Usually you provide <B>operator
+delete(&#160;)</B> if you provide <B>operator new(&#160;)</B>, but since
+<B>Track::operator new(&#160;)</B> just calls the global one in this case, the
+global <B>operator delete(&#160;)</B> will do. The preprocessor trick before
+<B>main(&#160;)</B> is just to save typing. If you still want different versions
+of <B>new</B> available, then remove the macro and replace the calls to new to
+use placement syntax, as in<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>Track* t1 = <font color=#0000ff>new</font> (__FILE__, __LINE) Track;</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Even more interesting is to use a <B>map</B> to associate
+addresses with the strings. This way you can <B>delete</B> elements from the
+static container as you use the <B>delete</B> operator on the object. The
+following example does just that by defining <B>Track::operator
+delete(&#160;)</B> as a wrapper for <B>::operator delete(&#160;)</B>.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S13:MappedMemory.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+#include &lt;<font color=#0000ff>new</font>&gt;
+#include &lt;string&gt;
+#include &lt;map&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Track {
+    <font color=#0000ff>static</font> map&lt;<font color=#0000ff>void</font>*, string&gt; allocs;
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font>* <font color=#0000ff>operator</font> <font color=#0000ff>new</font>(size_t size, <font color=#0000ff>const</font> <font color=#0000ff>char</font>* file,
+                              <font color=#0000ff>int</font> line);
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font> <font color=#0000ff>operator</font> <font color=#0000ff>delete</font>(<font color=#0000ff>void</font>* p);
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font> display();
+};
+
+map&lt;<font color=#0000ff>void</font>*, string&gt; Track::allocs;
+
+<font color=#0000ff>void</font>* Track::<font color=#0000ff>operator</font> <font color=#0000ff>new</font>(size_t size, <font color=#0000ff>const</font> <font color=#0000ff>char</font>* file,
+                          <font color=#0000ff>int</font> line) {
+    ostringstream os;
+    os &lt;&lt; file &lt;&lt; <font color=#004488>", line "</font> &lt;&lt; line;
+    <font color=#0000ff>void</font>* addr = ::<font color=#0000ff>operator</font> <font color=#0000ff>new</font>(size);
+    allocs.insert(make_pair(addr, os.str()));
+    <font color=#0000ff>return</font> addr;
+}
+    
+<font color=#0000ff>void</font> Track::<font color=#0000ff>operator</font> <font color=#0000ff>delete</font>(<font color=#0000ff>void</font>* p) {
+    allocs.erase(p);
+    ::<font color=#0000ff>operator</font> <font color=#0000ff>delete</font>(p);
+}
+
+<font color=#0000ff>void</font> Track::display() {
+    map&lt;<font color=#0000ff>void</font>*, string&gt;::iterator p = allocs.begin();
+    <font color=#0000ff>while</font> (p != allocs.end()) {
+        cout &lt;&lt; p-&gt;first &lt;&lt; <font color=#004488>", "</font> &lt;&lt; p-&gt;second &lt;&lt; endl;
+        ++p;
+    }
+}
+
+<font color=#009900>// Preprocessor trick:</font>
+#define <font color=#0000ff>new</font> <font color=#0000ff>new</font> (__FILE__, __LINE__)
+
+<font color=#0000ff>int</font> main() {
+    Track* t1 = <font color=#0000ff>new</font> Track;
+    Track* t2 = <font color=#0000ff>new</font> Track;
+    Track* t3 = <font color=#0000ff>new</font> Track;
+    Track::display();
+    cout &lt;&lt; endl;
+
+    <font color=#0000ff>delete</font> t3;
+    Track::display();
+    cout &lt;&lt; endl;
+
+    <font color=#0000ff>delete</font> t2;
+    Track::display();
+    cout &lt;&lt; endl;
+
+    <font color=#0000ff>delete</font> t1;
+    Track::display();
+}
+
+<font color=#009900>/* Output:
+00683554, x14a.cpp, line 44
+00683CC8, x14a.cpp, line 45
+00683CFC, x14a.cpp, line 46
+
+00683554, x14a.cpp, line 44
+00683CC8, x14a.cpp, line 45
+
+00683554, x14a.cpp, line 44
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>I display the map after each delete so you can see the
+changes.<BR></P></DIV>
+<A NAME="Heading278"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+13-15</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>ArrayOperatorNew.cpp</B> by adding  a static
+<B>vector&lt;Widget*&gt;</B> that adds each <B>Widget</B> address that is
+allocated in <B>operator new ( )</B> and removes it when it is released via
+<B>operator delete( ).   </B>(You may need to look up information about <B>
+vector</B> in your Standard C++ Library documentation or in the 2<SUP>nd</SUP>
+volume of this book, available at the Web site.)  Create a second class called 
+<B>Memory Checker</B> that has a destructor that prints out the number of
+<B>Widget</B> pointers in you vector.  Create a program with a single global
+instance of <B>MemoryChecker</B> and in <B>main( )</B>, dynamically allocate and
+destroy several objects and arrays of <B>Widget</B>.  Show that
+<B>MemoryChecker</B> reveals memory leaks.<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap12.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap14.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

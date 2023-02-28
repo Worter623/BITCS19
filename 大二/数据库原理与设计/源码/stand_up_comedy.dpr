@@ -1,0 +1,43 @@
+program stand_up_comedy;
+
+uses
+  Forms,
+  arrange in 'delphi\arrange.pas' {arrangeform},
+  buy in 'delphi\buy.pas' {buyform},
+  changepw in 'delphi\changepw.pas' {changepwform},
+  common in 'delphi\common.pas',
+  commonregister in 'delphi\commonregister.pas' {commonregisterform},
+  logactor in 'delphi\logactor.pas' {logactorform},
+  login in 'delphi\login.pas' {loginform},
+  logshow in 'delphi\logshow.pas' {logshowform},
+  master in 'delphi\master.pas' {masterform},
+  masterregister in 'delphi\masterregister.pas' {masterregisterform},
+  purchase in 'delphi\purchase.pas' {purchaseform},
+  registerjump in 'delphi\registerjump.pas' {registerjumpform},
+  selectsells in 'delphi\selectsells.pas' {selectsellsform},
+  selectshow in 'delphi\selectshow.pas' {selectshowform},
+  sequence in 'delphi\sequence.pas' {sequenceform},
+  users in 'delphi\users.pas' {usersform};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tloginform, loginform);
+  Application.CreateForm(Tarrangeform, arrangeform);
+  Application.CreateForm(Tbuyform, buyform);
+  Application.CreateForm(Tchangepwform, changepwform);
+  Application.CreateForm(Tcommonregisterform, commonregisterform);
+  Application.CreateForm(Tlogactorform, logactorform);
+  Application.CreateForm(Tlogshowform, logshowform);
+  Application.CreateForm(Tmasterform, masterform);
+  Application.CreateForm(Tmasterregisterform, masterregisterform);
+  Application.CreateForm(Tpurchaseform, purchaseform);
+  Application.CreateForm(Tregisterjumpform, registerjumpform);
+  Application.CreateForm(Tselectsellsform, selectsellsform);
+  Application.CreateForm(Tselectshowform, selectshowform);
+  Application.CreateForm(Tsequenceform, sequenceform);
+  Application.CreateForm(Tusersform, usersform);
+  Application.Run;
+end.

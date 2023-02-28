@@ -1,0 +1,767 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:47
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap14.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 14</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap13.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap15.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 14</H1></FONT>
+<A NAME="Heading280"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Car.cpp</B> so that it also inherits from a class
+called <B>Vehicle</B>, placing appropriate member functions in <B>Vehicle</B>
+(that is, make up some member functions). Add a nondefault constructor to
+<B>Vehicle</B>, which you must call inside <B>Car</B>&#146;s
+constructor.<BR></P></DIV>
+<A NAME="Heading281"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create two classes, <B>A </B>and <B>B, </B>with default
+constructors that announce themselves. Inherit a new class called <B>C</B> from
+<B>A</B>, and create a member object of <B>B </B>in <B>C</B>, but do not create
+a constructor for <B>C</B>. Create an object of class <B>C </B>and observe the
+results.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=4><B><I>14-3</I></B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Create two classes, <B>A </B>and <B>B, </B>with default
+constructors that announce themselves. Inherit a new class called <B>C</B> from
+<B>A</B>, and create a member object of <B>B </B>in <B>C</B>, but do not create
+a constructor for <B>C</B>. Create an object of class <B>C </B>and observe the
+results.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S14:DefaultConstruction.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> A {
+<font color=#0000ff>public</font>:
+    A() {cout &lt;&lt; <font color=#004488>"A::A()\n"</font>;}
+};
+
+<font color=#0000ff>class</font> B {
+<font color=#0000ff>public</font>:
+    B() {cout &lt;&lt; <font color=#004488>"B::B()\n"</font>;}
+};
+
+<font color=#0000ff>class</font> C : <font color=#0000ff>public</font> A {
+    B b;
+};
+
+<font color=#0000ff>int</font> main() {
+    C c;
+}
+
+<font color=#009900>/* Output:
+A::A()
+B::B()
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The &#147;parts&#148; of a <B>C</B> object are automatically
+constructed, inherited sub-objects first, followed by contained
+objects.<BR></P></DIV>
+<A NAME="Heading282"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a three-level hierarchy of classes with default
+constructors, along with destructors, both of which announce themselves to
+<B>cout</B>.<B> </B>Verify that for an object of the most derived type, all
+three constructors and destructors are automatically called. Explain the order
+in which the calls are made.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S14:HierarchyConstruction.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+
+<font color=#0000ff>class</font> A {
+<font color=#0000ff>public</font>:
+    A() {cout &lt;&lt; <font color=#004488>"A::A()\n"</font>;}
+    ~A() {cout &lt;&lt; <font color=#004488>"A::~A()\n"</font>;}
+};
+
+<font color=#0000ff>class</font> B : <font color=#0000ff>public</font> A {
+<font color=#0000ff>public</font>:
+    B() {cout &lt;&lt; <font color=#004488>"B::B()\n"</font>;}
+    ~B() {cout &lt;&lt; <font color=#004488>"B::~B()\n"</font>;}
+};
+
+<font color=#0000ff>class</font> C : <font color=#0000ff>public</font> B {
+<font color=#0000ff>public</font>:
+    C() {cout &lt;&lt; <font color=#004488>"C::C()\n"</font>;}
+    ~C() {cout &lt;&lt; <font color=#004488>"C::~C()\n"</font>;}
+};
+
+<font color=#0000ff>int</font> main() {
+    C c;
+}
+
+<font color=#009900>/* Output:
+A::A()
+B::B()
+C::C()
+C::~C()
+B::~B()
+A::~A()
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>An object&#146;s &#147;parts&#148; are always constructed
+before the object itself. Applying this principle recursively requires that the
+sub-object at the top of the hierarchy must be created first. Destruction is
+always the reverse order of construction.<BR></P></DIV>
+
+<DIV ALIGN="LEFT"><P>(Exercises 14-5 through 14-8 are left to the
+reader.)<BR></P></DIV>
+<A NAME="Heading283"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>Combined.cpp</B>, create a class <B>D</B> that inherits
+from <B>B</B> and has a member object of class <B>C</B>. Add code to show when
+the constructors and destructors are being called.<BR></P></DIV>
+<A NAME="Heading284"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Order.cpp</B> to add another level of inheritance
+<B>Derived3</B> with member objects of class <B>Member4</B> and <B>Member5</B>.
+Trace the output of the program.<BR></P></DIV>
+<A NAME="Heading285"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>NameHiding.cpp</B>, verify that in <B>Derived2</B>,
+<B>Derived3</B>, and <B>Derived4</B>, none of the base-class versions of
+<B>f(&#160;)</B> are available.<BR></P></DIV>
+<A NAME="Heading286"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>NameHiding.cpp</B> by adding three overloaded
+functions named <B>h(&#160;)</B> to <B>Base</B>, and show that redefining one of
+them in a derived class hides the others.<BR></P></DIV>
+<A NAME="Heading287"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Inherit a class <B>StringVector</B> from
+<B>vector&lt;void*&gt;</B> and redefine the <B>push_back(&#160;)</B> and
+<B>operator[]</B> member functions to accept and produce <B>string*</B>. What
+happens if you try to <B>push_back(&#160;)</B> a <B>void*</B>?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S14:StringVector.cpp</font>
+<font color=#009900>//{-msc} VC++ only fakes reinterpret_cast</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> StringVector : <font color=#0000ff>public</font> vector&lt;<font color=#0000ff>void</font>*&gt; {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> push_back(string* s) {
+        vector&lt;<font color=#0000ff>void</font>*&gt;::push_back(s);
+    }
+    string*&amp; <font color=#0000ff>operator</font>[](size_t n) {
+        <font color=#0000ff>return</font> <font color=#0000ff>reinterpret_cast</font>&lt;string*&gt;
+                               (vector&lt;<font color=#0000ff>void</font>*&gt;::<font color=#0000ff>operator</font>[](n));
+    }
+    <font color=#0000ff>const</font> string* <font color=#0000ff>operator</font>[](size_t n) <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> <font color=#0000ff>reinterpret_cast</font>&lt;<font color=#0000ff>const</font> string*&gt; 
+                               (vector&lt;<font color=#0000ff>void</font>*&gt;::<font color=#0000ff>operator</font>[](n));
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    StringVector v;
+    string s1(<font color=#004488>"live"</font>), s2(<font color=#004488>"long"</font>), s3(<font color=#004488>"and"</font>), s4(<font color=#004488>"prosper"</font>);
+    v.push_back(&amp;s1);
+    v.push_back(&amp;s2);
+    v.push_back(&amp;s3);
+    v.push_back(&amp;s4);
+    <font color=#0000ff>for</font> (size_t i = 0; i &lt; v.size(); ++i)
+        cout &lt;&lt; *v[i] &lt;&lt; endl;
+        
+    <font color=#009900>// void* p = &amp;s1;</font>
+    <font color=#009900>// v.push_back(p);  // error!!!</font>
+}
+
+<font color=#009900>/* Output:
+live
+long
+and
+prosper
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The problem with the commented-out <B>push_back(&#160;)</B>
+above is that there is no implicit conversion from a <B>void*</B> to any other
+type, as there is in C. This makes <B>StringVector</B> type-safe. Note that I
+overloaded both versions of <B>operator[]</B> (<B>const</B> and
+non-<B>const</B>).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>If you&#146;ve done any amount of reading on object-oriented
+programming in C++, you probably have learned that you should never override a
+non-virtual function from a publicly-inherited class (see for example, Scott
+Meyers &#147;Effective C++&#148;, Item 37). The standard containers such as
+<B>vector</B> have no virtual functions at all, so there must be a better way to
+define <B>StringVector</B>. The Better Way is to use private inheritance, and
+provide access to the inherited functions as the following version
+illustrates.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> StringVector : <font color=#0000ff>private</font> vector&lt;<font color=#0000ff>void</font>*&gt; {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> push_back(string* s) {
+        vector&lt;<font color=#0000ff>void</font>*&gt;::push_back(s);
+    }
+    string*&amp; <font color=#0000ff>operator</font>[](size_t n) {
+        <font color=#0000ff>return</font> <font color=#0000ff>reinterpret_cast</font>&lt;string*&gt; 
+                               (vector&lt;<font color=#0000ff>void</font>*&gt;::<font color=#0000ff>operator</font>[](n));
+    }
+    <font color=#0000ff>const</font> string* <font color=#0000ff>operator</font>[](size_t n) <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> <font color=#0000ff>reinterpret_cast</font>&lt;<font color=#0000ff>const</font> string*&gt; 
+                               (vector&lt;<font color=#0000ff>void</font>*&gt;::<font color=#0000ff>operator</font>[](n));
+    }
+    <font color=#0000ff>using</font> vector&lt;<font color=#0000ff>void</font>*&gt;::size;
+};</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Private inheritance combined with templates makes building
+such type-safe containers fairly simple. (See Chapter 16 and Volume
+2).<BR></P></DIV>
+
+<DIV ALIGN="LEFT"><P>(Exercises 14-10 through 14-13 are left to the
+reader.)<BR></P></DIV>
+<A NAME="Heading288"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a class containing a <B>long</B> and use the
+psuedo-constructor call syntax in the constructor to initialize the
+<B>long</B>.<BR></P></DIV>
+<A NAME="Heading289"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class called <B>Asteroid</B>.<B> </B>Use inheritance
+to specialize the <B>PStash</B> class in Chapter 13 (<B>PStash.h</B> &amp;
+<B>PStash.cpp</B>) so that it accepts and returns <B>Asteroid</B> pointers. Also
+modify <B>PStashTest.cpp</B> to test your classes. Change the class so
+<B>PStash</B> is a member object.<BR></P></DIV>
+<A NAME="Heading290"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repeat Exercise 11 with a <B>vector</B> instead of a
+<B>PStash</B>.<BR></P></DIV>
+<A NAME="Heading291"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>SynthesizedFunctions.cpp</B>, modify <B>Chess</B> to
+give it a default constructor, copy-constructor, and assignment operator.
+Demonstrate that you&#146;ve written these correctly.<BR></P></DIV>
+<A NAME="Heading292"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create two classes called <B>Traveler</B> and <B>Pager</B>
+without default constructors, but with constructors that take an argument of
+type <B>string</B>, which they simply copy to an internal <B>string</B>
+variable. For each class, write the correct copy-constructor and assignment
+operator. Now inherit a class <B>BusinessTraveler</B> from <B>Traveler </B>and
+give it a member object of type <B>Pager</B>. Write the correct default
+constructor, a constructor that takes a <B>string</B> argument, a
+copy-constructor, and an assignment operator.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S14:BusinessTraveler.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Traveler {
+    string str;
+<font color=#0000ff>public</font>:
+    Traveler(<font color=#0000ff>const</font> string&amp; s) : str(s) {}
+    Traveler(<font color=#0000ff>const</font> Traveler&amp; t) : str(t.str) {}
+    Traveler&amp; <font color=#0000ff>operator</font>=(<font color=#0000ff>const</font> Traveler&amp; t) {
+        <font color=#0000ff>if</font> (<font color=#0000ff>this</font> != &amp;t)
+            str = t.str;
+        <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+    }
+    string getString() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> str;
+    }
+};
+
+<font color=#0000ff>class</font> Pager {
+    string str;
+<font color=#0000ff>public</font>:
+    Pager(<font color=#0000ff>const</font> string&amp; s) : str(s) {}
+    Pager(<font color=#0000ff>const</font> Pager&amp; p) : str(p.str) {}
+    Pager&amp; <font color=#0000ff>operator</font>=(<font color=#0000ff>const</font> Pager&amp; p) {
+        <font color=#0000ff>if</font> (<font color=#0000ff>this</font> != &amp;p)
+            str = p.str;
+        <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+    }
+    string getString() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> str;
+    }
+};
+
+<font color=#0000ff>class</font> BusinessTraveler : <font color=#0000ff>public</font> Traveler {
+    Pager pager;
+<font color=#0000ff>public</font>:
+    BusinessTraveler() : Traveler(<font color=#004488>""</font>), pager(<font color=#004488>""</font>) {}
+    BusinessTraveler(<font color=#0000ff>const</font> string&amp; t, <font color=#0000ff>const</font> string&amp; p)
+        : Traveler(t), pager(p) {}
+    BusinessTraveler(<font color=#0000ff>const</font> BusinessTraveler&amp; b)
+        : Traveler(b), pager(b.pager) {}
+    BusinessTraveler&amp; <font color=#0000ff>operator</font>=(<font color=#0000ff>const</font> BusinessTraveler&amp; b) {
+        <font color=#0000ff>if</font> (<font color=#0000ff>this</font> != &amp;b) {
+            Traveler::<font color=#0000ff>operator</font>=(b); <font color=#009900>// Assign base part</font>
+            pager = b.pager;        <font color=#009900>// Assign derived part</font>
+        }
+        <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+    }
+    <font color=#0000ff>friend</font> ostream&amp; <font color=#0000ff>operator</font>&lt;&lt;(ostream&amp; os,
+                               <font color=#0000ff>const</font> BusinessTraveler&amp; b) {
+        <font color=#0000ff>return</font> os &lt;&lt; <font color=#004488>"{\"</font><font color=#004488>" &lt;&lt; b.getString() &lt;&lt; "</font>\<font color=#004488>", \"</font>"
+                  &lt;&lt; b.pager.getString() &lt;&lt; <font color=#004488>"\"</font>}";
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    BusinessTraveler b1(<font color=#004488>"Joe BusinessMan"</font>, <font color=#004488>"Pager 1"</font>);
+    cout &lt;&lt; b1 &lt;&lt; endl;
+    BusinessTraveler b2(<font color=#004488>"Jane BusinessWoman"</font>, <font color=#004488>"Pager 2"</font>);
+    cout &lt;&lt; b2 &lt;&lt; endl;
+    BusinessTraveler b3;
+    cout &lt;&lt; b3 &lt;&lt; endl;
+    BusinessTraveler b4(b1);
+    cout &lt;&lt; b4 &lt;&lt; endl;
+    b3 = b2;
+    cout &lt;&lt; b3 &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+{"Joe BusinessMan", "Pager 1"}
+{"Jane BusinessWoman", "Pager 2"}
+{"", ""}
+{"Joe BusinessMan", "Pager 1"}
+{"Jane BusinessWoman", "Pager 2"}*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The solution is a little clearer if <B>BusinessTraveler</B>
+has a constructor that takes two arguments: one for the <B>Traveler</B>&#146;s
+name and one for the <B>Pager</B> name. The key point of this exercise is to get
+the constructor and assignment operator correct with inheritance. Both need to
+make sure that the base class sub-object is taken care of (which is sometimes
+easy to forget!). In constructors you use the initializer list; in assignment
+operators you explicitly call the base class assignment operator (since the base
+class data is private, you have no choice).<BR></P></DIV>
+<A NAME="Heading293"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-15</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with two <B>static</B> member functions.
+Inherit from this class and redefine one of the member functions. Show that the
+other is hidden in the derived class.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S14:StaticBaseMethods.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Base {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font> f() {
+        cout &lt;&lt; <font color=#004488>"Base::f()\n"</font>;
+    }
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font> g() {
+        cout &lt;&lt; <font color=#004488>"Base::g()\n"</font>;
+    }
+};
+
+<font color=#0000ff>class</font> Derived : <font color=#0000ff>public</font> Base {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>static</font> <font color=#0000ff>void</font> g(<font color=#0000ff>int</font>) {
+        cout &lt;&lt; <font color=#004488>"Derived::g(int)\n"</font>;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    Derived::f();
+    Derived::g(1);
+    <font color=#009900>// Derived::g();   // Error: too few parameters</font>
+}
+
+<font color=#009900>/* Output:
+Base::f()
+Derived::g(int)
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The fact that I introduced a parameter for <B>g(&#160;)</B> in
+<B>Derived</B> is not significant; any function named the same as one in any
+base class hides all overloaded functions of the same name in the base classes
+(because derived classes constitute a nested scope).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=4><B><I>14-16</I></B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Look up more of the member functions for <B>ifstream</B>. In
+<B>FName2.cpp</B>, try them out on the <B>file</B> object.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading294"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-17</H2></FONT>
+<DIV ALIGN="LEFT"><P>Use <B>private</B> and <B>protected</B> inheritance to create
+two new classes from a base class. Then attempt to upcast objects of the derived
+class to the base class. Explain what happens.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S14:InaccessibleBase.cpp</font>
+<font color=#009900>//=M @echo Compile InaccessibleBase.cpp by hand!</font>
+<font color=#0000ff>class</font> Base {};
+<font color=#0000ff>class</font> Private : <font color=#0000ff>private</font> Base {};
+<font color=#0000ff>class</font> Protected : <font color=#0000ff>protected</font> Base {};
+
+<font color=#0000ff>int</font> main() {
+    Private pri;
+    Protected pro;
+    
+    <font color=#009900>// Both statements are errors:</font>
+    Base* b = <font color=#0000ff>static_cast</font>&lt;Base*&gt;(&amp;pri);
+    b = <font color=#0000ff>static_cast</font>&lt;Base*&gt;(&amp;pro);
+}
+
+<font color=#009900>/* Output:
+Error Line 12: Cannot cast from 'Private *' to 'Base *' in function main()
+Error Line 13: Cannot cast from 'Protected *' to 'Base *' in function main()
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Just like you can&#146;t access private or protected members
+in non-member or non-derived contexts (respectively), neither can you attempt an
+upcast to a private or protected base class. These types of inheritance are used
+for implementation only, therefore, clients that only have the public interface
+available have no such access.<BR></P></DIV>
+<A NAME="Heading295"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-18</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>Protected.cpp</B>, add a member function in
+<B>Derived</B> that calls the <B>protected</B> <B>Base</B> member
+<B>read(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader.)<BR></P></DIV>
+<A NAME="Heading296"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-19</H2></FONT>
+<DIV ALIGN="LEFT"><P>Change <B>Protected.cpp</B> so that <B>Derived</B> is using
+<B>protected</B> inheritance. See if you can call <B>value(&#160;)</B> for a
+<B>Derived</B> object.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader.)<BR></P></DIV>
+<A NAME="Heading297"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-20</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class called <B>SpaceShip</B> with a
+<B>fly(&#160;)</B> method. Inherit <B>Shuttle</B> from <B>SpaceShip</B> and add
+a <B>land(&#160;)</B> method. Create a new <B>Shuttle</B>, upcast by pointer or
+reference to a <B>SpaceShip</B>, and try to call the <B>land(&#160;)</B> method.
+Explain the results.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S14:NarrowingCast.cpp</font>
+<font color=#009900>//=M @echo Compile NarrowingCast.cpp by hand!</font>
+
+<font color=#0000ff>class</font> SpaceShip {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> fly() {}
+};
+
+<font color=#0000ff>class</font> Shuttle : <font color=#0000ff>public</font> SpaceShip {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> land() {}
+};
+
+<font color=#0000ff>int</font> main() {
+    Shuttle shut;
+    SpaceShip&amp; ship = <font color=#0000ff>static_cast</font>&lt;SpaceShip&amp;&gt;(shut);
+    ship.land();    <font color=#009900>// Error!!!</font>
+}
+
+<font color=#009900>/* Output:
+Error Line 16: 'land' is not a member of 'SpaceShip' in function main()
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>No mystery here. The variable ship is a <B>SpaceShip</B>,
+which does not have a <B>land(&#160;)</B> method. If <B>SpaceShip</B> had a land
+method, there would still be a problem: <B>SpaceShip::land(&#160;)</B> would be
+called instead of <B>Shuttle::land(&#160;)</B> (rarely the right thing to do!).
+This mystery is solved in the next chapter (read about virtual
+functions).<BR></P></DIV>
+
+<DIV ALIGN="LEFT"><P>(Exercises 14-21 through 14-25 are left to the
+reader.)<BR></P></DIV>
+<A NAME="Heading298"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-21</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify Instrument.cpp to add a prepare(&#160;) method to
+Instrument. Call prepare(&#160;) inside tune(&#160;).<BR></P></DIV>
+<A NAME="Heading299"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-22</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Instrument.cpp</B> so that <B>play(&#160;)</B>
+prints a message to <B>cout</B>, and <B>Wind</B> redefines <B>play(&#160;)</B>
+to print a different message to <B>cout</B>. Run the program and explain why you
+probably wouldn&#146;t want this behavior. Now put the <B>virtual</B> keyword
+(which you will learn about in Chapter 15) in front of the <B>play(&#160;)</B>
+declaration in <B>Instrument</B> and observe the change in the
+behavior.<BR></P></DIV>
+<A NAME="Heading300"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-23</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>CopyConstructor.cpp</B>, inherit a new class from
+<B>Child</B> and give it a <B>Member</B> <B>m</B>. Write a proper
+<B>constructor</B>, <B>copy-constructor</B>, <B>operator=</B>, and
+<B>operator&lt;&lt;</B> for ostreams, and test the class in
+<B>main(&#160;)</B>.<BR></P></DIV>
+<A NAME="Heading301"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-24</H2></FONT>
+<DIV ALIGN="LEFT"><P>Take the example <B>CopyConstructor.cpp</B> and modify it by
+adding your own copy-constructor to <B>Child</B> <I>without</I> calling the
+base-class copy-constructor and see what happens. Fix the problem by making a
+proper explicit call to the base-class copy constructor in the
+constructor-initializer list of the <B>Child</B> copy-constructor.<BR></P></DIV>
+<A NAME="Heading302"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-25</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>InheritStack2.cpp</B> to use a
+<B>vector&lt;string&gt; </B>instead of a <B>Stack</B>.<BR></P></DIV>
+<A NAME="Heading303"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-26</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class <B>Rock</B> with a default constructor, a
+copy-constructor, an assignment operator, and a destructor, all of which
+announce to <B>cout </B>that they&#146;ve been called. In
+<B>main(&#160;)</B>,<B> </B>create a <B>vector&lt;Rock&gt;</B> (that is, hold
+<B>Rock</B> objects by value) and add some <B>Rock</B>s. Run the program and
+explain the output you get. Note whether the destructors are called for the
+<B>Rock</B> objects in the <B>vector</B>. Now repeat the exercise with a
+<B>vector&lt;Rock*&gt;</B>. Is it possible to create a
+<B>vector&lt;Rock&amp;&gt;</B>?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S14:LikeARock.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Rock {
+<font color=#0000ff>public</font>:
+    Rock() {
+        cout &lt;&lt; <font color=#004488>"Rock()\n"</font>;
+    }
+    Rock(<font color=#0000ff>const</font> Rock&amp;) {
+        cout &lt;&lt; <font color=#004488>"Rock(const Rock&amp;)\n"</font>;
+    }
+    Rock&amp; <font color=#0000ff>operator</font>=(<font color=#0000ff>const</font> Rock&amp;) {
+        cout &lt;&lt; <font color=#004488>"Rock()\n"</font>;
+        <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+    }
+    ~Rock() {cout &lt;&lt; <font color=#004488>"~Rock()\n"</font>;}
+};
+    
+<font color=#0000ff>int</font> main() {
+    vector&lt;Rock&gt; byValue;
+    Rock r1, r2, r3;
+    byValue.push_back(r1);
+    byValue.push_back(r2);
+    byValue.push_back(r3);
+    cout &lt;&lt; <font color=#004488>"byValue populated\n\n"</font>;
+    
+    vector&lt;Rock*&gt; byPtr;
+    byPtr.push_back(&amp;r1);
+    byPtr.push_back(&amp;r2);
+    byPtr.push_back(&amp;r3);
+    cout &lt;&lt; <font color=#004488>"byPtr populated\n\n"</font>;
+}
+
+<font color=#009900>/* Output:
+Rock()
+Rock()
+Rock()
+Rock(const Rock&amp;)
+Rock(const Rock&amp;)
+Rock(const Rock&amp;)
+byValue populated
+
+byPtr populated
+
+~Rock()
+~Rock()
+~Rock()
+~Rock()
+~Rock()
+~Rock()
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>All the standard C++ containers store a copy of their elements
+(hence the calls to the copy constructor above). Even <B>byPtr</B> stores
+copies; they&#146;re just copies of the pointers you sent to
+<B>push_back(&#160;)</B>. As you can also see, the destructor of <B>byValue</B>
+ensures that all its elements (copies) are destroyed. (Again, so does
+<B>byPtr</B>; pointers just don&#146;t have destructors, so you see no trace
+output).  It makes no sense to have a vector of references, since vectors store
+copies. If you store heap pointers in a container, you are responsible to delete
+them.<BR></P></DIV>
+<A NAME="Heading304"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-27</H2></FONT>
+<DIV ALIGN="LEFT"><P>This exercise creates the design pattern called <I>proxy</I>.
+Start with a base class <B>Subject </B>and give it three functions:
+<B>f(&#160;)</B>, <B>g(&#160;)</B>, and <B>h(&#160;)</B>. Now inherit a class
+<B>Proxy</B> and two classes <B>Implementation1</B> and <B>Implementation2</B>
+from <B>Subject</B>. <B>Proxy</B> should contain a pointer to a <B>Subject</B>,
+and all the member functions for <B>Proxy</B> should just turn around and make
+the same calls through the <B>Subject</B> pointer. The <B>Proxy</B> constructor
+takes a pointer to a <B>Subject</B> that is installed in the <B>Proxy
+</B>(usually by the constructor). In <B>main(&#160;)</B>, create two different
+<B>Proxy</B> objects that use the two different implementations. Now modify
+<B>Proxy</B> so that you can dynamically change implementations.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This is the well-known Proxy pattern from the Gang of Four
+(see "Design Patterns", Gamma et al, Prentice-Hall, 1994). Here's a solution
+that allows changing the implementation at run-time:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S14:Proxy.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Subject {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> f() = 0;
+  <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> g() = 0;
+  <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> h() = 0;
+};
+
+<font color=#0000ff>class</font> Proxy : <font color=#0000ff>public</font> Subject {
+  Subject* pSubject;
+<font color=#0000ff>public</font>:
+  Proxy(Subject* pSubject = 0) {
+    <font color=#0000ff>this</font>-&gt;pSubject = pSubject;
+  }
+  <font color=#0000ff>void</font> setSubject(Subject* pSubject)  {
+    <font color=#0000ff>this</font>-&gt;pSubject = pSubject;
+  }
+  <font color=#0000ff>void</font> f() {
+    pSubject-&gt;f();
+  }
+  <font color=#0000ff>void</font> g() {
+    pSubject-&gt;g();
+  }
+  <font color=#0000ff>void</font> h() {
+    pSubject-&gt;h();
+  }
+};
+
+
+<font color=#0000ff>class</font> Implementation1 : <font color=#0000ff>public</font> Subject {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>void</font> f() {
+    cout &lt;&lt; <font color=#004488>"Implementation1::f\n"</font>;
+  }
+  <font color=#0000ff>void</font> g() {
+    cout &lt;&lt; <font color=#004488>"Implementation1::g\n"</font>;
+  }
+  <font color=#0000ff>void</font> h() {
+    cout &lt;&lt; <font color=#004488>"Implementation1::h\n"</font>;
+  }
+};
+
+<font color=#0000ff>class</font> Implementation2 : <font color=#0000ff>public</font> Subject {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>void</font> f() {
+    cout &lt;&lt; <font color=#004488>"Implementation2::f\n"</font>;
+  }
+  <font color=#0000ff>void</font> g() {
+    cout &lt;&lt; <font color=#004488>"Implementation2::g\n"</font>;
+  }
+  <font color=#0000ff>void</font> h() {
+    cout &lt;&lt; <font color=#004488>"Implementation2::h\n"</font>;
+  }
+};
+
+<font color=#0000ff>int</font> main() {
+  Implementation1 impl1;
+  Proxy proxy(&amp;impl1);
+  proxy.f();
+  proxy.g();
+  proxy.h();
+
+  Implementation2 impl2;
+  proxy.setSubject(&amp;impl2);
+  proxy.f();
+  proxy.g();
+  proxy.h();
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Here is the output:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>Implementation1::f
+Implementation1::g
+Implementation1::h
+Implementation2::f
+Implementation2::g
+Implementation2::h</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The Subject class is typically an abstract class, since it
+represents the interface of the functionality you want. The Implementation
+classes provide different implementations of the interface, of course. The proxy
+class also must formally implement the interface, since it is the primary object
+type the client uses. The flexibility of this pattern comes from the ability to
+change implementations without changing which object the client uses (yet
+another instance of the principle: &#147;All problems can be solved by
+introducing another level of indirection&#148;). This is a common technique to
+allow an object to &#147;change colors&#148; during its lifetime.<BR></P></DIV>
+<A NAME="Heading305"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-28</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>ArrayOperatorNew.cpp</B> from Chapter 13 to show
+that, if you inherit from <B>Widget</B>, the allocation still works correctly.
+Explain why inheritance in <B>Framis.cpp</B> from Chapter 13 would <I>not</I>
+work correctly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading306"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+14-29</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Framis.cpp</B> from Chapter 13 by inheriting from
+<B>Framis</B> and creating new versions of <B>new</B> and <B>delete</B> for your
+derived class. Demonstrate that they work correctly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap13.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap15.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:46
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap06.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 6</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap05.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap07.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 6</H1></FONT>
+<A NAME="Heading93"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+6-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a simple class called <B>Simple </B>with a constructor
+that prints something to tell you that it&#146;s been called. In
+<B>main(&#160;)</B> make an object of your class.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(see Exercise 3)<BR></P></DIV>
+<A NAME="Heading94"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+6-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Add a destructor to Exercise 1 that prints out a message to
+tell you that it&#146;s been called.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(see Exercise 3)<BR></P></DIV>
+<A NAME="Heading95"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+6-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify Exercise 2 so that the class contains an <B>int</B>
+member. Modify the constructor so that it takes an <B>int</B> argument that it
+stores in the class member. Both the constructor and destructor should print out
+the <B>int</B> value as part of their message, so you can see the objects as
+they are created and destroyed.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S06:Announce.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Announce {
+    <font color=#0000ff>int</font> x;
+<font color=#0000ff>public</font>:
+    Announce(<font color=#0000ff>int</font> x) {
+        <font color=#0000ff>this</font>-&gt;x = x;
+        cout &lt;&lt; <font color=#004488>"Announce("</font> &lt;&lt; x &lt;&lt; <font color=#004488>")\n"</font>;
+    }
+    ~Announce() {
+        cout &lt;&lt; <font color=#004488>"~Announce("</font> &lt;&lt; x &lt;&lt; <font color=#004488>")\n"</font>;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    Announce a1(1);
+    Announce a2(2);
+    {
+        Announce a3(3);
+        Announce a4(4);
+        <font color=#0000ff>goto</font> jump;
+        Announce a5(5);
+    }
+jump:
+    Announce a6(6);
+    cout &lt;&lt; <font color=#004488>"After jumping!\n"</font>;
+}
+
+<font color=#009900>/* Output:
+Announce(1)
+Announce(2)
+Announce(3)
+Announce(4)
+~Announce(4)
+~Announce(3)
+Announce(6)
+~Announce(6)
+~Announce(2)
+~Announce(1)
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The objects are created in the order they appear, but
+<B>a4</B> and <B>a3</B> (in that order) are the first to be destroyed since
+their scope terminates after the block nested inside of <B>main(&#160;)</B>.
+They are destroyed in spite of the fact that I jump out of the block prematurely
+(but <B>a5</B> is not created, of course). This fact solves problem 4
+also.<BR></P></DIV>
+<A NAME="Heading96"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+6-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Demonstrate that destructors are still called even when
+<B>goto</B> is used to jump out of a loop.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader, but look at the previous
+exercise)<BR></P></DIV>
+<A NAME="Heading97"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+6-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write two <B>for</B> loops that print out values from zero to
+10. In the first, define the loop counter before the <B>for</B> loop, and in the
+second, define the loop counter in the control expression of the <B>for</B>
+loop. For the second part of this exercise, modify the identifier in the second
+<B>for</B> loop so that it as the same name as the loop counter for the first
+and see what your compiler does.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S06:forScope.cpp</font>
+#include &lt;iostream&gt;
+
+#<font color=#0000ff>if</font> NEEDS_FIX
+#define <font color=#0000ff>for</font> <font color=#0000ff>if</font>(0); <font color=#0000ff>else</font> <font color=#0000ff>for</font>
+#endif
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>int</font> i;
+    <font color=#0000ff>for</font> (i = 0; i &lt; 10; ++i)
+        cout &lt;&lt; i &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+    
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 10; ++i)
+        cout &lt;&lt; i &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+}
+
+<font color=#009900>/* Expected output:
+0 1 2 3 4 5 6 7 8 9 
+0 1 2 3 4 5 6 7 8 9 
+*/</font>
+<font color=#009900>///:~</font>
+    </PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>A <B>for</B>-loop creates its own scope, so the
+&#147;<B>i</B>&#148; declared in the second loop hides the one declared at the
+top level of <B>main(&#160;)</B>. If your compiler doesn&#146;t yet support
+that, but it supports separate scopes for the parts of <B>if-else</B> statements
+(like one very well known compiler does), then define the macro NEEDS_FIX.
+NEEDS_FIX defines a macro replacement for the <B>for</B> keyword, which makes
+any <B>for</B>-loop the body of an <B>else</B>, thus having its own scope. Try
+it!<BR></P></DIV>
+<A NAME="Heading98"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+6-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify the <B>Handle.h</B>, <B>Handle.cpp</B>, and
+<B>UseHandle.cpp </B>files at the end of Chapter 5 to use constructors and
+destructors.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading99"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+6-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Use aggregate initialization to create an array of
+<B>double</B> in which you specify the size of the array but do not provide
+enough elements. Print out this array using <B>sizeof </B>to determine the size
+of the array. Now create an array of <B>double</B> using aggregate
+initialization <I>and</I> automatic counting. Print out the array.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S06:ArrayInit.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#009900>// Function to print array of doubles:</font>
+<font color=#0000ff>void</font> printDoubles(<font color=#0000ff>double</font> a[] , size_t n) {
+    <font color=#0000ff>for</font> (size_t i = 0; i &lt; n; ++i)
+        cout &lt;&lt; a[i] &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>double</font> a[5] = {10.0, 20.0};  <font color=#009900>// pads with 0&#146;s</font>
+    size_t n = <font color=#0000ff>sizeof</font> a / <font color=#0000ff>sizeof</font> a[0];
+    printDoubles(a, n);
+    
+    <font color=#0000ff>double</font> b[] = {30.0, 40.0, 50.0};
+    n = <font color=#0000ff>sizeof</font> b / <font color=#0000ff>sizeof</font> b[0];
+    printDoubles(b, n);
+}
+
+<font color=#009900>/* Output:
+10 20 0 0 0
+30 40 50
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading100"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+6-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Use aggregate initialization to create an array of
+<B>string</B> objects. Create a <B>Stack</B> to hold these <B>string</B>s and
+step through your array, pushing each <B>string</B> on your <B>Stack</B>.
+Finally, <B>pop</B> the <B>string</B>s off your <B>Stack</B> and print each
+one.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading101"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+6-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Demonstrate automatic counting and aggregate initialization
+with an array of objects of the class you created in Exercise 3. Add a member
+function to that class that prints a message. Calculate the size of the array
+and move through it, calling your new member function.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading102"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+6-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class without any constructors, and show that you can
+create objects with the default constructor. Now create a non-default
+constructor (one with an argument) for the class, and try compiling again.
+Explain what happened.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Once you define <I>any</I> constructor, the compiler assumes
+you will provide a default constructor if you need one, and therefore
+doesn&#146;t synthesize one for you. Thus, you can only count on the
+compiler-provided default constructor if you provide no constructors at
+all.<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap05.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap07.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

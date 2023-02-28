@@ -1,0 +1,633 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:46
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap05.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 5</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap04.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap06.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 5</H1></FONT>
+<A NAME="Heading78"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with <B>public</B>, <B>private</B>, and
+<B>protected</B> data members and function members. Create an object of this
+class and see what kind of compiler messages you get when you try to access all
+the class members.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading79"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a <B>struct</B> called <B>Lib</B> that contains three
+<B>string</B> objects <B>a</B>, <B>b,</B> and <B>c</B>. In <B>main(&#160;)</B>
+create a <B>Lib</B> object called <B>x </B>and assign to <B>x.a</B>, <B>x.b</B>,
+and <B>x.c</B>. Print out the values. Now replace <B>a</B>, <B>b,</B> and
+<B>c</B> with an array of <B>string s[3]</B>. Show that your code in
+<B>main(&#160;)</B> breaks as a result of the change.<B> </B>Now create a
+<B>class</B> called <B>Libc</B>, with <B>private</B> <B>string</B> objects
+<B>a</B>, <B>b,</B> and <B>c</B>, and member functions <B>seta(&#160;)</B>,
+<B>geta(&#160;)</B>, <B>setb(&#160;)</B>, <B>getb(&#160;)</B>,
+<B>setc(&#160;)</B>, and <B>getc(&#160;)</B> to set and get the values. Write
+<B>main(&#160;)</B> as before. Now change the <B>private</B> <B>string</B>
+objects <B>a</B>, <B>b,</B> and <B>c</B> to a <B>private </B>array of <B>string
+s[3]</B>. Show that the code in <B>main(&#160;)</B> does <I>not</I> break as a
+result of the change.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading80"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class and a global <B>friend</B> function that
+manipulates the <B>private</B> data in the class.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading81"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write two classes, each of which has a member function that
+takes a pointer to an object of the other class. Create instances of both
+objects in <B>main(&#160;)</B> and call the aforementioned member function in
+each class.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S05:PointToMeAndYou.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> You;  <font color=#009900>// Forward declaration</font>
+
+<font color=#0000ff>class</font> Me {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> ProcessYou(You* p) {
+        cout &lt;&lt; <font color=#004488>"Processing You at "</font> &lt;&lt; p &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>class</font> You {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> ProcessMe(Me* p) {
+        cout &lt;&lt; <font color=#004488>"Processing Me at "</font> &lt;&lt; p &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    Me me;
+    You you;
+    
+    me.ProcessYou(&amp;you);
+    you.ProcessMe(&amp;me);
+}
+
+<font color=#009900>/* Output:
+Processing You at 0065FDF4
+Processing Me at 0065FDFC
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>When two classes refer to each other, it is necessary to
+forward-declare at least one of them, as I did above. You must only use
+pointers, of course, or you&#146;ll truly find yourself in a chicken-and-egg
+fix. FYI: when classes have a relationship, for example, and <B>Employee</B>
+&#147;has-a&#148; <B>Manager</B>, it is common to reflect this relationship by
+actually storing a pointer to the <B>Manager</B> object as a member in the
+<B>Employee</B> object, so you don&#146;t have to explicitly pass pointers as
+arguments to member functions like I did here.<BR></P></DIV>
+<A NAME="Heading82"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create three classes. The first class contains <B>private
+</B>data, and grants friendship to the entire second class and to a member
+function of the third class. In <B>main(&#160;)</B>, demonstrate that all of
+these work correctly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S05:MyFriends.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> HasStuff;     <font color=#009900>// Must precede GoodFriend definition</font>
+
+<font color=#0000ff>class</font> GoodFriend {  <font color=#009900>// Must precede HasStuff definition</font>
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> hasAccess(HasStuff* p);
+    <font color=#0000ff>void</font> hasNoAccess(HasStuff* p) {
+        cout &lt;&lt; <font color=#004488>"Cannot access "</font> &lt;&lt; p &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>class</font> HasStuff {
+<font color=#0000ff>private</font>:
+    <font color=#0000ff>int</font> x;
+
+    <font color=#0000ff>friend</font> <font color=#0000ff>class</font> BestFriend;
+    <font color=#0000ff>friend</font> <font color=#0000ff>void</font> GoodFriend::hasAccess(HasStuff*);
+};
+
+<font color=#009900>// Must follow HasStuff definition:</font>
+<font color=#0000ff>void</font> GoodFriend::hasAccess(HasStuff* p) {
+    cout &lt;&lt; <font color=#004488>"From GoodFriend::hasAccess: "</font> &lt;&lt; p-&gt;x &lt;&lt; endl;
+}
+
+<font color=#009900>// All methods of BestFriend have access to HasStuff::x</font>
+<font color=#009900>// This must also follow the HasStuff definition:</font>
+<font color=#0000ff>class</font> BestFriend {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> initFriend(HasStuff* p) {
+        p-&gt;x = 5;
+    }
+    <font color=#0000ff>void</font> queryFriend(HasStuff* p) {
+        cout &lt;&lt; <font color=#004488>"From BestFriend: "</font> &lt;&lt; p-&gt;x &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    HasStuff h;
+    
+    BestFriend b;
+    b.initFriend(&amp;h);
+    b.queryFriend(&amp;h);
+    
+    GoodFriend g;
+    g.hasAccess(&amp;h);
+    g.hasNoAccess(&amp;h);
+}
+
+<font color=#009900>/* Output:
+From BestFriend: 5
+From GoodFriend::hasAccess: 5
+Cannot access 0065FE00
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This is another exercise in forward declarations. The
+definition of <B>GoodFriend</B> requires the existence of class <B>HasStuff</B>,
+but I cannot include the implementation of <B>GoodFriend::has Access(&#160;)</B>
+in situ, because it uses the fact that <B>HasStuff</B> contains an integer named
+<B>x</B> (likewise for the entire class <B>BestFriend</B>). Also, if you tried
+to access <B>HasStuff::x</B> in <B>GoodFriend::hasNoAccess(&#160;)</B> you would
+get a compiler error. The statement &#147;<B>friend class BestFriend</B>&#148;
+inside of <B>HasStuff</B> is simultaneously a forward declaration and a friend
+declaration, otherwise I would have had to forward-declare <B>BestFriend</B>
+before the definition of <B>HasStuff</B> (but I&#146;m lazy).<BR></P></DIV>
+<A NAME="Heading83"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>Hen</B> class. Inside this, nest a <B>Nest</B>
+class. Inside <B>Nest</B>, place an <B>Egg</B> class. Each class should have a
+<B>display(&#160;)</B> member function. In <B>main(&#160;)</B>, create an
+instance of each class and call the <B>display(&#160;)</B> function for each
+one.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S05:NestedFriends.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Hen {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> display() {
+        cout &lt;&lt; <font color=#004488>"Hen::display\n"</font>;
+    }
+
+    <font color=#0000ff>class</font> Nest {
+    <font color=#0000ff>public</font>:
+        <font color=#0000ff>void</font> display() {
+            cout &lt;&lt; <font color=#004488>"Hen::Nest::display\n"</font>;
+        }
+    
+        <font color=#0000ff>class</font> Egg {
+        <font color=#0000ff>public</font>:    
+            <font color=#0000ff>void</font> display() {
+                cout &lt;&lt; <font color=#004488>"Hen::Nest::Egg::display\n"</font>;
+            }
+        };
+    };
+};
+
+<font color=#0000ff>int</font> main() {
+    Hen h;
+    Hen::Nest n;
+    Hen::Nest::Egg e;
+    
+    h.display();
+    n.display();
+    e.display();
+}
+
+<font color=#009900>/* Output:
+Hen::display
+Hen::Nest::display
+Hen::Nest::Egg::display
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P><B>Nest</B> and <B>Egg</B> are just like normal classes except
+they reside in the scope of other classes instead of the global scope, which
+explains the need for the explicit qualification via the scope resolution
+operator. Also, <B>Hen</B> has no access rights to any private members of
+<B>Nest</B> or <B>Egg</B>, nor does <B>Nest</B> have any rights to
+<B>Egg</B>&#146;s private members (if there were any &#150; see the next
+exercise).<BR></P></DIV>
+<A NAME="Heading84"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify Exercise 6 so that <B>Nest</B> and <B>Egg</B> each
+contain <B>private</B> data. Grant friendship to allow the enclosing classes
+access to this <B>private</B> data.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S05:NestedFriends.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Hen {
+<font color=#0000ff>public</font>:
+
+    <font color=#0000ff>class</font> Nest {
+        <font color=#0000ff>int</font> x;
+        <font color=#0000ff>friend</font> <font color=#0000ff>class</font> Hen;
+
+    <font color=#0000ff>public</font>:
+
+        <font color=#0000ff>class</font> Egg {
+            <font color=#0000ff>int</font> y;
+            <font color=#0000ff>friend</font> <font color=#0000ff>class</font> Nest;
+
+        <font color=#0000ff>public</font>:    
+            <font color=#0000ff>void</font> display() {
+                cout &lt;&lt; <font color=#004488>"Hen::Nest::Egg::display: "</font> &lt;&lt; y &lt;&lt; endl;
+            }
+        };
+        
+        <font color=#0000ff>void</font> initEgg(Egg* e) {
+            e-&gt;y = 2;
+        }
+        <font color=#0000ff>void</font> display() {
+            cout &lt;&lt; <font color=#004488>"Hen::Nest::display: "</font> &lt;&lt; x &lt;&lt; endl;
+        }
+    };
+
+    <font color=#0000ff>void</font> initNest(Nest* n) {
+        n-&gt;x = 1;
+    }
+    <font color=#0000ff>void</font> display() {
+        cout &lt;&lt; <font color=#004488>"Hen::display\n"</font>;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    Hen h;
+    Hen::Nest n;
+    Hen::Nest::Egg e;
+    
+    h.initNest(&amp;n);
+    n.initEgg(&amp;e);
+    h.display();
+    n.display();
+    e.display();
+}
+
+<font color=#009900>/* Output:
+Hen::display
+Hen::Nest::display: 1
+Hen::Nest::Egg::display: 2
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>In this example I had to move the implementation of
+<B>Hen::Nest::display(&#160;)</B> past the nested class <B>Egg</B>, because it
+access members of <B>Egg</B>. The same reasoning applies to the init-functions
+above.<BR></P></DIV>
+<A NAME="Heading85"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with data members distributed among numerous
+<B>public</B>, <B>private,</B> and <B>protected</B> sections. Add a member
+function <B>showMap(&#160;)</B> that prints the names of each of these data
+members and their addresses. If possible, compile and run this program on more
+than one compiler and/or computer and/or operating system to see if there are
+layout differences in the object.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Here&#146;s a sample for two particular compilers:<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S05:MapMembers.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Mapped {
+    <font color=#0000ff>int</font> x;
+    
+<font color=#0000ff>protected</font>:
+    <font color=#0000ff>int</font> y;
+
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>int</font> z;
+    
+    <font color=#0000ff>void</font> showMap() {
+        cout &lt;&lt; <font color=#004488>"x is at "</font> &lt;&lt; &amp;x &lt;&lt; endl;
+        cout &lt;&lt; <font color=#004488>"y is at "</font> &lt;&lt; &amp;y &lt;&lt; endl;
+        cout &lt;&lt; <font color=#004488>"z is at "</font> &lt;&lt; &amp;z &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    Mapped m;
+    m.showMap();
+}
+
+<font color=#009900>/* Output:
+// Compiler A:
+x is at 0065FDF8
+y is at 0065FDFC
+z is at 0065FE00
+
+// Compiler B:
+x is at 0064FDEC
+y is at 0064FDF0
+z is at 0064FDF4
+*/</font>
+<font color=#009900>///:~</font>
+</PRE></FONT></BLOCKQUOTE><A NAME="Heading86"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Copy the implementation and test files for <B>Stash </B>in
+Chapter 4 so that you can compile and test <B>Stash.h</B> in this
+chapter.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading87"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Place objects of the <B>Hen</B> class from Exercise 6 in a
+<B>Stash</B>. Fetch them out and print them (if you have not already done so,
+you will need to add <B>Hen::print(&#160;)</B>).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading88"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Copy the implementation and test files for <B>Stack </B>in
+Chapter 4 so that you can compile and test <B>Stack2.h</B> in this
+chapter.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading89"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Place objects of the <B>Hen</B> class from Exercise 6 in a
+<B>Stack</B>. Fetch them out and print them (if you have not already done so,
+you will need to add <B>Hen::print(&#160;)</B>).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading90"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Cheshire</B> in <B>Handle.cpp</B>, and verify that
+your project manager recompiles and relinks only this file, but doesn&#146;t
+recompile <B>UseHandle.cpp</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading91"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+5-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>StackOfInt</B> class (a stack that holds
+<B>int</B>s) using the &#147;Cheshire cat&#148; technique that hides the
+low-level data structure you use to store the elements in a class called
+<B>StackImp</B>. Implement two versions of <B>StackImp</B>: one that uses a
+fixed-length array of <B>int</B>, and one that uses a <B>vector&lt;int&gt;</B>.
+Have a preset maximum size for the stack so you don&#146;t have to worry about
+expanding the array in the first version. Note that the <B>StackOfInt.h</B>
+class doesn&#146;t have to change with <B>StackImp</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Here&#146;s the <B>StackOfInt</B> class:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S05:StackOfInt.h</font>
+#include &lt;cstddef&gt;  <font color=#009900>// for size_t</font>
+#include &lt;climits&gt;  <font color=#009900>// for INT_MIN</font>
+<font color=#009900>// VC++ doesn&#146;t put size_t in std:</font>
+#ifndef _MSC_VER
+<font color=#0000ff>using</font> std::size_t;
+#endif
+
+<font color=#0000ff>struct</font> StackImp;    <font color=#009900>// Incomplete type declaration</font>
+
+<font color=#0000ff>struct</font> StackOfInt {
+    <font color=#0000ff>enum</font> {STKERROR = INT_MIN};
+    <font color=#0000ff>void</font> init();
+    <font color=#0000ff>void</font> cleanup();
+    <font color=#0000ff>int</font> push(<font color=#0000ff>int</font>);
+    <font color=#0000ff>int</font> pop();
+    <font color=#0000ff>int</font> top();
+    size_t size();
+
+<font color=#0000ff>private</font>:
+    StackImp* pImpl; <font color=#009900>// The &#147;smile&#148;</font>
+};
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>To do Cheshire Cat, I just <I>declare</I> the <B>StackImp</B>
+class (this makes it an &#147;incomplete&#148; type), and declare a pointer to
+it as a member of <B>StackOfInt</B>. The implementations of
+<B>StackOfInt</B>&#146;s member functions will use the internals of
+<B>StackImp</B> via <B>pImpl</B>, so I have to define the method bodies in a
+separate .cpp file (otherwise we&#146;re not hiding anything!). Here&#146;s
+the .cpp file for the array version:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S05:StackOfInt1.cpp {O}</font>
+<font color=#009900>// Uses an array to implement a stack</font>
+#include <font color=#004488>"StackOfInt.h"</font>
+
+<font color=#009900>// Complete the incomplete type StackImp:</font>
+<font color=#009900>// (This could be in a separate header file)</font>
+<font color=#0000ff>struct</font> StackImp {
+    <font color=#0000ff>enum</font> {MAXSIZE = 100};
+    <font color=#0000ff>int</font> data[MAXSIZE];
+    <font color=#0000ff>int</font> ptr;
+};
+
+<font color=#0000ff>void</font> StackOfInt::init() {
+    pImpl = <font color=#0000ff>new</font> StackImp;
+}
+
+<font color=#0000ff>int</font> StackOfInt::push(<font color=#0000ff>int</font> x) {
+    <font color=#0000ff>if</font> (pImpl-&gt;ptr == StackImp::MAXSIZE)
+        <font color=#0000ff>return</font> STKERROR;
+    <font color=#0000ff>else</font> {
+        pImpl-&gt;data[pImpl-&gt;ptr++] = x;
+        <font color=#0000ff>return</font> x;
+    }
+}
+
+<font color=#0000ff>int</font> StackOfInt::pop() {
+    <font color=#0000ff>return</font> (pImpl-&gt;ptr == StackImp::MAXSIZE)
+        ? STKERROR
+        : pImpl-&gt;data[--pImpl-&gt;ptr];
+}
+
+<font color=#0000ff>int</font> StackOfInt::top() {
+    <font color=#0000ff>return</font> (pImpl-&gt;ptr == StackImp::MAXSIZE)
+        ? STKERROR
+        : pImpl-&gt;data[pImpl-&gt;ptr-1];
+}
+
+size_t StackOfInt::size() {
+    <font color=#0000ff>return</font> pImpl-&gt;ptr;
+}
+
+<font color=#0000ff>void</font> StackOfInt::cleanup() {
+    <font color=#0000ff>delete</font> pImpl;
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>First off I complete the definition of <B>StackImp</B>, then
+implement the methods of <B>StackOfInt</B>. The most important thing to do is
+create <B>StackOfInt</B>&#146;s <B>StackImp</B> member on the heap, so the user
+must call the <B>init(&#160;)</B> before using the stack functions, and must
+remember to call <B>cleanup(&#160;)</B> when finished. (All of this is taken
+care of automatically by a constructor and a destructor, as explained in the
+nest chapter). Here&#146;s a sample test program:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S05:StackOfIntTest.cpp</font>
+<font color=#009900>//{L} StackOfInt1</font>
+#include <font color=#004488>"StackOfInt.h"</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    StackOfInt stk;
+    
+    stk.init();
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 5; ++i)
+        stk.push(i);
+    
+    <font color=#0000ff>while</font> (stk.size() &gt; 0)
+        cout &lt;&lt; stk.pop() &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+4
+3
+2
+1
+0
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Here&#146;s the vector version:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S05:StackOfInt2.cpp {O}</font>
+<font color=#009900>// Uses a vector to implement a stack</font>
+#include <font color=#004488>"StackOfInt.h"</font>
+#include &lt;vector&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#009900>// Complete the incomplete type StackImp:</font>
+<font color=#009900>// (This could be in a separate header file)</font>
+<font color=#0000ff>struct</font> StackImp {
+    <font color=#0000ff>enum</font> {MAXSIZE = 100};
+    vector&lt;<font color=#0000ff>int</font>&gt; data;
+};
+
+<font color=#0000ff>void</font> StackOfInt::init() {
+    pImpl = <font color=#0000ff>new</font> StackImp;
+}
+
+<font color=#0000ff>int</font> StackOfInt::push(<font color=#0000ff>int</font> x) {
+    <font color=#0000ff>if</font> (pImpl-&gt;data.size() == StackImp::MAXSIZE)
+        <font color=#0000ff>return</font> STKERROR;
+    <font color=#0000ff>else</font> {
+        pImpl-&gt;data.push_back(x);
+        <font color=#0000ff>return</font> x;
+    }
+}
+
+<font color=#0000ff>int</font> StackOfInt::pop() {
+    <font color=#0000ff>if</font> (pImpl-&gt;data.size() == StackImp::MAXSIZE)
+        <font color=#0000ff>return</font> STKERROR;
+    <font color=#0000ff>else</font> {
+        <font color=#0000ff>int</font> x = pImpl-&gt;data.back();
+        pImpl-&gt;data.pop_back();
+        <font color=#0000ff>return</font> x;
+    }
+}
+
+<font color=#0000ff>int</font> StackOfInt::top() {
+    <font color=#0000ff>return</font> (pImpl-&gt;data.size() == StackImp::MAXSIZE)
+        ? STKERROR
+        : pImpl-&gt;data.back();
+}
+
+size_t StackOfInt::size() {
+    <font color=#0000ff>return</font> pImpl-&gt;data.size();
+}
+
+<font color=#0000ff>void</font> StackOfInt::cleanup() {
+    <font color=#0000ff>delete</font> pImpl;
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Neither the test program nor <B>StackOfInt.h</B> need to
+change at all, and the user has no knowledge of how I implemented the stack.
+Just to verify this, here&#146;s a test program:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S05:StackOfIntTest.cpp</font>
+<font color=#009900>//{L} StackOfInt2</font>
+#include <font color=#004488>"StackOfInt.h"</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    StackOfInt stk;
+    
+    stk.init();
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 5; ++i)
+        stk.push(i);
+    
+    <font color=#0000ff>while</font> (stk.size() &gt; 0)
+        cout &lt;&lt; stk.pop() &lt;&lt; endl;
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The only difference is in the special <B>{L}</B> tag that
+tells the makefile builder tool to link <B>StackOfInt2</B> instead of
+<B>StackOfInt1</B>.<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap04.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap06.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

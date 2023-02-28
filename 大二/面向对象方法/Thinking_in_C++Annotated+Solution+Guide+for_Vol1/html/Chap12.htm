@@ -1,0 +1,908 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:47
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap12.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 12</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap11.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap13.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 12</H1></FONT>
+<A NAME="Heading232"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a simple class with an overloaded <B>operator++</B>.
+Try calling this operator in both pre- and postfix form and see what kind of
+compiler warning you get.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading233"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a simple class containing an <B>int</B> and overload
+the <B>operator+</B> as a member function. Also provide a <B>print(&#160;)
+</B>member function that takes an <B>ostream&amp; </B>as an argument and prints
+to that <B>ostream&amp;</B>.<B> </B>Test your class to show that it works
+correctly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading234"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Add a binary <B>operator-</B> to Exercise 2 as a member
+function. Demonstrate that you can use your objects in complex expressions like 
+<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><B>a + b &#150; c</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading235"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Add an <B>operator++</B> and <B>operator--</B> to Exercise 2,
+both the prefix and the postfix versions, such that they return the incremented
+or decremented object. Make sure that the postfix versions return the correct
+value. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading236"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify the increment and decrement operators in Exercise 4 so
+that the prefix versions are non-<B>const</B> and the postfix versions are
+<B>const</B>. Show that they work correctly and explain why this would be done
+in practice.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading237"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Change the <B>print(&#160;)</B> function in Exercise 2 so that
+it is the overloaded <B>operator&lt;&lt;</B> as in
+<B>IostreamOperatorOverloading.cpp</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading238"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify Exercise 3 so that the <B>operator+</B> and
+<B>operator-</B> are non-member functions. Demonstrate that they still work
+correctly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading239"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Add the unary <B>operator-</B> to Exercise 2 and demonstrate
+that it works correctly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This solution covers exercises 2-6 as well. Here is a class
+that has all the operators called for. First, the header file:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:HasInt.h</font>
+#ifndef HASINT_H
+#define HASINT_H
+#include &lt;iosfwd&gt;
+
+<font color=#0000ff>class</font> HasInt {
+    <font color=#0000ff>int</font> n;
+<font color=#0000ff>public</font>:
+    HasInt(<font color=#0000ff>int</font> i = 0);
+    HasInt&amp; <font color=#0000ff>operator</font>++();
+    <font color=#0000ff>const</font> HasInt <font color=#0000ff>operator</font>++(<font color=#0000ff>int</font>);
+    HasInt&amp; <font color=#0000ff>operator</font>--();
+    <font color=#0000ff>const</font> HasInt <font color=#0000ff>operator</font>--(<font color=#0000ff>int</font>);
+    HasInt <font color=#0000ff>operator</font>-() <font color=#0000ff>const</font>;
+    HasInt&amp; <font color=#0000ff>operator</font>+=(<font color=#0000ff>const</font> HasInt&amp;);
+    HasInt&amp; <font color=#0000ff>operator</font>-=(<font color=#0000ff>const</font> HasInt&amp;);
+
+    <font color=#009900>// Global Friends:</font>
+    <font color=#0000ff>friend</font> std::ostream&amp; <font color=#0000ff>operator</font>&lt;&lt;(std::ostream&amp;,
+                                    <font color=#0000ff>const</font> HasInt&amp;);
+    <font color=#0000ff>friend</font> HasInt <font color=#0000ff>operator</font>+(<font color=#0000ff>const</font> HasInt&amp;, <font color=#0000ff>const</font> HasInt&amp;);
+    <font color=#0000ff>friend</font> HasInt <font color=#0000ff>operator</font>-(<font color=#0000ff>const</font> HasInt&amp;, <font color=#0000ff>const</font> HasInt&amp;);
+};
+
+<font color=#0000ff>inline</font>
+HasInt::HasInt(<font color=#0000ff>int</font> i) {
+    n = i;
+}
+
+<font color=#0000ff>inline</font>
+HasInt HasInt::<font color=#0000ff>operator</font>-() <font color=#0000ff>const</font> {
+    <font color=#0000ff>return</font> HasInt(-n);
+}
+
+<font color=#0000ff>inline</font>
+HasInt&amp; HasInt::<font color=#0000ff>operator</font>+=(<font color=#0000ff>const</font> HasInt&amp; h) {
+    n += h.n;
+    <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+}
+
+<font color=#0000ff>inline</font>
+HasInt&amp; HasInt::<font color=#0000ff>operator</font>-=(<font color=#0000ff>const</font> HasInt&amp; h) {
+    n -= h.n;
+    <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+}
+
+<font color=#0000ff>inline</font>
+HasInt&amp; HasInt::<font color=#0000ff>operator</font>++()
+{
+    ++n;
+    <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+}
+
+<font color=#0000ff>inline</font>
+<font color=#0000ff>const</font> HasInt HasInt::<font color=#0000ff>operator</font>++(<font color=#0000ff>int</font>)
+{
+    <font color=#0000ff>const</font> HasInt old = *<font color=#0000ff>this</font>;
+    ++(*<font color=#0000ff>this</font>);  <font color=#009900>// HasInt::operator++()</font>
+    <font color=#0000ff>return</font> old;
+}                                         
+
+<font color=#0000ff>inline</font>
+HasInt&amp; HasInt::<font color=#0000ff>operator</font>--()
+{
+    --n;
+    <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+}
+
+<font color=#0000ff>inline</font>
+<font color=#0000ff>const</font> HasInt HasInt::<font color=#0000ff>operator</font>--(<font color=#0000ff>int</font>)
+{
+    <font color=#0000ff>const</font> HasInt old = *<font color=#0000ff>this</font>;
+    --(*<font color=#0000ff>this</font>);  <font color=#009900>// HasInt::operator--()</font>
+    <font color=#0000ff>return</font> old;
+}                                         
+
+<font color=#009900>// Globals:</font>
+<font color=#0000ff>inline</font>
+HasInt <font color=#0000ff>operator</font>+(<font color=#0000ff>const</font> HasInt&amp; h1, <font color=#0000ff>const</font> HasInt&amp; h2) {
+    <font color=#0000ff>return</font> HasInt(h1.n + h2.n);
+}
+
+<font color=#0000ff>inline</font>
+HasInt <font color=#0000ff>operator</font>-(<font color=#0000ff>const</font> HasInt&amp; h1, <font color=#0000ff>const</font> HasInt&amp; h2) {
+    <font color=#0000ff>return</font> HasInt(h1.n - h2.n);
+}
+#endif
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The header <B>&lt;iosfwd&gt;</B> contains commonly used
+declarations items from <B>&lt;iostream&gt;</B>, but there is no implementation,
+so it occurs only a fraction of the compile-time overhead. For that reason I put
+the implementation of <B>operator&lt;&lt;</B> in the <B>cpp</B> file that
+follows. Note that the prefix increment/decrement operators return a
+non-<B>const</B> reference, but the postfix versions return a <B>const</B>
+object. It is reasonable for the prefix operators to return <B>*this</B>,
+because the arithmetic occurs first, but the postfix operators must return a
+temporary. It doesn&#146;t make sense to modify a temporary, so operations like
+<B>i++++</B> are disallowed in C/C++. Making the return type a <B>const</B>
+object also disallows double increments/decrements. Note also that I implement
+the postfix operators in terms of the prefix ones. This way you only have to
+modify the latter, since they&#146;re in-sync. Just for fun added
+<B>operator+=</B> and <B>operator-=.</B><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:HasInt.cpp {O}</font>
+#include <font color=#004488>"HasInt.h"</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+ostream&amp; <font color=#0000ff>operator</font>&lt;&lt;(ostream&amp; os, <font color=#0000ff>const</font> HasInt&amp; h) {
+    <font color=#0000ff>return</font> os &lt;&lt; h.n;
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:Overloaded.cpp</font>
+<font color=#009900>//{L} HasInt</font>
+#include <font color=#004488>"HasInt.h"</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+    HasInt x(1), y(2), z, w;
+    cout &lt;&lt; <font color=#004488>"x = "</font> &lt;&lt; x 
+         &lt;&lt; <font color=#004488>", y = "</font> &lt;&lt; y
+         &lt;&lt; <font color=#004488>", z = "</font> &lt;&lt; z
+         &lt;&lt; <font color=#004488>", w = "</font> &lt;&lt; w
+         &lt;&lt; endl;
+    
+    w = ++x + y++ - --z;
+    cout &lt;&lt; <font color=#004488>"x = "</font> &lt;&lt; x 
+         &lt;&lt; <font color=#004488>", y = "</font> &lt;&lt; y
+         &lt;&lt; <font color=#004488>", z = "</font> &lt;&lt; z
+         &lt;&lt; <font color=#004488>", w = "</font> &lt;&lt; w
+         &lt;&lt; endl;
+    
+    w = x - y;
+    z = x + y;
+    x += y;
+    y -= x;
+    cout &lt;&lt; <font color=#004488>"x = "</font> &lt;&lt; x 
+     &lt;&lt; <font color=#004488>", y = "</font> &lt;&lt; y
+     &lt;&lt; <font color=#004488>", z = "</font> &lt;&lt; z
+     &lt;&lt; <font color=#004488>", w = "</font> &lt;&lt; w
+     &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+x = 1, y = 2, z = 0, w = 0
+x = 2, y = 3, z = -1, w = 5 
+x = 5, y = -2, z = 5, w = -1
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading240"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class that contains a single <B>private</B>
+<B>char</B>. Overload the iostream operators <B>&lt;&lt;</B> and <B>&gt;&gt;</B>
+(as in <B>IostreamOperatorOverloading.cpp</B>) and test them. You can test them
+with <B>fstreams</B>, <B>stringstream</B>s, and <B>cin</B> and
+<B>cout</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading241"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Determine the dummy constant value that your compiler passes
+for postfix <B>operator++</B> and <B>operator--</B>. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading242"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a <B>Number</B> class that holds a <B>double</B>, and
+add overloaded operators for <B>+, &#150;, *, /</B>, and assignment. Choose the
+return values for these functions so that expressions can be chained together,
+and for efficiency. Write an automatic type conversion <B>operator
+double(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Note that I changed the problem to call for <B>operator
+double(&#160;)</B> instead of <B>operator int(&#160;)</B>. Here&#146;s a header
+file that defines <B>Number</B>:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:Number.h</font>
+#ifndef NUMBER_H
+#define NUMBER_H
+#include &lt;cassert&gt;
+
+<font color=#0000ff>class</font> Number {
+    <font color=#0000ff>double</font> val;
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>explicit</font> Number(<font color=#0000ff>double</font> x = 0.0) {
+        val = x;
+    }
+    Number&amp; <font color=#0000ff>operator</font>+=(<font color=#0000ff>const</font> Number&amp; n) {
+        val += n.val;
+        <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+    }
+    Number&amp; <font color=#0000ff>operator</font>-=(<font color=#0000ff>const</font> Number&amp; n) {
+        val -= n.val;
+        <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+    }
+    Number&amp; <font color=#0000ff>operator</font>*=(<font color=#0000ff>const</font> Number&amp; n) {
+        val *= n.val;
+        <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+    }
+    Number&amp; <font color=#0000ff>operator</font>/=(<font color=#0000ff>const</font> Number&amp; n) {
+        assert(n.val != 0.0);
+        val /= n.val;
+        <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+    }
+    <font color=#0000ff>operator</font> <font color=#0000ff>double</font>() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> val;
+    }
+    
+    <font color=#0000ff>friend</font> Number <font color=#0000ff>operator</font>+(<font color=#0000ff>const</font> Number&amp;,
+                            <font color=#0000ff>const</font> Number&amp;);
+    <font color=#0000ff>friend</font> Number <font color=#0000ff>operator</font>-(<font color=#0000ff>const</font> Number&amp;,
+                            <font color=#0000ff>const</font> Number&amp;);
+    <font color=#0000ff>friend</font> Number <font color=#0000ff>operator</font>*(<font color=#0000ff>const</font> Number&amp;,
+                            <font color=#0000ff>const</font> Number&amp;);
+    <font color=#0000ff>friend</font> Number <font color=#0000ff>operator</font>/(<font color=#0000ff>const</font> Number&amp;,
+                            <font color=#0000ff>const</font> Number&amp;);
+};
+
+<font color=#0000ff>inline</font>
+Number <font color=#0000ff>operator</font>+(<font color=#0000ff>const</font> Number&amp; n1, <font color=#0000ff>const</font> Number&amp; n2) {
+    <font color=#0000ff>return</font> Number(n1.val + n2.val);
+}
+
+<font color=#0000ff>inline</font>
+Number <font color=#0000ff>operator</font>-(<font color=#0000ff>const</font> Number&amp; n1, <font color=#0000ff>const</font> Number&amp; n2) {
+    <font color=#0000ff>return</font> Number(n1.val - n2.val);
+}
+
+<font color=#0000ff>inline</font>
+Number <font color=#0000ff>operator</font>*(<font color=#0000ff>const</font> Number&amp; n1, <font color=#0000ff>const</font> Number&amp; n2) {
+    <font color=#0000ff>return</font> Number(n1.val * n2.val);
+}
+
+<font color=#0000ff>inline</font>
+Number <font color=#0000ff>operator</font>/(<font color=#0000ff>const</font> Number&amp; n1, <font color=#0000ff>const</font> Number&amp; n2) {
+    assert(n2.val != 0.0);
+    <font color=#0000ff>return</font> Number(n1.val / n2.val);
+}
+#endif
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The problem called for an assignment operator, but the
+compiler-synthesized one suffices (since the only data involved is a
+<B>double</B>), so I provided assignment versions of the mathematical operators
+only. The constructor is <B>explicit</B> because of the presence of <B>operator
+double(&#160;)</B>. If both were defined, then the compiler wouldn&#146;t know
+what to do with a mixed expression such as "<B>n + 1</B>", where <B>n</B> is a
+<B>Number</B> &#150; so I disallowed such expressions altogether. As a rule,
+binary operators (other than assignment) are made global so you can have such
+mixed expressions, so I left them global here anyway, even though no such
+expressions can occur. On the other hand, unary operator as a rule are member
+functions. The test program follows.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:NumberTest.cpp</font>
+#include &lt;iostream&gt;
+#include <font color=#004488>"Number.h"</font>
+
+<font color=#009900>// Macro and display function for convenience:</font>
+#define eval(expr) display(#expr, expr)
+
+<font color=#0000ff>void</font> display(<font color=#0000ff>const</font> <font color=#0000ff>char</font>* s, <font color=#0000ff>const</font> Number&amp; res) {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    cout &lt;&lt; s &lt;&lt; <font color=#004488>" = "</font> &lt;&lt; res &lt;&lt; endl;
+}
+
+<font color=#0000ff>int</font> main() {
+    Number a(1.0), b(2.0);
+    eval(a + b);
+    eval(a - b);
+    eval(a * b);
+    eval(a / b);
+    eval(a * (a + b) - (b - a) / b);
+    a += b;
+    eval(a);
+    a -= b;
+    eval(a);
+    a *= b;
+    eval(a);
+    a /= b;
+    eval(a);
+}
+
+<font color=#009900>/* Output:
+a + b = 3
+a - b = -1
+a * b = 2
+a / b = 0.5
+a * (a + b) - (b - a) / b = 2.5
+a = 3
+a = 1
+a = 2
+a = 1
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading243"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify Exercise 11 so that the <I>return value
+optimization</I> is used, if you have not already done so.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>See Exercise 11. It turns out that many compilers will perform
+the return value optimization even if you store the result in a local variable
+before returning it, but why take chances?<BR></P></DIV>
+<A NAME="Heading244"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class that contains a pointer, and demonstrate that
+if you allow the compiler to synthesize the <B>operator=</B> the result of using
+that operator will be pointers that are aliased to the same storage. Now fix the
+problem by defining your own <B>operator=</B> and demonstrate that it corrects
+the aliasing. Make sure you check for self-assignment and handle that case
+properly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading245"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a class called <B>Bird </B>that contains a <B>string</B>
+member and a <B>static int</B>.<B> </B>In the default constructor, use the
+<B>int</B> to automatically generate an identifier that you build in the
+<B>string</B>, along with the name of the class (<B>Bird #1</B>, <B>Bird #2</B>,
+etc.). Add an <B>operator&lt;&lt; </B>for <B>ostream</B>s to print out the
+<B>Bird</B> objects. Write an assignment <B>operator=</B> and a
+copy-constructor. In <B>main(&#160;)</B>, verify that everything works
+correctly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading246"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-15</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a class called <B>BirdHouse</B> that contains an object,
+a pointer and a reference for class <B>Bird</B> from Exercise 14. The
+constructor should take the three <B>Bird</B>s as arguments. Add an
+<B>operator&lt;&lt;</B> for <B>ostream</B>s for <B>BirdHouse</B>. Disallow
+assignment and copy-construction. In <B>main(&#160;)</B>, verify that everything
+works correctly. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The compiler-synthesized copy constructor and assignment
+operator for <B>Bird</B> will be just fine, since <B>Bird</B> holds a
+<B>string</B> by value (see exercise 24). Here&#146;s <B>Bird</B>:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:Bird.h</font>
+#ifndef BIRD_H
+#define BIRD_H
+
+#include &lt;iosfwd&gt;
+#include &lt;string&gt;
+
+<font color=#0000ff>class</font> Bird {
+    <font color=#0000ff>static</font> <font color=#0000ff>int</font> birdNum;
+    std::string id;
+<font color=#0000ff>public</font>:
+    Bird();
+    <font color=#0000ff>friend</font> std::ostream&amp; <font color=#0000ff>operator</font>&lt;&lt;(std::ostream&amp;,
+                                    <font color=#0000ff>const</font> Bird&amp;);
+};
+#endif
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:Bird.cpp {O}</font>
+#include <font color=#004488>"Bird.h"</font>
+#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> Bird::birdNum = 0;
+
+Bird::Bird() {
+    ostringstream os;
+    os &lt;&lt; <font color=#004488>"Bird# "</font> &lt;&lt; ++birdNum;
+    id = os.str();
+}
+
+ostream&amp; <font color=#0000ff>operator</font>&lt;&lt;(ostream&amp; os, <font color=#0000ff>const</font> Bird&amp; b) {
+    <font color=#0000ff>return</font> os &lt;&lt; b.id;
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>For a class that has a reference member, you must either
+define a custom copy constructor and assignment operator or you must disallow
+them. As instructed, we&#146;ll disallow them here by making them
+private.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:BirdHouse.h</font>
+#ifndef BIRDHOUSE_H
+#define BIRDHOUSE_H
+#include <font color=#004488>"Bird.h"</font>
+
+<font color=#0000ff>class</font> BirdHouse {
+    <font color=#009900>// Feathered friends:</font>
+    Bird val;
+    Bird* ptr;
+    Bird&amp; ref;
+    
+    <font color=#009900>// Disallowed ops:</font>
+    BirdHouse(<font color=#0000ff>const</font> BirdHouse&amp;);
+    BirdHouse&amp; <font color=#0000ff>operator</font>=(<font color=#0000ff>const</font> BirdHouse&amp;);
+    
+<font color=#0000ff>public</font>:
+    BirdHouse(<font color=#0000ff>const</font> Bird&amp; v, Bird* p, Bird&amp; r)
+    : val(v), ref(r) {
+        ptr = p;
+    }
+       
+    <font color=#0000ff>friend</font> std::ostream&amp; <font color=#0000ff>operator</font>&lt;&lt;(std::ostream&amp;,
+                                    <font color=#0000ff>const</font> BirdHouse&amp;);
+};
+
+#endif
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Remember that all <B>const</B> and reference members must be
+initialized in the constructor initializer list (viz., <B>ref</B> above). You
+should also always initialize members contained by value (such as <B>val</B>,
+above), otherwise the default constructor for that member will be called before
+the body of the constructor executes. The stream output operator for
+<B>BirdHouse</B> just calls upon that for <B>Bird</B>, as follows:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:BirdHouse.cpp {O}</font>
+#include <font color=#004488>"BirdHouse.h"</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+ostream&amp; <font color=#0000ff>operator</font>&lt;&lt;(ostream&amp; os, <font color=#0000ff>const</font> BirdHouse&amp; bh) {
+    os &lt;&lt; '{' &lt;&lt; bh.val &lt;&lt; <font color=#004488>", "</font> &lt;&lt; *bh.ptr
+       &lt;&lt; <font color=#004488>", "</font> &lt;&lt; bh.ref &lt;&lt; '}';
+    <font color=#0000ff>return</font> os;
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>And here&#146;s the test program:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:TheBirds.cpp</font>
+<font color=#009900>//{L} Bird BirdHouse</font>
+#include <font color=#004488>"BirdHouse.h"</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    Bird a, b, c;
+    BirdHouse bh(a, &amp;b, c);
+    cout &lt;&lt; bh &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+{Bird# 1, Bird# 2, Bird# 3}
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading247"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-16</H2></FONT>
+<DIV ALIGN="LEFT"><P>Add an <B>int</B> data member to both <B>Bird</B> and
+<B>BirdHouse</B> in Exercise 15. Add member operators <B>+</B>, <B>-</B>,
+<B>*</B>, and <B>/</B> that use the <B>int</B> members to perform the operations
+on the respective members. Verify that these work.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading248"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-17</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repeat Exercise 16 using non-member operators.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading249"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-18</H2></FONT>
+<DIV ALIGN="LEFT"><P>Add an operator-- to SmartPointer.cpp and
+NestedSmartPointer.cpp.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading250"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-19</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>CopyingVsInitialization.cpp</B> so that all of the
+constructors print a message that tells you what&#146;s going on. Now verify
+that the two forms of calls to the copy-constructor (the assignment form and the
+parenthesized form) are equivalent.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading251"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-20</H2></FONT>
+<DIV ALIGN="LEFT"><P>Attempt to create a non-member <B>operator=</B> for a class
+and see what kind of compiler message you get.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading252"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-21</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with a copy-constructor that has a second
+argument, a <B>string</B> that has a default value that says &#147;CC
+call.&#148; Create a function that takes an object of your class by value and
+show that your copy-constructor is called correctly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading253"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-22</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>CopyingWithPointers.cpp</B>, remove the <B>operator=</B>
+in <B>DogHouse</B> and show that the compiler-synthesized <B>operator=</B>
+correctly copies the <B>string</B> but simply aliases the <B>Dog</B>
+pointer.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading254"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-23</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>ReferenceCounting.cpp</B>, add a <B>static int</B> and
+an ordinary <B>int </B>as data members to both <B>Dog</B> and <B>DogHouse</B>.
+In all constructors for both classes, increment the <B>static int</B> and assign
+the result to the ordinary <B>int</B> to keep track of the number of objects
+that have been created. Make the necessary modifications so that all the
+printing statements will say the <B>int</B> identifiers of the objects
+involved.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading255"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-24</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class containing a <B>string</B> as a data member.
+Initialize the <B>string</B> in the constructor, but do not create a
+copy-constructor or <B>operator=</B>. Make a second class that has a member
+object of your first class; do not create a copy-constructor or <B>operator=</B>
+for this class either. Demonstrate that the copy-constructor and
+<B>operator=</B> are properly synthesized by the compiler.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:CopyAssign.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+#define eval(expr) display(#expr, expr)
+
+<font color=#0000ff>class</font> HasString {
+    string str;
+<font color=#0000ff>public</font>:
+    HasString(<font color=#0000ff>const</font> string&amp; s) : str(s) {}
+    <font color=#0000ff>friend</font> ostream&amp; 
+    <font color=#0000ff>operator</font>&lt;&lt;(ostream&amp; os, <font color=#0000ff>const</font> HasString&amp; hs) {
+        <font color=#0000ff>return</font> os &lt;&lt; hs.str;
+    }
+};
+
+<font color=#0000ff>class</font> HasString2 {
+    HasString str2;
+<font color=#0000ff>public</font>:
+    HasString2(<font color=#0000ff>const</font> HasString&amp; s2) : str2(s2) {}
+    <font color=#0000ff>friend</font> ostream&amp; 
+    <font color=#0000ff>operator</font>&lt;&lt;(ostream&amp; os, <font color=#0000ff>const</font> HasString2&amp; hs2) {
+        <font color=#0000ff>return</font> os &lt;&lt; hs2.str2;
+    }
+};
+
+<font color=#0000ff>void</font> display(<font color=#0000ff>const</font> <font color=#0000ff>char</font>* s, <font color=#0000ff>const</font> HasString2&amp; res) {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    cout &lt;&lt; s &lt;&lt; <font color=#004488>" = "</font> &lt;&lt; res &lt;&lt; endl;
+}
+
+<font color=#0000ff>int</font> main() {
+    HasString s1(<font color=#004488>"Buzz"</font>);
+    eval(s1);
+    {
+        HasString s2(s1);
+        eval(s2);
+    }
+    HasString s2(s1);
+    s1 = HasString(<font color=#004488>"Lightyear"</font>);
+    eval(s1);
+    eval(s2);
+    cout &lt;&lt; endl;
+    
+    HasString2 t1(HasString(<font color=#004488>"Buzz"</font>));
+    eval(t1);
+    {
+        HasString2 t2(t1);
+        eval(t2);
+    }
+    HasString2 t2(t1);
+    t1 = HasString2(HasString(<font color=#004488>"Lightyear"</font>));
+    eval(t1);
+    eval(t2);
+}
+
+<font color=#009900>/* Output:
+s1 = Buzz
+s2 = Buzz
+s1 = Lightyear
+s2 = Buzz
+
+t1 = Buzz
+t2 = Buzz
+t1 = Lightyear
+t2 = Buzz
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>For convenience I&#146;ve added an output operator above. The
+eval/display trick borrowed from exercise 11 needs a little explanation here.
+Since <B>HasString2</B> has a single-arg constructor taking a <B>HasString</B>,
+there is an implicit conversion from <B>HasString</B> to <B>HasString2</B>. This
+means that <B>display(const char*, const HasString2&amp;)</B> can be called as
+<B>display(const char*, const HasString&amp;)</B>. This way I only need one
+display function and therefore one version of <B>eval</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>In <B>main(&#160;)</B> I define <B>s2</B> as a copy of
+<B>s1</B> inside of its own block. When execution exits that block, you would
+get an access violation if the destructor for <B>s2</B> had destroyed the string
+inside of <B>s1</B> (this happens with shallow copy). No such error occurs, so
+we assume the copy constructor actually made a new copy of the underlying
+string.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>After exiting the first block, I create <B>s2</B> again, and
+then assign a new value to <B>s1</B>. The assignment works, but <B>s2</B> is not
+changed, so indeed <B>s2</B> and <B>s1</B> are not connected in any
+way.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>I repeat the tests analogously for
+<B>HasString2</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The compiler-synthesized versions of the copy constructor and
+assignment operator are as if you had defined the following:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>HasString::HasString(<font color=#0000ff>const</font> HasString&amp; rhs) : str(rhs.str) {}
+HasString&amp; HasString::<font color=#0000ff>operator</font>=(<font color=#0000ff>const</font> HasString&amp; rhs) {
+    str = rhs.str;
+}
+HasString2::HasString2(<font color=#0000ff>const</font> HasString2&amp; rhs) : str2(rhs.str2) {}
+HasString2&amp; HasString2::<font color=#0000ff>operator</font>=(<font color=#0000ff>const</font> HasString2&amp; rhs) {
+    str2 = rhs.str2;
+}</PRE></FONT></BLOCKQUOTE>
+<A NAME="Heading256"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-25</H2></FONT>
+<DIV ALIGN="LEFT"><P>Combine the classes in <B>OverloadingUnaryOperators.cpp</B>
+and <B>Integer.cpp</B>. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading257"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-26</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>PointerToMemberOperator.cpp</B> by adding two new
+member functions to <B>Dog</B> that take no arguments and return <B>void</B>.
+Create and test an overloaded <B>operator-&gt;*</B> that works with your two new
+functions.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:PointerToMemberOperator.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Dog {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>void</font> bark() <font color=#0000ff>const</font> { 
+    cout &lt;&lt; <font color=#004488>"bark\n"</font>;  
+  }
+  <font color=#0000ff>void</font> yip() <font color=#0000ff>const</font> { 
+    cout &lt;&lt; <font color=#004488>"yip\n"</font>;  
+  }
+  <font color=#0000ff>typedef</font> <font color=#0000ff>void</font> (Dog::*PMF)(<font color=#0000ff>void</font>) <font color=#0000ff>const</font>;
+  
+  <font color=#0000ff>class</font> FunctionObject {
+    Dog* ptr;
+    PMF pmem;
+  <font color=#0000ff>public</font>:
+    FunctionObject(Dog* wp, PMF pmf) 
+      : ptr(wp), pmem(pmf) { 
+      cout &lt;&lt; <font color=#004488>"FunctionObject constructor\n"</font>;
+    }
+    <font color=#0000ff>void</font> <font color=#0000ff>operator</font>()() <font color=#0000ff>const</font> {
+      cout &lt;&lt; <font color=#004488>"FunctionObject::operator()\n"</font>;
+      (ptr-&gt;*pmem)();
+    }
+  };
+  FunctionObject <font color=#0000ff>operator</font>-&gt;*(PMF pmf) { 
+    cout &lt;&lt; <font color=#004488>"operator-&gt;*"</font> &lt;&lt; endl;
+    <font color=#0000ff>return</font> FunctionObject(<font color=#0000ff>this</font>, pmf);
+  }
+};
+ 
+<font color=#0000ff>int</font> main() {
+  Dog w;
+  Dog::PMF pmf = &amp;Dog::bark;
+  (w-&gt;*pmf)();
+  pmf = &amp;Dog::yip;
+  (w-&gt;*pmf)();
+}
+ 
+<font color=#009900>/* Output:
+operator-&gt;*
+FunctionObject constructor
+FunctionObject::operator()
+bark
+operator-&gt;*
+FunctionObject constructor
+FunctionObject::operator()
+yip
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>I&#146;ve removed the previous set of functions seen in the
+book (<B>sleep(&#160;)</B>, <B>eat(&#160;)</B>, etc.) to save space. The changes
+to be made are:<BR></P></DIV>
+<OL>
+<LI>	Define the member functions (I chose <B>bark(&#160;)</B> and
+<B>yip(&#160;)</B>) with the signature <B>void(*)(&#160;).</B><LI>	Define a
+<B>typedef</B> for that signature for convenience (I replaced
+<B>PMF</B>).<LI>	Overload <B>operator(&#160;)</B> in <B>FunctionObject</B> to
+take no arguments and return no value. Have it just apply the stored member
+function via the stored object pointer.<LI>	Modify <B>main(&#160;)</B> to call
+the functions without an argument and expecting no return
+value.</OL><A NAME="Heading258"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-27</H2></FONT>
+<DIV ALIGN="LEFT"><P>Add an <B>operator-&gt;*</B> to
+<B>NestedSmartPointer.cpp</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading259"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-28</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create two classes, <B>Apple</B> and <B>Orange</B>. In
+<B>Apple</B>, create a constructor that takes an <B>Orange</B> as an argument.
+Create a function that takes an <B>Apple</B> and call that function with an
+<B>Orange</B> to show that it works. Now make the <B>Apple</B> constructor
+<B>explicit</B> to demonstrate that the automatic type conversion is thus
+prevented. Modify the call to your function so that the conversion is made
+explicitly and thus succeeds.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading260"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-29</H2></FONT>
+<DIV ALIGN="LEFT"><P>Add a global <B>operator*</B> to
+<B>ReflexivityInOverloading.cpp</B> and demonstrate that it is
+reflexive.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading261"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-30</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create two classes and create an <B>operator+</B> and the
+conversion functions such that addition is reflexive for the two
+classes.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S12:ReflexiveAdd.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>class</font> A {
+    <font color=#0000ff>int</font> n;
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>friend</font> A <font color=#0000ff>operator</font>+(<font color=#0000ff>const</font> A&amp;, <font color=#0000ff>const</font> A&amp;);
+    A(<font color=#0000ff>int</font> i) {
+        n = i;
+    }
+    <font color=#0000ff>int</font> toInt() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> n;
+    }
+};
+
+<font color=#0000ff>class</font> B {
+    <font color=#0000ff>int</font> n;
+<font color=#0000ff>public</font>:
+    B(<font color=#0000ff>int</font> i) {
+        n = i;
+    }
+    <font color=#0000ff>operator</font> A() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> A(n);
+    }
+};
+
+A <font color=#0000ff>operator</font>+(<font color=#0000ff>const</font> A&amp; a1, <font color=#0000ff>const</font> A&amp; a2) {
+    <font color=#0000ff>return</font> A(a1.n + a2.n);
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    A a(1);
+    B b(2);
+    cout &lt;&lt; (a + b).toInt() &lt;&lt; endl;
+    cout &lt;&lt; (b + a).toInt() &lt;&lt; endl;
+    cout &lt;&lt; (a + 3).toInt() &lt;&lt; endl;
+    cout &lt;&lt; (3 + b).toInt() &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+3
+3
+4
+5
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Just like with the case using class <B>Number</B> and
+<B>int</B> in the book, you have to decide which class is the dominant one
+(i.e., which one will be the target of conversion from the other). You can
+simultaneously have <B>operator+</B> functions such that one returns an <B>A</B>
+and the other a <B>B</B>, because the compiler will not know which one to pick
+in a mixed expression such as <B>a + b</B>. So I chose <B>A</B> to dominate,
+which means all that is necessary is to have <B>B</B> contain an <B>operator
+A(&#160;)</B> conversion function. I was tempted to have an <B>operator
+int(&#160;)</B> in <B>class A</B> for printing convenience, but that would make
+the expression <B>a + 3</B> above ambiguous, since <B>A</B> has a single-arg
+constructor that takes an <B>int</B>. In general, explicit conversions (like
+<B>A::toInt(&#160;)</B>) are preferred over implicit ones.<BR></P></DIV>
+<A NAME="Heading262"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-31</H2></FONT>
+<DIV ALIGN="LEFT"><P>Fix <B>TypeConversionFanout.cpp</B> by creating an explicit
+function to call to perform the type conversion, instead of one of the automatic
+conversion operators.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading263"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+12-32</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write simple code that uses the <B>+</B>, <B>-</B>, <B>*</B>,
+and <B>/</B> operators for <B>double</B>s. Figure out how your compiler
+generates assembly code and look at the assembly language that&#146;s generated
+to discover and explain what&#146;s going on under the hood.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap11.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap13.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

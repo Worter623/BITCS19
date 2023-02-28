@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="A3数据库编码">
+  <Items>
+    <LogicalFolder Name="连接" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="LAPTOP-7O733H1T\BITPC:LAPTOP-7O733H1T\86137">
+          <Created>2021-06-07T23:26:37.3996051+08:00</Created>
+          <Type>SQL</Type>
+          <Server>LAPTOP-7O733H1T\BITPC</Server>
+          <UserName />
+          <Authentication>Windows 身份验证</Authentication>
+          <InitialDB />
+          <LoginTimeout>30</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - 查询</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="查询" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="01数据库创建和表单建立.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-7O733H1T\BITPC:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LAPTOP-7O733H1T\BITPC</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>01数据库创建和表单建立.sql</FullPath>
+        </FileNode>
+        <FileNode Name="02预置信息插入.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-7O733H1T\BITPC:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LAPTOP-7O733H1T\BITPC</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>02预置信息插入.sql</FullPath>
+        </FileNode>
+        <FileNode Name="03界面级联.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-7O733H1T\BITPC:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LAPTOP-7O733H1T\BITPC</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>03界面级联.sql</FullPath>
+        </FileNode>
+        <FileNode Name="04权限管理（触发器与存储过程）.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-7O733H1T\BITPC:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LAPTOP-7O733H1T\BITPC</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>04权限管理（触发器与存储过程）.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="杂项" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

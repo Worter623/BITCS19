@@ -1,0 +1,853 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:46
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap10.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 10</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap09.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap11.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 10</H1></FONT>
+<A NAME="Heading167"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a function with a static variable that is a pointer
+(with a default argument of zero). When the caller provides a value for this
+argument it is used to point at the beginning of an array of <B>int</B>. If you
+call the function with a zero argument (using the default argument), the
+function returns the next value in the array, until it sees a &#147;-1&#148;
+value in the array (to act as an end-of-array indicator). Exercise this function
+in <B>main(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading168"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a function that returns the next value in a Fibonacci
+sequence every time you call it. Add an argument that is a <B>bool</B> with a
+default value of <B>false</B> such that when you give the argument with
+<B>true</B> it &#147;resets&#148; the function to the beginning of the
+Fibonacci sequence. Exercise this function in <B>main(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:Fibonacci.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+
+<font color=#0000ff>int</font> fib(<font color=#0000ff>bool</font> reset = <font color=#0000ff>false</font>) {
+    <font color=#0000ff>static</font> <font color=#0000ff>int</font> first = 0;
+    <font color=#0000ff>static</font> <font color=#0000ff>int</font> second = 1;
+    <font color=#0000ff>static</font> <font color=#0000ff>int</font> count = 0;
+    
+    <font color=#0000ff>if</font> (reset) {
+        <font color=#009900>// Start over</font>
+        first = count = 0;
+        second = 1;
+    }
+    
+    <font color=#009900>// The first 2 numbers are special </font>
+    <font color=#0000ff>int</font> result;
+    <font color=#0000ff>if</font> (count == 0) {
+        assert(first == 0 &amp;&amp; second == 1);
+        result = 0;
+    }
+    <font color=#0000ff>else</font> <font color=#0000ff>if</font> (count == 1) {
+        assert(first == 0 &amp;&amp; second == 1);
+        result = 1;
+    }
+    <font color=#0000ff>else</font> {
+        result = first + second;
+        first = second;
+        second = result;
+    }
+    ++count;    
+    
+    <font color=#0000ff>return</font> result;
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    
+    <font color=#009900>// Print first 10</font>
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 10; ++i)
+        cout &lt;&lt; fib() &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+        
+    <font color=#009900>// print first 5</font>
+    cout &lt;&lt; fib(<font color=#0000ff>true</font>) &lt;&lt; ' ';
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> j = 1; j &lt; 5; ++j)
+        cout &lt;&lt; fib() &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+0 1 1 2 3 5 8 13 21 34 
+0 1 1 2 3 
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The Fibonacci sequence is the sequence beginning with 0 and 1
+where each successive number is the sum of the preceding two. When requesting
+the first or second element in the sequence (i.e., 0 or 1), no summing is done.
+I keep track of the which number I&#146;m on with the static variable
+<B>count</B> (the first number being the &#147;zeroeth&#148; element). Since
+this is a chapter on namespaces, I put the using directive in
+<B>main(&#160;)</B>, giving it the minimal scope possible.<BR></P></DIV>
+<A NAME="Heading169"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class that holds an array of <B>int</B>s. Set the
+size of the array using <B>static const int</B> inside the class. Add a
+<B>const</B> <B>int</B> variable, and initialize it in the constructor
+initializer list; make the constructor <B>inline</B>. Add a <B>static</B>
+<B>int</B> member variable and initialize it to a specific value. Add a
+<B>static</B> member function that prints the <B>static</B> data member. Add an
+<B>inline</B> member function called <B>print(&#160;)</B> to print out all the
+values in the array and to call the <B>static</B> member function. Exercise this
+class in <B>main(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading170"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class called <B>Monitor </B>that keeps track of the
+number of times that its <B>incident(&#160;)</B> member function has been
+called. Add a <B>print(&#160;)</B> member function that displays the number of
+incidents. Now create a global function (not a member function) containing a
+<B>static</B> <B>Monitor</B> object. Each time you call the function it should
+call the <B>print(&#160;)</B> member function to display the incident count.
+Exercise the function in <B>main(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:Monitor1.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>class</font> Monitor {
+    <font color=#0000ff>int</font> count;
+<font color=#0000ff>public</font>:
+    Monitor() {
+        count = 0;
+    }
+    <font color=#0000ff>void</font> incident() {
+        ++count;
+    }
+    <font color=#0000ff>void</font> print() {
+        std::cout &lt;&lt; count &lt;&lt; <font color=#004488>" incidents\n"</font>;
+    }
+};
+
+<font color=#0000ff>void</font> f() {
+    <font color=#0000ff>static</font> Monitor m;
+    m.incident();
+    m.print();
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 5; ++i)
+        f();
+}
+
+<font color=#009900>/* Output:
+1 incidents
+2 incidents
+3 incidents
+4 incidents
+5 incidents
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Just like static built-ins, local static objects are
+initialized once during program startup and destroyed at program exit.<BR></P></DIV>
+<A NAME="Heading171"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify the <B>Monitor</B> class from Exercise 4 so that you
+can <B>decrement(&#160;)</B> the incident count. Make a class <B>Monitor2</B>
+that takes as a constructor argument a pointer to a <B>Monitor1</B>, and which
+stores that pointer and calls <B>incident(&#160;)</B> and <B>print(&#160;)</B>.
+In the destructor for <B>Monitor2</B>, call <B>decrement(&#160;)</B> and
+<B>print(&#160;)</B>. Now make a <B>static</B> object of <B>Monitor2</B> inside
+a function. Inside <B>main(&#160;)</B>, experiment with calling the function and
+not calling the function to see what happens with the destructor of
+<B>Monitor2</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:Monitor2.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+
+<font color=#0000ff>class</font> Monitor1 {
+    <font color=#0000ff>int</font> count;
+<font color=#0000ff>public</font>:
+    Monitor1() {
+        count = 0;
+    }
+    <font color=#0000ff>void</font> incident() {
+        ++count;
+    }
+    <font color=#0000ff>void</font> decrement() {
+        --count;
+    }
+    <font color=#0000ff>void</font> print() {
+        std::cout &lt;&lt; count &lt;&lt; <font color=#004488>" incidents\n"</font>;
+    }
+};
+
+<font color=#0000ff>class</font> Monitor2 {
+    Monitor1* pm;
+<font color=#0000ff>public</font>:
+    Monitor2(Monitor1* p) {
+        assert(p);
+        pm = p;
+        pm-&gt;incident();
+        pm-&gt;print();
+    }
+    ~Monitor2() {
+        assert(pm);
+        pm-&gt;decrement();
+        pm-&gt;print();
+    }
+};
+
+Monitor1 g_mon;
+
+<font color=#0000ff>void</font> f() {
+    <font color=#0000ff>static</font> Monitor2 m(&amp;g_mon);
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 5; ++i)
+        f();
+}
+
+<font color=#009900>/* Output:
+1 incidents
+0 incidents
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>First notice that the <B>Monitor1</B> object needs to be of
+static storage duration, since it is used to initialize a static object, so I
+made it global. Because <B>g_mon</B> is static, there is only one call to its
+constructor and destructor, no matter how many times the loop in
+<B>main(&#160;)</B> executes. But if you never call <B>f(&#160;)</B>, then
+<B>g_mon</B> is not initialized at all! (Try it!). This illustrates the fact
+that static objects are only created as needed (so C++ compilers need to be very
+smart!).<BR></P></DIV>
+<A NAME="Heading172"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Make a global object of <B>Monitor2</B> and see what
+happens.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:Monitor3.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+
+<font color=#0000ff>class</font> Monitor1 {
+    <font color=#0000ff>int</font> count;
+<font color=#0000ff>public</font>:
+    Monitor1() {
+        count = 0;
+    }
+    <font color=#0000ff>void</font> incident() {
+        ++count;
+    }
+    <font color=#0000ff>void</font> decrement() {
+        --count;
+    }
+    <font color=#0000ff>void</font> print() {
+        std::cout &lt;&lt; count &lt;&lt; <font color=#004488>" incidents\n"</font>;
+    }
+};
+
+<font color=#0000ff>class</font> Monitor2 {
+    Monitor1* pm;
+<font color=#0000ff>public</font>:
+    Monitor2(Monitor1* p) {
+        assert(p);
+        pm = p;
+        pm-&gt;incident();
+        pm-&gt;print();
+    }
+    ~Monitor2() {
+        assert(pm);
+        pm-&gt;decrement();
+        pm-&gt;print();
+    }
+};
+
+Monitor1 g_mon1;
+Monitor2 g_mon2(&amp;g_mon1);
+
+<font color=#0000ff>int</font> main() {
+}
+
+<font color=#009900>/* Output:
+1 incidents
+0 incidents
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Since there is no dependency on any function, but rather the
+objects are global, then the constructor and destructor always execute
+once.<BR></P></DIV>
+<A NAME="Heading173"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with a destructor that prints a message and
+then calls <B>exit(&#160;)</B>. Create a global object of this class and see
+what happens.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading174"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>StaticDestructors.cpp</B>, experiment with the order of
+constructor and destructor calls by calling <B>f(&#160;)</B> and
+<B>g(&#160;)</B>  inside <B>main(&#160;)</B> in different orders. Does your
+compiler get it right?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading175"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>StaticDestructors.cpp</B>, test the default error
+handling of your implementation by turning the original definition of <B>out</B>
+into an <B>extern</B> declaration and putting the actual definition after the
+definition of <B>a</B> (whose <B>Obj</B> constructor sends information to
+<B>out</B>). Make sure there&#146;s nothing else important running on your
+machine when you run the program or that your machine will handle faults
+robustly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading176"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Prove that file static variables in header files don&#146;t
+clash with each other when included in more than one <B>cpp</B> file.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Here&#146;s the header file:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:FileStatic.h</font>
+
+<font color=#0000ff>static</font> <font color=#0000ff>int</font> var;
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Each of the following two <B>cpp</B> files include
+<B>FileStatic.h</B>, and contains functions that access <B>var</B>.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:FileStatic1.cpp {O}</font>
+#include <font color=#004488>"FileStatic.h"</font>
+
+<font color=#0000ff>void</font> setVal1(<font color=#0000ff>int</font> x) {
+    var = x;
+}
+
+<font color=#0000ff>int</font> getVal1() {
+    <font color=#0000ff>return</font> var;
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:FileStatic2.cpp {O}</font>
+#include <font color=#004488>"FileStatic.h"</font>
+
+<font color=#0000ff>void</font> setVal2(<font color=#0000ff>int</font> x) {
+    var = x;
+}
+
+<font color=#0000ff>int</font> getVal2() {
+    <font color=#0000ff>return</font> var;
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>If <B>var</B> had external linkage, then the following
+<B>main(&#160;)</B>, which links with both of the preceding <B>cpp</B> files,
+would cause a link error (but it doesn&#146;t).<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:DifferentStatics.cpp</font>
+<font color=#009900>//{L} FileStatic1 FileStatic2</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>extern</font> <font color=#0000ff>void</font> setVal1(<font color=#0000ff>int</font>);
+<font color=#0000ff>extern</font> <font color=#0000ff>void</font> setVal2(<font color=#0000ff>int</font>);
+<font color=#0000ff>extern</font> <font color=#0000ff>int</font> getVal1();
+<font color=#0000ff>extern</font> <font color=#0000ff>int</font> getVal2();
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    setVal1(1);
+    setVal2(2);
+    cout &lt;&lt; <font color=#004488>"val in FileStatic1.cpp == "</font> &lt;&lt; getVal1() &lt;&lt; endl;
+    cout &lt;&lt; <font color=#004488>"val in FileStatic2.cpp == "</font> &lt;&lt; getVal2() &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+val in FileStatic1.cpp == 1
+val in FileStatic2.cpp == 2
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading177"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a simple class containing an <B>int</B>, a constructor
+that initializes the <B>int</B> from its argument, a member function to set the
+<B>int</B> from its argument, and a <B>print(&#160;)</B> function that prints
+the <B>int</B>. Put your class in a header file, and include the header file in
+two <B>cpp</B> files. In one <B>cpp</B> file make an instance of your class, and
+in the other declare that identifier <B>extern</B> and test it inside
+<B>main(&#160;)</B>. Remember, you&#146;ll have to link the two object files or
+else the linker won&#146;t find the object.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading178"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Make the instance of the object in Exercise 11 <B>static</B>
+and verify that it cannot be found by the linker because of this.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading179"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>Declare a function in a header file. Define the function in
+one <B>cpp</B> file and call it inside <B>main(&#160;)</B> in a second
+<B>cpp</B> file. Compile and verify that it works. Now change the function
+definition so that it is <B>static</B> and verify that the linker cannot find
+it.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading180"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write and compile a simple program that uses the <B>auto</B>
+and <B>register</B> keywords.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading181"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-15</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Volatile.cpp</B> from Chapter 8 to make
+<B>comm::isr(&#160;)</B> something that could actually work as an interrupt
+service routine. Hint: an interrupt service routine doesn&#146;t take any
+arguments.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading182"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-16</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a header file containing a <B>namespace</B>. Inside the
+<B>namespace</B> create several function declarations. Now create a second
+header file that includes the first one and continues the <B>namespace</B>,
+adding several more function declarations. Now create a <B>cpp</B> file that
+includes the second header file. Alias your namespace to another (shorter) name.
+Inside a function definition, call one of your functions using scope resolution.
+Inside a separate function definition, write a using directive to introduce your
+namespace into that function scope, and show that you don&#146;t need scope
+resolution to call the functions from your namespace.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Here are the two header files:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:MyNames1.h</font>
+
+#ifndef MYNAMES1_H
+#define MYNAMES1_H
+
+#include &lt;iostream&gt;
+
+<font color=#0000ff>namespace</font> MyNamespace {
+    <font color=#0000ff>void</font> f() {
+        std::cout &lt;&lt; <font color=#004488>"MyNameSpace::f()\n"</font>;
+    }
+}
+
+#endif
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:MyNames2.h</font>
+
+#ifndef MYNAMES2_H
+#define MYNAMES2_H
+
+#include <font color=#004488>"MyNames1.h"</font>
+
+<font color=#0000ff>namespace</font> MyNamespace {
+    <font color=#0000ff>void</font> g() {
+        std::cout &lt;&lt; <font color=#004488>"MyNameSpace::g()\n"</font>;
+    }
+}
+
+#endif
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The following <B>cpp</B> file includes only the second, which
+in turn includes the first, but all names in <B>MyNamespace</B> are
+available.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:Disjoint.cpp</font>
+#include <font color=#004488>"MyNames2.h"</font>
+
+<font color=#0000ff>namespace</font> MNS = MyNamespace;
+
+<font color=#0000ff>void</font> byScope() {
+    MNS::f();
+}
+
+<font color=#0000ff>void</font> byDirective() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> MNS;
+    g();
+}
+
+<font color=#0000ff>int</font> main() {
+    byScope();
+    byDirective();
+}
+
+<font color=#009900>/* Output:
+MyNameSpace::f()
+MyNameSpace::g()
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Almost the entire standard C++ library is in the single
+namespace <B>std</B>, but the definition of <B>std</B> is spread over all the
+standard headers.<BR></P></DIV>
+<A NAME="Heading183"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-17</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a header file with an unnamed namespace. Include the
+header in two separate <B>cpp</B> files and show that an unnamed space is unique
+for each translation unit.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This problem is analogous to exercise 10 &#150; just change
+the static definition of <B>var</B> to a declaration in the unnamed
+namespace.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:Unnamed.h</font>
+<font color=#0000ff>namespace</font> {
+    <font color=#0000ff>int</font> var;
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:Unnamed1.cpp {O}</font>
+#include <font color=#004488>"Unnamed.h"</font>
+
+<font color=#0000ff>void</font> setVal1(<font color=#0000ff>int</font> x) {
+    var = x;
+}
+
+<font color=#0000ff>int</font> getVal1() {
+    <font color=#0000ff>return</font> var;
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:Unnamed2.cpp {O}</font>
+#include <font color=#004488>"Unnamed.h"</font>
+
+<font color=#0000ff>void</font> setVal2(<font color=#0000ff>int</font> x) {
+    var = x;
+}
+
+<font color=#0000ff>int</font> getVal2() {
+    <font color=#0000ff>return</font> var;
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:UnnamedUnique.cpp</font>
+<font color=#009900>//{L} Unnamed1 Unnamed2</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>extern</font> <font color=#0000ff>void</font> setVal1(<font color=#0000ff>int</font>);
+<font color=#0000ff>extern</font> <font color=#0000ff>void</font> setVal2(<font color=#0000ff>int</font>);
+<font color=#0000ff>extern</font> <font color=#0000ff>int</font> getVal1();
+<font color=#0000ff>extern</font> <font color=#0000ff>int</font> getVal2();
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    setVal1(1);
+    setVal2(2);
+    cout &lt;&lt; <font color=#004488>"val in Unnamed1.cpp == "</font> &lt;&lt; getVal1() &lt;&lt; endl;
+    cout &lt;&lt; <font color=#004488>"val in Unnamed2.cpp == "</font> &lt;&lt; getVal2() &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+val in Unnamed1.cpp == 1
+val in Unnamed2.cpp == 2
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading184"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-18</H2></FONT>
+<DIV ALIGN="LEFT"><P>Using the header file from Exercise 17, show that the names in
+an unnamed namespace are automatically available in a translation unit without
+qualification.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Illustrated in the previous solution.<BR></P></DIV>
+<A NAME="Heading185"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-19</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>FriendInjection.cpp</B> to add a definition for the
+friend function and to call the function inside <B>main(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading186"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-20</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>Arithmetic.cpp</B>, demonstrate that the using directive
+does not extend outside the function in which the directive was made.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading187"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-21</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repair the problem in <B>OverridingAmbiguity.cpp</B>, first
+with scope resolution, then instead with a using declaration that forces the
+compiler to choose one of the identical function names.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading188"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-22</H2></FONT>
+<DIV ALIGN="LEFT"><P>In two header files, create two namespaces, each containing a
+class (with all inline definitions) with a name identical to that in the other
+namespace. Create a <B>cpp</B> file that includes both header files. Create a
+function, and inside the function use the using directive to introduce both
+namespaces. Try creating an object of the class and see what happens. Make the
+using directives global (outside of the function) to see if it makes any
+difference. Repair the problem using scope resolution, and create objects of
+both classes.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading189"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-23</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repair the problem in Exercise 22 with a using declaration
+that forces the compiler to choose one of the identical class names.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading190"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-24</H2></FONT>
+<DIV ALIGN="LEFT"><P>Extract the namespace declarations in
+<B>BobsSuperDuperLibrary.cpp</B> and <B>UnnamedNamespaces.cpp</B> and put them
+in separate header files, giving the unnamed namespace a name in the process. In
+a third header file create a new namespace that combines the elements of the
+other two namespaces with using declarations. In <B>main(&#160;)</B>, introduce
+your new namespace with a using directive and access all the elements of your
+namespace.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading191"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-25</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a header file that includes <B>&lt;string&gt;</B> and
+<B>&lt;iostream&gt;</B> but does not use any using directives or using
+declarations. Add &#147;include guards&#148; as you&#146;ve seen in the
+header files in this book. Create a class with all inline functions that
+contains a <B>string</B> member, with a constructor that initializes that
+<B>string</B> from its argument and a <B>print(&#160;)</B> function that
+displays the <B>string</B>. Create a <B>cpp</B> file and exercise your class in
+<B>main(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:Polite.h</font>
+#ifndef POLITE_H
+#define POLITE_H
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+<font color=#0000ff>class</font> Polite {
+    std::string data;
+<font color=#0000ff>public</font>:
+    Polite(<font color=#0000ff>const</font> std::string&amp; s) : data(s) {}
+    <font color=#0000ff>void</font> print() {
+        std::cout &lt;&lt; <font color=#004488>"data == "</font> &lt;&lt; data &lt;&lt; std::endl;
+    }
+};
+#endif <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>It&#146;s &#147;polite&#148; to not use any using
+directives at file scope in header files, since this can conceivably introduce
+name clashes down the road during a compilation. You might find it odd that I
+don&#146;t have to qualify operator&lt;&lt; above. For example, the
+expression<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>std::cout &lt;&lt; &#147;data&#148;</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>really is equivalent to<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>operator</font>&lt;&lt;(std::cout, data)</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>but this operator function is declared in <B>std</B>! How then
+can I use it unqualified? The answer is <I>Koenig lookup</I>, which specifies
+that the compiler looks in the namespace of a function&#146;s arguments to
+resolve the function name itself. Here&#146;s the main program:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:PoliteClient.cpp</font>
+#include <font color=#004488>"Polite.h"</font>
+
+<font color=#0000ff>int</font> main() {
+    Polite p(<font color=#004488>"It's silence that I ask for in my kitchen!"</font>);
+    p.print();
+}
+
+<font color=#009900>/* Output:
+data == It's silence that I ask for in my kitchen!
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<A NAME="Heading192"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-26</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class containing a <B>static</B> <B>double</B> and
+<B>long</B>. Write a <B>static</B> member function that prints out the
+values.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading193"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-27</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class containing an <B>int</B>, a constructor that
+initializes the <B>int</B> from its argument, and a <B>print(&#160;)</B>
+function to display the <B>int</B>. Now create a second class that contains a
+<B>static</B> object of the first one. Add a <B>static</B> member function that
+calls the <B>static</B> object&#146;s <B>print(&#160;)</B> function. Exercise
+your class in <B>main(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading194"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-28</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class containing both a <B>const</B> and a
+non-<B>const</B> <B>static</B> array of <B>int</B>. Write <B>static</B> methods
+to print out the arrays. Exercise your class in <B>main(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading195"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-29</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class containing a <B>string</B>, with a constructor
+that initializes the <B>string</B> from its argument, and a <B>print(&#160;)</B>
+function to display the <B>string</B>. Create another class that contains both
+<B>const </B>and non-<B>const</B> <B>static</B> arrays of objects of the first
+class, and <B>static</B> methods to print out these arrays. Exercise this second
+class in <B>main(&#160;)</B>. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading196"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-30</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>struct</B> that contains an <B>int</B> and a
+default constructor that initializes the <B>int</B> to zero. Make this
+<B>struct</B> local to a function. Inside that function, create an array of
+objects of your <B>struct</B> and demonstrate that each <B>int</B> in the array
+has automatically been initialized to zero.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S10:LocalStruct.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+
+<font color=#0000ff>void</font> f() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>struct</font> Int {
+        <font color=#0000ff>int</font> n;
+        Int() : n(0) {}
+    };
+    
+    Int a[3];
+    size_t count = <font color=#0000ff>sizeof</font> a / <font color=#0000ff>sizeof</font> a[0];
+    <font color=#0000ff>for</font> (size_t i = 0; i &lt; count; ++i)
+        cout &lt;&lt; a[i].n &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+}
+
+<font color=#0000ff>int</font> main() {
+    f();
+}
+
+<font color=#009900>/* Output:
+0 0 0
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<A NAME="Heading197"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-31</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class that represents a printer connection, and that
+only allows you to have one printer.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This the well-known Singleton Pattern. A simple implementation
+follows.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> Printer {
+    <font color=#0000ff>static</font> <font color=#0000ff>int</font> count;
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>static</font> Printer* create() {
+        <font color=#0000ff>return</font> (count == 0) ? ++count, <font color=#0000ff>new</font> Printer : 0;
+    }
+    ~Printer() {--count;}
+<font color=#0000ff>private</font>:
+    Printer() {}
+};
+
+<font color=#0000ff>int</font> Printer::count = 0;
+
+<font color=#0000ff>int</font> main() {
+    Printer* p1 = Printer::create();
+    assert(p1);
+    Printer* p2 = Printer::create();
+    assert(!p2);
+    <font color=#0000ff>delete</font> p1;
+    Printer* p3 = Printer::create();
+    assert(p3);
+    <font color=#0000ff>delete</font> p3;
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The only way to create a <B>Printer</B> object is through the
+static <B>create(&#160;)</B> function, since the constructor is private, but
+<B>create(&#160;)</B> checks the static variable <B>count</B> to see if a
+printer is already in existence, in which case it skips the creation and returns
+a null pointer.<BR></P></DIV>
+<A NAME="Heading198"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-32</H2></FONT>
+<DIV ALIGN="LEFT"><P>In a header file, create a class <B>Mirror </B>that contains
+two data members: a pointer to a <B>Mirror </B>object and a <B>bool</B>. Give it
+two constructors: the default constructor initializes the <B>bool</B> to
+<B>true</B> and the <B>Mirror </B>pointer to zero. The second constructor takes
+as an argument a pointer to a <B>Mirror </B>object, which it assigns to the
+object&#146;s internal pointer; it sets the <B>bool</B> to <B>false</B>. Add a
+member function <B>test(&#160;)</B>: if the object&#146;s pointer is nonzero,
+it returns the value of <B>test(&#160;) </B>called through the pointer. If the
+pointer is zero, it returns the <B>bool</B>. Now create five <B>cpp</B> files,
+each of which includes the <B>Mirror </B>header. The first <B>cpp</B> file
+defines a global <B>Mirror </B>object using the default constructor. The second
+file declares the object in the first file as <B>extern</B>, and defines a
+global <B>Mirror </B>object using the second constructor, with a pointer to the
+first object. Keep doing this until you reach the last file, which will also
+contain a global object definition. In that file, <B>main(&#160;)</B> should
+call the <B>test(&#160;)</B> function and report the result. If the result is
+<B>true</B>, find out how to change the linking order for your linker and change
+it until the result is <B>false</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading199"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-33</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repair the problem in Exercise 32 using technique one shown in
+this book.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading200"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-34</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repair the problem in Exercise 32 using technique two shown in
+this book.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading201"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+10-35</H2></FONT>
+<DIV ALIGN="LEFT"><P>Without including a header file, declare the function
+<B>puts(&#160;)</B> from the Standard C Library. Call this function from
+<B>main(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap09.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap11.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

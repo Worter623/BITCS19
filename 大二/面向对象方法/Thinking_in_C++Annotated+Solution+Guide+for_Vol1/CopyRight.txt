@@ -1,0 +1,26 @@
+Copyright (c)2001, MindView, Inc. All Rights Reserved.
+
+The "Thinking in C++, 2nd Edition, Volume 1 Annotated Solutions Guide."
+
+You cannot copy and distribute this code; it is available for purchase only from
+http://www.mindview.net/Books/TICPP/Solutions/.
+
+You cannot remove this copyright and notice. You cannot distribute modified 
+versions of the source code in this package. You cannot use this file in printed 
+media without the express permission of MindView, Inc. 
+
+MindView, Inc. makes no representation about the suitability of this software 
+for any purpose. It is provided "as is" without express or implied warranty of 
+any kind, including any implied warranty of merchantability, fitness for a 
+particular purpose or non-infringement. The entire risk as to the quality and 
+performance of the software is with you. MindView, Inc. shall not be liable for 
+any damages suffered by you or any third party as a result of using or 
+distributing software. In no event will MindView, Inc. be liable for any lost 
+revenue, profit, or data, or for direct, indirect, special, consequential, 
+incidental, or punitive damages, however caused and regardless of the theory of 
+liability, arising out of the use of or inability to use software, even if 
+MindView, Inc. has been advised of the possibility of such damages. Should the 
+software prove defective, you assume the cost of all necessary servicing, 
+repair, or correction. 
+
+If you think you've found an error, please submit the correction to www.BruceEckel.com.

@@ -1,0 +1,368 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:46
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap07.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 7</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap06.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap08.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 7</H1></FONT>
+<A NAME="Heading104"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+7-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>Text</B> class that contains a <B>string</B>
+object to hold the text of a file. Give it two constructors: a default
+constructor and a constructor that takes a <B>string</B> argument that is the
+name of the file to open. When the second constructor is used, open the file and
+read the contents into the <B>string</B> member object. Add a member function
+<B>contents(&#160;)</B> to return the <B>string</B> so (for example) it can be
+printed. In <B>main(&#160;)</B>,<B> </B>open a file using <B>Text</B> and print
+the contents.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S07:Text.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Text {
+    string text;
+<font color=#0000ff>public</font>:
+    Text() {}
+    Text(<font color=#0000ff>const</font> string&amp; fname) {
+        ifstream ifs(fname.c_str());
+        string line;
+        <font color=#0000ff>while</font> (getline(ifs, line))
+            text += line + '\n';
+    }
+    string contents() {
+        <font color=#0000ff>return</font> text;
+    }
+};
+
+<font color=#0000ff>int</font> main(<font color=#0000ff>int</font> argc, <font color=#0000ff>char</font>* argv[]) {
+    <font color=#0000ff>if</font> (argc &gt; 1)
+    {
+        Text t1;
+        Text t2(argv[1]);
+        cout &lt;&lt; <font color=#004488>"t1 :\n"</font> &lt;&lt; t1.contents() &lt;&lt; endl;
+        cout &lt;&lt; <font color=#004488>"t2 :\n"</font> &lt;&lt; t2.contents() &lt;&lt; endl;
+    }
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>When creating a <B>Text</B> object, the compiler guarantees
+that the <B>text</B> data member has its default constructor
+<B>(string::string(&#160;))</B> executed before either <B>Text</B> constructor
+runs, hence the default <B>Text</B> constructor just builds an empty string.
+This program prints an empty string for <B>t1</B> followed by the contents of
+the file named in the first command-line argument. Note the use of
+<B>string::c_str(&#160;)</B> in the second constructor. That&#146;s because the
+<B>ifstream</B> constructor takes a <B>char*</B> argument, not a
+<B>string</B>.<BR></P></DIV>
+<A NAME="Heading105"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+7-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>Message</B> class with a constructor that takes a
+single <B>string</B> with a default value. Create a private member
+<B>string</B>, and in the constructor simply assign the argument <B>string</B>
+to your internal <B>string</B>. Create two overloaded member functions called
+<B>print(&#160;)</B>: one that takes no arguments and simply prints the message
+stored in the object, and one that takes a <B>string</B> argument, which it
+prints in addition to the internal message. Does it make sense to use this
+approach instead of the one used for the constructor?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S07:Message.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Message {
+    string msg;
+<font color=#0000ff>public</font>:
+    Message(<font color=#0000ff>const</font> string&amp; s = <font color=#004488>"MSG"</font>) : msg(s) {}
+    <font color=#0000ff>void</font> print() {
+        cout &lt;&lt; msg &lt;&lt; endl;
+    }
+    <font color=#0000ff>void</font> print(<font color=#0000ff>const</font> string&amp; suffix) {
+        cout &lt;&lt; msg &lt;&lt; ' ' &lt;&lt; suffix &lt;&lt; endl;
+    }
+};
+
+
+<font color=#0000ff>int</font> main() {
+    Message m1;
+    Message m2(<font color=#004488>"Error"</font>);
+    m1.print();
+    m2.print();
+    m1.print(<font color=#004488>"hello"</font>);
+    m2.print(<font color=#004488>"goodbye"</font>);
+}
+
+<font color=#009900>/* Output:
+MSG
+Error
+MSG hello
+Error goodbye
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>It&#146;s usually more flexible to allow optional arguments
+in the call to print, since the text of a message is fixed when it is created. A
+common technique allows an optional prefix for messages, as the following
+example illustrates.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S07:MessageWithPrefix.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Message {
+    string msg;
+<font color=#0000ff>public</font>:
+    Message(<font color=#0000ff>const</font> string&amp; s) : msg(s) {}
+    <font color=#0000ff>void</font> print() {
+        cout &lt;&lt; msg &lt;&lt; endl;
+    }
+    <font color=#0000ff>void</font> print(<font color=#0000ff>const</font> string&amp; prefix) {
+        cout &lt;&lt; prefix &lt;&lt; <font color=#004488>": "</font> &lt;&lt; msg &lt;&lt; endl;
+    }
+};
+
+
+<font color=#0000ff>int</font> main() {
+    Message m(<font color=#004488>"This is a message"</font>);
+    m.print();
+    m.print(<font color=#004488>"Attention"</font>);
+}
+
+<font color=#009900>/* Output:
+This is a message
+Attention: This is a message
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading106"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+7-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Determine how to generate assembly output with your compiler,
+and run experiments to deduce the name-decoration scheme.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading107"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+7-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class that contains four member functions, with 0, 1,
+2, and 3 <B>int</B> arguments, respectively. Create a <B>main(&#160;)</B> that
+makes an object of your class and calls each of the member functions. Now modify
+the class so it has instead a single member function with all the arguments
+defaulted. Does this change your <B>main(&#160;)</B>?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Here&#146;s the first version:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S07:ManyArgs.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> ManyArgs {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> f() {
+        cout &lt;&lt; <font color=#004488>"{}\n"</font>;
+    }
+    <font color=#0000ff>void</font> f(<font color=#0000ff>int</font> i) {
+        cout &lt;&lt; <font color=#004488>"{"</font> &lt;&lt; i &lt;&lt; <font color=#004488>"}\n"</font>;
+    }
+    <font color=#0000ff>void</font> f(<font color=#0000ff>int</font> i, <font color=#0000ff>int</font> j) {
+        cout &lt;&lt; <font color=#004488>"{"</font> &lt;&lt; i &lt;&lt; <font color=#004488>", "</font> &lt;&lt; j &lt;&lt; <font color=#004488>"}\n"</font>;
+    }
+    <font color=#0000ff>void</font> f(<font color=#0000ff>int</font> i, <font color=#0000ff>int</font> j, <font color=#0000ff>int</font> k) {
+        cout &lt;&lt; <font color=#004488>"{"</font> &lt;&lt; i &lt;&lt; <font color=#004488>", "</font> &lt;&lt; j &lt;&lt; <font color=#004488>", "</font> &lt;&lt; k &lt;&lt; <font color=#004488>"}\n"</font>;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    ManyArgs a;
+    a.f();
+    a.f(1);
+    a.f(1, 2);
+    a.f(1, 2, 3);
+}
+
+<font color=#009900>/* Output:
+{}
+{1}
+{1, 2}
+{1, 2, 3}
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Now compare the output above to that from this
+default-argument version:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S07:DefaultArgs.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> DefaultArgs {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> f(<font color=#0000ff>int</font> i = 0, <font color=#0000ff>int</font> j = 0, <font color=#0000ff>int</font> k = 0) {
+        cout &lt;&lt; <font color=#004488>"{"</font> &lt;&lt; i &lt;&lt; <font color=#004488>", "</font> &lt;&lt; j &lt;&lt; <font color=#004488>", "</font> &lt;&lt; k &lt;&lt; <font color=#004488>"}\n"</font>;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    DefaultArgs a;
+    a.f();
+    a.f(1);
+    a.f(1, 2);
+    a.f(1, 2, 3);
+}
+
+<font color=#009900>/* Output:
+{0, 0, 0}
+{1, 0, 0}
+{1, 2, 0}
+{1, 2, 3}
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Although it&#146;s true that the operations in
+<B>main(&#160;)</B> did not change, the respective outputs suggest when each
+feature is appropriate. Use default arguments when there truly is a default
+value (like zero above). When you want no value at all in certain instances,
+then the functions are different enough that you need the overloads.<BR></P></DIV>
+<A NAME="Heading108"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+7-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a function with two arguments and call it from
+<B>main(&#160;)</B>. Now make one of the arguments a &#147;placeholder&#148;
+(no identifier) and see if your call in <B>main(&#160;)</B> changes.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S07:NamelessArg.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>void</font> twoArgs(<font color=#0000ff>int</font> i, <font color=#0000ff>float</font> x) {
+    cout &lt;&lt; <font color=#004488>"twoArgs("</font> &lt;&lt; i &lt;&lt; <font color=#004488>", "</font> &lt;&lt; x &lt;&lt; <font color=#004488>")\n"</font>;
+}
+
+<font color=#0000ff>void</font> placeHolder(<font color=#0000ff>int</font> i, <font color=#0000ff>float</font>) {
+    cout &lt;&lt; <font color=#004488>"twoArgs("</font> &lt;&lt; i &lt;&lt; <font color=#004488>",)\n"</font>;
+}
+
+<font color=#0000ff>int</font> main() {
+    twoArgs(1, 2);
+    placeHolder(1, 2);
+}
+
+<font color=#009900>/* Output:
+twoArgs(1, 2)
+twoArgs(1,)
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Placeholders are useful in those rare occasions (often in
+maintaining code) when you need different versions of a function, but only the
+type, not the value, of the differentiating parameter is important.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Exercises 6 &#150; 10 left to the reader)<BR></P></DIV>
+<A NAME="Heading109"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+7-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Stash3.h</B> and <B>Stash3.cpp</B> to use default
+arguments in the constructor. Test the constructor by making two different
+versions of a <B>Stash</B> object.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading110"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+7-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a new version of the <B>Stack</B> class (from Chapter
+6) that contains the default constructor as before, and a second constructor
+that takes as its arguments an array of pointers to objects and the size of that
+array. This constructor should move through the array and push each pointer onto
+the <B>Stack</B>. Test your class with an array of <B>string</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading111"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+7-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>SuperVar</B> so that there are <B>#ifdef</B>s around
+all the <B>vartype</B> code as described in the section on <B>enum</B>. Make
+<B>vartype</B> a regular and <B>public </B>enumeration (with no instance) and
+modify <B>print(&#160;)</B> so that it requires a <B>vartype</B> argument to
+tell it what to do.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading112"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+7-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Implement <B>Mem2.h</B> and make sure that the modified class
+still works with <B>MemTest.cpp</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading113"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+7-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Use <B>class Mem</B> to implement <B>Stash</B>. Note that
+because the implementation is <B>private</B> and thus hidden from the client
+programmer, the test code does not need to be modified.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>In <B>class Mem</B>, add a <B>bool</B> <B>moved(&#160;)</B>
+member function that takes the result of a call to <B>pointer(&#160;)</B> and
+tells you whether the pointer has moved (due to reallocation). Write a
+<B>main(&#160;)</B> that tests your <B>moved(&#160;)</B> member function. Does
+it make more sense to use something like <B>moved(&#160;)</B> or to simply call
+<B>pointer(&#160;)</B> every time you need to access the memory in
+<B>Mem</B>?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap06.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap08.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

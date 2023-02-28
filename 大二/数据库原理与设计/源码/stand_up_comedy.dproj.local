@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/06/08 00:28:17.910.dproj,C:\Users\86137\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\86137\Desktop\database\A3数据库编码\stand_up_comedy.dproj</Transaction>
+  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="delphi"/>
+    <File Path="delphi\arrange.pas"/>
+    <File Path="delphi\arrange.dfm"/>
+    <File Path="delphi\buy.pas"/>
+    <File Path="delphi\buy.dfm"/>
+    <File Path="delphi\changepw.pas"/>
+    <File Path="delphi\changepw.dfm"/>
+    <File Path="delphi\common.pas"/>
+    <File Path="delphi\commonregister.pas"/>
+    <File Path="delphi\commonregister.dfm"/>
+    <File Path="delphi\logactor.pas"/>
+    <File Path="delphi\logactor.dfm"/>
+    <File Path="delphi\login.pas"/>
+    <File Path="delphi\login.dfm"/>
+    <File Path="delphi\logshow.pas"/>
+    <File Path="delphi\logshow.dfm"/>
+    <File Path="delphi\master.pas"/>
+    <File Path="delphi\master.dfm"/>
+    <File Path="delphi\masterregister.pas"/>
+    <File Path="delphi\masterregister.dfm"/>
+    <File Path="delphi\purchase.pas"/>
+    <File Path="delphi\purchase.dfm"/>
+    <File Path="delphi\registerjump.pas"/>
+    <File Path="delphi\registerjump.dfm"/>
+    <File Path="delphi\selectsells.pas"/>
+    <File Path="delphi\selectsells.dfm"/>
+    <File Path="delphi\selectshow.pas"/>
+    <File Path="delphi\selectshow.dfm"/>
+    <File Path="delphi\sequence.pas"/>
+    <File Path="delphi\sequence.dfm"/>
+    <File Path="delphi\users.pas"/>
+    <File Path="delphi\users.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

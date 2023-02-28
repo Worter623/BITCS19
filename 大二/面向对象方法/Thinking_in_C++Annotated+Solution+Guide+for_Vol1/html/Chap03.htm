@@ -1,0 +1,1087 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:45
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap03.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 3</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap02.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap04.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 3<A NAME="_Toc312373819"></A></H1></FONT>
+<A NAME="Heading14"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a header file (with an extension of
+&#145;<B>.h</B>&#146;). In this file, declare a group of functions by varying
+the argument lists and return values from among the following: <B>void</B>,
+<B>char</B>, <B>int</B>, and <B>float</B>. Now create a <B>.cpp</B> file which
+includes your header file and creates definitions for all these functions. Each
+definition should simply print out the function name, argument list and return
+type so you know it&#146;s been called. Create a second <B>.cpp</B> file which
+includes your header file and defines <B>int main(&#160;)</B>, containing calls
+to all your functions. Compile and run your program.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:Prototypes.h</font>
+<font color=#009900>//  Declares various functions</font>
+<font color=#0000ff>void</font> f(<font color=#0000ff>int</font>);
+<font color=#0000ff>int</font> g(<font color=#0000ff>float</font>);
+<font color=#0000ff>float</font> h(<font color=#0000ff>char</font>);
+<font color=#0000ff>char</font> k(<font color=#0000ff>void</font>);  <font color=#009900>// same as char k()</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:Prototypes.cpp {O}</font>
+<font color=#009900>// Implements functions declared in Prototypes.h</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>void</font> f(<font color=#0000ff>int</font> i) {
+  cout &lt;&lt; <font color=#004488>"f("</font> &lt;&lt; i &lt;&lt; <font color=#004488>") returning void\n"</font>;
+}
+
+
+<font color=#0000ff>int</font> g(<font color=#0000ff>float</font> x) {
+  cout &lt;&lt; <font color=#004488>"g("</font> &lt;&lt; x &lt;&lt; <font color=#004488>") returning int\n"</font>;
+  <font color=#0000ff>return</font> 0;
+}
+
+<font color=#0000ff>float</font> h(<font color=#0000ff>char</font> c) {
+  cout &lt;&lt; <font color=#004488>"h("</font> &lt;&lt; c &lt;&lt; <font color=#004488>") returning float\n"</font>;
+  <font color=#0000ff>return</font> 1.5;
+}
+
+<font color=#0000ff>char</font> k(<font color=#0000ff>void</font>) {   <font color=#009900>// same as char k()</font>
+  cout &lt;&lt; <font color=#004488>"k() returning char\n"</font>;
+  <font color=#0000ff>return</font> 'a';
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:ProtoTest.cpp</font>
+<font color=#009900>//{L} Prototypes</font>
+#include <font color=#004488>"Prototypes.h"</font>
+
+<font color=#0000ff>int</font> main() {
+  f(1);
+  g(1.5);
+  h('c');
+  k();
+}
+
+<font color=#009900>/* Output:
+f(1) returning void
+g(1.5) returning int
+h(c) returning float
+k() returning char
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading15"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program that uses two nested <B>for</B> loops and the
+modulus operator (<B>%</B>) to detect and print prime numbers (integral numbers
+that are not evenly divisible by any other numbers except for themselves and
+1).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:prime.cpp</font>
+<font color=#009900>//  Tests numbers for primality</font>
+#include &lt;iostream&gt;
+#include &lt;cmath&gt;    <font color=#009900>// for sqrt()</font>
+
+<font color=#0000ff>int</font> main() {
+  <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+  <font color=#0000ff>const</font> <font color=#0000ff>int</font> MAX = 100;
+
+  <font color=#009900>// Print 2 as a prime:</font>
+  cout &lt;&lt; <font color=#004488>"2 "</font>;
+
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 3; i &lt;= MAX; i += 2) {
+    <font color=#0000ff>float</font> val = i; <font color=#009900>// Produce float value</font>
+    <font color=#0000ff>int</font> mid = <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>int</font>&gt;(sqrt(val));
+    <font color=#0000ff>int</font> j;
+    <font color=#0000ff>for</font> (j = 3; j &lt;= mid; j += 2)
+      <font color=#0000ff>if</font> (i % j == 0)
+        <font color=#0000ff>break</font>;
+
+    <font color=#0000ff>if</font> (j &gt; mid)
+      cout &lt;&lt; i &lt;&lt; ' ';
+  }
+  cout &lt;&lt; endl;
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This program prints out the number 2 a special case and then
+inspects all odd numbers (<B>int i</B>) by dividing by all odd numbers (<B>int
+j</B>) less than or equal to the square root of the number being tested (because
+if a number greater than the square root is a factor, a number less than the
+square root must be also). If a number is prime, it will go all the way through
+the inner loop without breaking out, so the statement <B>j &gt; mid</B> will be
+true.<BR></P></DIV>
+<A NAME="Heading16"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program that uses a <B>while </B>loop to read words
+from standard input (<B>cin</B>) into a <B>string</B>. This is an
+&#147;infinite&#148; <B>while</B> loop, which you break out of (and exit the
+program) using a <B>break</B> statement. For each word that is read, evaluate
+it<B> </B>by first using a sequence of <B>if</B> statements to &#147;map&#148;
+an integral value to the word, and then use a <B>switch</B> statement that uses
+that integral value as its selector (this sequence of events is not meant to be
+good programming style; it&#146;s just supposed to give you exercise with
+control flow). Inside each <B>case</B>,<B> </B>print something meaningful. You
+must decide what the &#147;interesting&#148; words are and what the meaning
+is. You must also decide what word will signal the end of the program. Test the
+program by redirecting a file into the program&#146;s standard input (if you
+want to save typing, this file can be your program&#146;s source
+file).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:MapWords.cpp</font>
+<font color=#009900>//  Maps words to numbers</font>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cstdio&gt;
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+    string word;
+    <font color=#0000ff>for</font> (;;) {
+        <font color=#0000ff>int</font> code;
+        cin &gt;&gt; word;
+        <font color=#0000ff>if</font> (word == <font color=#004488>"exit"</font> | word == <font color=#004488>"return"</font>)
+            <font color=#0000ff>break</font>;
+
+        <font color=#009900>// Map words:</font>
+        <font color=#0000ff>if</font> (word == <font color=#004488>"a"</font> || word == <font color=#004488>"an"</font> || word == <font color=#004488>"the"</font>)
+            code = 0;
+        <font color=#0000ff>else</font> <font color=#0000ff>if</font> (word == <font color=#004488>"after"</font> || word == <font color=#004488>"before"</font> ||
+                 word == <font color=#004488>"beside"</font> || word == <font color=#004488>"by"</font> ||
+                 word == <font color=#004488>"for"</font> || word == <font color=#004488>"from"</font> ||
+                 word == <font color=#004488>"in"</font> || word == <font color=#004488>"into"</font> ||
+                 word == <font color=#004488>"of"</font> || word == <font color=#004488>"to"</font>)
+            code = 1;
+        <font color=#0000ff>else</font> <font color=#0000ff>if</font> (word == <font color=#004488>"if"</font> || word == <font color=#004488>"else"</font>)
+            code = 2;
+        <font color=#0000ff>else</font> <font color=#0000ff>if</font> (word == <font color=#004488>"who"</font> || word == <font color=#004488>"what"</font> ||
+                 word == <font color=#004488>"when"</font> || word == <font color=#004488>"where"</font> ||
+                 word == <font color=#004488>"why"</font>)
+            code = 3;
+        <font color=#0000ff>else</font>
+            code = 4;
+
+        <font color=#009900>// Print code description:</font>
+        <font color=#0000ff>switch</font> (code) {
+        <font color=#0000ff>case</font> 0:
+            puts(<font color=#004488>"article"</font>);
+            <font color=#0000ff>break</font>;
+        <font color=#0000ff>case</font> 1:
+            puts(<font color=#004488>"preposition"</font>);
+            <font color=#0000ff>break</font>;
+        <font color=#0000ff>case</font> 2:
+            puts(<font color=#004488>"conditional"</font>);
+            <font color=#0000ff>break</font>;
+        <font color=#0000ff>case</font> 3:
+            puts (<font color=#004488>"interrogative"</font>);
+            <font color=#0000ff>break</font>;
+        <font color=#0000ff>default</font>:
+            puts(<font color=#004488>"unmapped word"</font>);
+            <font color=#0000ff>break</font>;
+        }
+    }
+    <font color=#0000ff>return</font> 0;
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The program above categorizes word as articles, prepositions,
+conditionals, or interrogatives. Given the following input:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>now is the time <font color=#0000ff>for</font> all good men to come to the aid of their party
+no matter who, no matter when, or from where
+<font color=#0000ff>else</font> we perish
+exit</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>the output is:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>unmapped word
+unmapped word
+article
+unmapped word
+preposition
+unmapped word
+unmapped word
+unmapped word
+preposition
+unmapped word
+preposition
+article
+unmapped word
+preposition
+unmapped word
+unmapped word
+unmapped word
+unmapped word
+unmapped word
+unmapped word
+unmapped word
+unmapped word
+unmapped word
+preposition
+interrogative
+conditional
+unmapped word
+unmapped word</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>It is customary to put the <B>default</B> clause last in the
+<B>switch</B> statement (although it&#146;s not required). If you&#146;re in
+the habit of putting it elsewhere, then you better have the habit of always
+including a <B>break</B> with it!<BR></P></DIV>
+<A NAME="Heading17"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Menu.cpp</B> to use <B>switch</B> statements instead
+of <B>if</B> statements.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader).<BR></P></DIV>
+<A NAME="Heading18"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program that evaluates the two expressions in the
+section labeled &#147;precedence.&#148;<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading19"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>YourPets2.cpp</B> so that it uses various different
+data types (<B>char</B>, <B>int</B>, <B>float</B>, <B>double</B> and their
+variants). Run the program and create a map of the resulting memory layout. If
+you have access to more than one kind of machine or operating system or
+compiler, try this experiment with as many variations as you can
+manage.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading20"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create two functions, one that takes a <B>string*</B> and one
+that takes a <B>string&amp;</B>. Each of these functions should modify the
+outside <B>string </B>object in their own unique way. In <B>main(&#160;)</B>,
+create and initialize a <B>string</B> object, print it, then pass it to each of
+the two functions, printing the results.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:StringRef.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>void</font> stringRef(string&amp; s) {
+    s += <font color=#004488>" come blow"</font>;
+}
+
+<font color=#0000ff>void</font> stringPtr(string* p) {
+    p-&gt;append(<font color=#004488>" your horn"</font>);
+}
+
+<font color=#0000ff>int</font> main() {
+    string s = <font color=#004488>"Little Boy Blue"</font>;
+    stringRef(s);
+    stringPtr(&amp;s);
+    cout &lt;&lt; s &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+Little Boy Blue come blow your horn
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Each function takes its turn appending something to the
+original string, the first with the <B>std::string::operator+=(&#160;)</B>, the
+second with <B>std::string::append(&#160;)</B>. With references you don&#146;t
+have to use the <B>&amp;</B> operator like you do with pointers.<BR></P></DIV>
+<A NAME="Heading21"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program that uses all the trigraphs to see if your
+compiler supports them.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:trigraph.cpp</font>
+<font color=#009900>//{-bor} Must run Borland's trigraph.exe first</font>
+<font color=#009900>//{-g++295} Trigraphs not supported</font>
+<font color=#009900>//{-g++3} Trigraphs not supported</font>
+??=include &lt;iostream&gt;
+
+<font color=#0000ff>int</font> main(<font color=#0000ff>int</font> argc, <font color=#0000ff>char</font>* argv??(??)) ??&lt;
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>unsigned</font> <font color=#0000ff>int</font> n;
+    <font color=#0000ff>if</font> (argc != 2 ??!??! (n = atoi(argv??(1??))) &lt;= 0)
+        <font color=#0000ff>return</font> 1;
+    cout &lt;&lt; ??-(n ??' 0xf0f0) &lt;&lt; '??/n';
+    <font color=#0000ff>return</font> 0;
+??&gt;
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This program expects one numeric command-line argument, which
+it manipulates with bitwise operations before printing it to standard output. It
+is equivalent to the following program:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:no-trigraph.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+
+<font color=#0000ff>int</font> main(<font color=#0000ff>int</font> argc, <font color=#0000ff>char</font>* argv[]) {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>unsigned</font> <font color=#0000ff>int</font> n;
+    <font color=#0000ff>if</font> (argc != 2 || (n = atoi(argv[1])) &lt;= 0)
+        <font color=#0000ff>return</font> 1;
+    cout &lt;&lt; ~(n ^ 0xf0f0) &lt;&lt; '\n';
+    <font color=#0000ff>return</font> 0;
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading22"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Compile and run <B>Static.cpp</B>. Remove the <B>static</B>
+keyword from the code, compile and run it again and explain what
+happens.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading23"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Try to compile and link <B>FileStatic.cpp</B> with
+<B>FileStatic2.cpp</B>. What does the resulting error message mean?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading24"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Boolean.cpp</B> so that it works with <B>double</B>
+values instead of <B>int</B>s.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading25"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Boolean.cpp</B> and <B>Bitwise.cpp</B> so they use
+the explicit operators (if your compiler is conformant to the C++ Standard it
+will support these).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading26"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Bitwise.cpp</B> to use the functions from
+<B>Rotation.cpp</B>. Make sure you display the results in such a way that
+it&#146;s clear what&#146;s happening during rotations.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading27"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Ifthen.cpp</B> to use the ternary <B>if-else</B>
+operator (<B>?:</B>).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading28"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-15</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>struct</B> that holds two <B>string</B> objects
+and one <B>int</B>. Use a <B>typedef</B> for the <B>struct</B> name. Create an
+instance of the <B>struct</B>,<B> </B>initialize all three values in your
+instance, and print them out. Take the address of your instance and assign it to
+a pointer to your <B>struct</B> type. Change the three values in your instance
+and print them out, all using the pointer.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution</B></FONT>:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:struct.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>typedef</font> <font color=#0000ff>struct</font> {
+    string last;
+    string first;
+    <font color=#0000ff>int</font> age;
+} Person;
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    Person p;
+    p.last = <font color=#004488>"Einstein"</font>;
+    p.first = <font color=#004488>"Albert"</font>;
+    p.age = 122;
+    cout &lt;&lt; p.last &lt;&lt; ',' &lt;&lt; p.first &lt;&lt; ',' &lt;&lt; p.age &lt;&lt; endl;
+    
+    Person* pptr = &amp;p;
+    pptr-&gt;last = <font color=#004488>"Alger"</font>;
+    pptr-&gt;first = <font color=#004488>"Horatio"</font>;
+    pptr-&gt;age = 167;
+    cout &lt;&lt; pptr-&gt;last &lt;&lt; ',' &lt;&lt; pptr-&gt;first &lt;&lt; ',' &lt;&lt; pptr-&gt;age
+         &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+Einstein,Albert,122
+Alger,Horatio,167
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The <B>typedef</B> is necessary only when compiling this as a
+C program. The preferred C++ style for the <B>Person</B> struct is:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>struct</font> Person {
+    string last;
+    string first;
+    <font color=#0000ff>int</font> age;
+};</PRE></FONT></BLOCKQUOTE><A NAME="Heading29"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-16</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a program that uses an enumeration of colors. Create a
+variable of this <B>enum</B> type and print out all the numbers that correspond
+with the color names, using a <B>for</B> loop.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:Enum.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>enum</font> color {
+    BLACK,
+    RED,
+    GREEN,
+    BLUE,
+    WHITE
+};
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> hue = BLACK; hue &lt;= WHITE; ++hue)
+        cout &lt;&lt; hue &lt;&lt; ' ';
+}
+
+<font color=#009900>/* Output:
+0 1 2 3 4
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>It is always safe to assign an enumerator to an integer, but
+not vice-versa.<BR></P></DIV>
+<A NAME="Heading30"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-17</H2></FONT>
+<DIV ALIGN="LEFT"><P>Experiment with <B>Union.cpp</B> by removing various
+<B>union</B> elements to see the effects on the size of the resulting
+<B>union</B>. Try assigning to one element (thus one type) of the <B>union</B>
+and printing out via a different element (thus a different type) to see what
+happens.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading31"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-18</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a program that defines two <B>int</B> arrays, one right
+after the other. Index off the end of the first array into the second, and make
+an assignment. Print out the second array to see the changes cause by this. Now
+try defining a <B>char</B> variable between the first array definition and the
+second, and repeat the experiment. You may want to create an array printing
+function to simplify your coding.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This exercise asks you to perform operations that are
+undefined in the C++ language specification, for two reasons:<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>First, to show that even if an operation is undefined, you can
+often still go ahead and do it, possibly without any error reports at
+compile-time or run-time. Thus, coding undefined operations can result in subtle
+and hard-to-find bugs.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>To see what happens when an undefined operation is performed.
+Since such operations are literally &#147;not defined&#148; in the language, a
+particular compiler may deal with it in any way that it sees fit. For example, a
+compiler may actually choose to insert code to prevent you from exceeding the
+array bounds (or this may be an option that could be switched on and off).
+Compilers typically do not do this, because it would add extra run-time
+overhead.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Here&#146;s one way to solve the exercise, with an extra way
+to stomp on your memory thrown in for good measure:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:AbusingTheLanguage.cpp</font>
+<font color=#009900>// Shows what happens when you run off the</font>
+<font color=#009900>// end of an array and other misbehavior.</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>void</font> print(<font color=#0000ff>char</font>* name, <font color=#0000ff>int</font>* array, <font color=#0000ff>int</font> size) {
+  <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; size; i++)
+    cout &lt;&lt; name &lt;&lt; <font color=#004488>"["</font> &lt;&lt; i &lt;&lt; <font color=#004488>"] ("</font> 
+         &lt;&lt; (<font color=#0000ff>long</font>)(&amp;array[i]) &lt;&lt; <font color=#004488>") = "</font> 
+         &lt;&lt; array[i] &lt;&lt; endl;
+}
+
+<font color=#009900>// A preprocessor macro to simplify the printing</font>
+<font color=#009900>// of all the data in main():</font>
+#define PRT(A, B, C, D) \
+  print(#A, A, <font color=#0000ff>sizeof</font> A / <font color=#0000ff>sizeof</font> *A); \
+  print(#B, B, <font color=#0000ff>sizeof</font> B / <font color=#0000ff>sizeof</font> *B); \
+  cout &lt;&lt; #C <font color=#004488>" ("</font> &lt;&lt; (<font color=#0000ff>long</font>)(&amp;C) &lt;&lt; <font color=#004488>") = "</font> \
+       &lt;&lt; C &lt;&lt; endl; \
+  print(#D, D, <font color=#0000ff>sizeof</font> D / <font color=#0000ff>sizeof</font> *D);
+
+<font color=#0000ff>int</font> main() {
+  <font color=#0000ff>int</font> a[] = { 1, 2, 3 };
+  <font color=#0000ff>int</font> b[] = { 4, 5, 6 };
+  <font color=#0000ff>char</font> c = 'x';
+  <font color=#0000ff>int</font> d[] = { 7, 8, 9 };
+  PRT(a, b, c, d);
+  cout &lt;&lt; <font color=#004488>"Index off the end of a:\n"</font>;
+  a[3] = 47;
+  PRT(a, b, c, d);
+  cout &lt;&lt; <font color=#004488>"Index off the end of b:\n"</font>;
+  b[3] = 27;
+  PRT(a, b, c, d);
+  cout &lt;&lt; <font color=#004488>"Abuse c with pointers and casts:\n"</font>;
+  *((<font color=#0000ff>double</font>*)&amp;c) = 99.99;
+  PRT(a, b, c, d);
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The <B>print(&#160;)</B> function takes the name of an array,
+the starting address of the array, and the number of elements in the array (so
+that the <B>print(&#160;)</B> function itself doesn&#146;t run off the end!),
+and uses these to display the elements in a readable fashion. In addition, it
+takes the address of each array element and casts it to a <B>long</B> so that it
+can be displayed. This way you will see the way that your particular compiler
+allocates storage.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>It turns out that it&#146;s helpful &#150; and tedious
+&#150; to print out all the elements after every change is made in the program.
+To do this without reproducing a lot of code, the <B>PRT</B> macro is created,
+which takes four elements (three arrays and one non-array, <B>C</B>) and uses
+<B>print(&#160;)</B> and other code to display all the details. Note the use of
+the &#145;<B>#</B>&#146; sign in front of the arguments &#150; this takes the
+argument identifier and turns it into a string, which is very convenient for
+printing.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>In <B>main(&#160;)</B>, 3 arrays are defined one after the
+other, and the <B>char</B> <B>c</B> is interspersed between the second and third
+arrays. You might think that this means that the arrays will be laid out in
+memory in the same order that they are defined, but the compiler is under no
+such constraint and so you will see different results from one compiler to
+another. In fact, the compiler that I used (Borland C++ 5.4 on Windows 98)
+produced the following output:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>a[0] (6684152) = 1
+a[1] (6684156) = 2
+a[2] (6684160) = 3
+b[0] (6684140) = 4
+b[1] (6684144) = 5
+b[2] (6684148) = 6
+c (6684139) = x
+d[0] (6684124) = 7
+d[1] (6684128) = 8
+d[2] (6684132) = 9
+Index off the end of a:
+a[0] (6684152) = 1
+a[1] (6684156) = 2
+a[2] (6684160) = 3
+b[0] (6684140) = 4
+b[1] (6684144) = 5
+b[2] (6684148) = 6
+c (6684139) = x
+d[0] (6684124) = 7
+d[1] (6684128) = 8
+d[2] (6684132) = 9
+Index off the end of b:
+a[0] (6684152) = 27
+a[1] (6684156) = 2
+a[2] (6684160) = 3
+b[0] (6684140) = 4
+b[1] (6684144) = 5
+b[2] (6684148) = 6
+c (6684139) = x
+d[0] (6684124) = 7
+d[1] (6684128) = 8
+d[2] (6684132) = 9
+Abuse c with pointers and casts:
+a[0] (6684152) = 27
+a[1] (6684156) = 2
+a[2] (6684160) = 3
+b[0] (6684140) = 1546188226
+b[1] (6684144) = 4217087
+b[2] (6684148) = 6
+c (6684139) = &Aring;
+d[0] (6684124) = 7
+d[1] (6684128) = 8
+d[2] (6684132) = 9</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>First, notice that even though <B>b</B> is defined after
+<B>a</B>, it is placed in memory <I>before</I> <B>a</B>. In fact, after noting
+that <B>int</B>s are 4 bytes long and a <B>char</B> is one byte long (on this
+machine, with this compiler),<B> </B>the actual order is: <B>d</B>, 3 empty
+bytes, <B>c</B>, <B>b</B>, and then <B>a</B>. Thus, in the initial test that
+indexes off the end of <B>a</B>, nothing happens because there&#146;s no
+important memory after the end of <B>a</B> (it&#146;s the
+&#147;bottom-most&#148; element on the stack). But if you index off the end of
+<B>b</B>, it moves into <B>a</B>. Again, your compiler will probably lay things
+out differently and so you&#146;ll see (and have to decipher) different
+results.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The final example does something that is not advisable but all
+too common. In C and C++, you can take any variable and pretend it&#146;s
+another variable using a cast. Here, <B>c</B> (which is one byte long) is
+actually turned into a variable of type <B>double</B> (8 bytes long). Of course,
+<B>c</B> is still only one byte long and so if you assign into it as if it were
+a <B>double</B>, then the other 7 bytes &#150; which happen to belong to
+<B>b</B> &#150; are written into as well as the one byte of <B>c</B>. Thus, you
+assign to <B>c</B> and <B>b</B> changes, which is certainly a bug. On top of
+that, this program will almost certainly produce different results on different
+machines, because the memory layout, and often the sizes of the data types, will
+be different.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>When you see this kind of code abuse taking place there will
+usually be an argument for it, and it might even be convincing (watch for the
+word &#147;efficiency&#148; which is usually at the root of things). Resist
+the temptation &#150; there are enough subtle bugs that creep into your code as
+it is without wantonly introducing them.<BR></P></DIV>
+<A NAME="Heading32"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-19</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>ArrayAddresses.cpp</B> to work with the data types
+<B>char</B>, <B>long int</B>, <B>float</B> and <B>double</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading33"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-20</H2></FONT>
+<DIV ALIGN="LEFT"><P>Apply the technique in <B>ArrayAddresses.cpp</B> to print out
+the size of the <B>struct</B> and the addresses of the array elements in
+<B>StructArray.cpp</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading34"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-21</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create an array of <B>string</B> objects and assign a string
+to each element. Print out the array using a <B>for</B> loop.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:StringArray.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    string stringArray[] = {<font color=#004488>"one"</font>, <font color=#004488>"small"</font>, <font color=#004488>"step"</font>,
+                            <font color=#004488>"for"</font>, <font color=#004488>"man"</font>};
+    <font color=#0000ff>const</font> <font color=#0000ff>int</font> nStrings = <font color=#0000ff>sizeof</font> stringArray
+                       / <font color=#0000ff>sizeof</font> stringArray[0];
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; nStrings; ++i)
+        cout &lt;&lt; stringArray[i] &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+one
+small
+step
+for
+man
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Note that the compiler is able to initialize the elements of
+<B>stringArray</B> from C-style string literals (i.e., pointers to <B>char</B>).
+This is because the <B>string</B> class knows how to convert arrays of
+<B>char</B> to <B>string</B> objects (more on this in the chapter on classes).
+The compiler infers the dimension for <B>stringArray</B> from the number of
+strings in the initializer list. Note also the use of a common idiom for
+computing the number of elements in an array: divide the size of the array
+(<B>sizeof stringArray</B>) by its element size (<B>sizeof stringArray[0]</B>).
+<BR></P></DIV>
+<A NAME="Heading35"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-22</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create two new programs starting from <B>ArgsToInts.cpp</B> so
+they use <B>atol(&#160;)</B> and <B>atof(&#160;)</B>, respectively.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading36"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-23</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>PointerIncrement2.cpp</B> so it uses a <B>union</B>
+instead of a <B>struct</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution</B></FONT>:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:PointerIncrement2.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>typedef</font> <font color=#0000ff>union</font> {
+  <font color=#0000ff>char</font> c;
+  <font color=#0000ff>short</font> s;
+  <font color=#0000ff>int</font> i;
+  <font color=#0000ff>long</font> l;
+  <font color=#0000ff>float</font> f;
+  <font color=#0000ff>double</font> d;
+  <font color=#0000ff>long</font> <font color=#0000ff>double</font> ld;
+} Primitives;
+
+<font color=#0000ff>int</font> main() {
+  Primitives p[10];
+  Primitives* pp = p;
+  cout &lt;&lt; <font color=#004488>"sizeof(Primitives) = "</font> 
+    &lt;&lt; <font color=#0000ff>sizeof</font>(Primitives) &lt;&lt; endl;
+  cout &lt;&lt; <font color=#004488>"pp = "</font> &lt;&lt; (<font color=#0000ff>long</font>)pp &lt;&lt; endl;
+  pp++;
+  cout &lt;&lt; <font color=#004488>"pp = "</font> &lt;&lt; (<font color=#0000ff>long</font>)pp &lt;&lt; endl;
+  cout &lt;&lt; <font color=#004488>"sizeof long double = "</font> &lt;&lt; <font color=#0000ff>sizeof</font>(<font color=#0000ff>long</font> <font color=#0000ff>double</font>) &lt;&lt; endl;
+} 
+
+<font color=#009900>/* Output:
+sizeof(Primitives) = 8
+pp = 6618536
+pp = 6618544
+sizeof long double = 8
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The only changes I made to the version in the book was to
+change <B>struct</B> to <B>union</B>, and to add the printing of <B>sizeof(long
+double)</B>, which is the largest member of <B>Primitives</B>. The compiler I
+used above didn&#146;t pad <B>Primitives</B> for alignment purposes, but
+another compiler gave the following output:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>sizeof</font>(Primitives) = 16
+pp = 6684004
+pp = 6684020
+<font color=#0000ff>sizeof</font> <font color=#0000ff>long</font> <font color=#0000ff>double</font> = 10</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This compiler pads by default, but you can turn it off with a
+compiler switch.<BR></P></DIV>
+<A NAME="Heading37"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-24</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify PointerArithmetic.cpp to work with long and long
+double.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading38"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-25</H2></FONT>
+<DIV ALIGN="LEFT"><P>Define a <B>float</B> variable. Take its address, cast that
+address to an <B>unsigned char*</B>, and assign it to an <B>unsigned char</B>
+pointer. Using this pointer and <B>[&#160;]</B>, index into the <B>float</B>
+variable and use the <B>printBinary(&#160;) </B>function defined in this chapter
+to print out a map of the <B>float</B> (go from 0 to <B>sizeof(float)</B>).
+Change the value of the <B>float</B> and see if you can figure out what&#146;s
+going on (the <B>float</B> contains encoded data).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution</B></FONT>:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:MapFloat.cpp</font>
+<font color=#009900>//{L} PrintBinary</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>void</font> printBinary(<font color=#0000ff>unsigned</font> <font color=#0000ff>char</font>);
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>float</font> x = 128.0;
+    <font color=#0000ff>unsigned</font> <font color=#0000ff>char</font>* p = <font color=#0000ff>reinterpret_cast</font>&lt;<font color=#0000ff>unsigned</font> <font color=#0000ff>char</font>*&gt;(&amp;x);
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; <font color=#0000ff>sizeof</font>(<font color=#0000ff>float</font>); ++i)
+        printBinary(p[i]);
+    cout &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+00000000000000000000000001000011
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The layout of floating-point numbers is a bit of mystery. The
+compilers I use all use IEEE floating-point layout specifications, which for a
+<B>float</B> use 1 bit for the sign, 24 (23 actual) for the mantissa, and 8 for
+the exponent. You&#146;ll need to consult the IEEE specification for
+information. Note the need for <B>reinterpret_cast</B> above, since
+<B>float*</B> and <B>char*</B> are not considered related types. (See problem 29
+for more details).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The special comment tag <B>{L}</B> tells my make builder
+program to link the <B>MapFloat</B> object file with the <B>PrintBinary</B>
+object file (necessary to link the <B>printBinary()</B> function).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>More interesting is a solution that uses <B>void*</B>. The
+following program has a function, <B>printBytes</B>, that takes a <B>void*</B>
+parameter and casts it to a pointer to <B>unsigned char</B>. It also takes a
+<B>size_t</B> (an unsigned integer type defined in iostream and a few other
+places) representing the number of bytes to inspect.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:PrintBytes.cpp</font>
+<font color=#009900>//{L} PrintBinary</font>
+#include &lt;iostream&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>void</font> printBinary(<font color=#0000ff>unsigned</font> <font color=#0000ff>char</font>);
+
+<font color=#0000ff>void</font> printBytes(<font color=#0000ff>const</font> <font color=#0000ff>void</font> *p, size_t n) {
+    <font color=#0000ff>const</font> <font color=#0000ff>unsigned</font> <font color=#0000ff>char</font>* pByte =
+        <font color=#0000ff>reinterpret_cast</font>&lt;<font color=#0000ff>const</font> <font color=#0000ff>unsigned</font> <font color=#0000ff>char</font>*&gt;(p);
+    <font color=#0000ff>for</font> (size_t i = 0; i &lt; n; ++i)
+        printBinary(pByte[i]);
+    cout &lt;&lt; endl;
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>float</font> x = 128.0;
+    printBytes(&amp;x, <font color=#0000ff>sizeof</font> x);
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Note that I use <B>const</B> where it applies. It makes no
+difference to make <B>printBinary</B>&#146;s argument const, since parameters
+passed by value always make a copy of their argument anyway. But I want to make
+clear that <B>printBytes</B> will not modify any bytes of its argument, so I
+declare it pointer-to-<B>const</B>, and must use the <B>const</B> in the cast as
+well. You might find the version of <B>printBinary</B> I used
+interesting:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:PrintBinary.cpp {O}</font>
+#include &lt;iostream&gt;
+#include &lt;climits&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>void</font> printBinary(<font color=#0000ff>unsigned</font> <font color=#0000ff>char</font> val) {
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = CHAR_BIT-1; i &gt;= 0; i--)
+        cout &lt;&lt; <font color=#004488>"01"</font>[!!(val &amp; (1 &lt;&lt; i))];
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The macro <B>CHAR_BIT</B> defined in <B>&lt;climits&gt;</B>
+specifies the number of bits in a byte (usually 8). Also note that I&#146;m
+using the literal &#147;01&#148; as an array. Applying the logical not
+operator (!) twice in succession converts the expression <B>(val &amp; (1
+&lt;&lt; i))</B> to 1 if it is non-zero, and leaves it as 0 otherwise, so I can
+use it as an index into &#147;01&#148;, thus avoiding the need for the
+<B>if</B> statement found in the book.<BR></P></DIV>
+<A NAME="Heading39"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-26</H2></FONT>
+<DIV ALIGN="LEFT"><P>Define an array of <B>int</B>. Take the starting address of
+that array and use <B>static_cast</B> to convert it into an <B>void*</B>. Write
+a function that takes a <B>void*</B>, a number (indicating a number of bytes),
+and a value (indicating the value to which each byte should be set) as
+arguments. The function should set each byte in the specified range to the
+specified value. Try out the function on your array of <B>int</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader &#150; see the solution for problem 25
+for a hint)<BR></P></DIV>
+<A NAME="Heading40"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-27</H2></FONT>
+
+<DIV ALIGN="LEFT"><P>Create a <B>const</B> array of <B>double</B> and a
+<B>volatile</B> array of <B>double</B>. Index through each array and use
+<B>const_cast</B> to cast each element to non-<B>const</B> and
+non-<B>volatile</B>, respectively, and assign a value to each element.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading41"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-28</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a function that takes a pointer to an array of
+<B>double</B> and a value indicating the size of that array. The function should
+print each element in the array. Now create an array of <B>double</B> and
+initialize each element to zero, then use your function to print the array. Next
+use <B>reinterpret_cast</B> to cast the starting address of your array to an
+<B>unsigned char*</B>, and set each byte of the array to 1 (hint: you&#146;ll
+need to use <B>sizeof</B> to calculate the number of bytes in a <B>double</B>).
+Now use your array-printing function to print the results. Why do you think each
+element was not set to the value 1.0?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading42"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-29</H2></FONT>
+<DIV ALIGN="LEFT"><P>(Challenging) Modify <B>FloatingAsBinary.cpp</B> so that it
+prints out each part of the <B>double</B> as a separate group of bits.
+You&#146;ll have to replace the calls to <B>printBinary(&#160;)</B> with your
+own specialized code (which you can derive from <B>printBinary(&#160;)</B>)
+in<B> </B>order to do this, and you&#146;ll also have to look up and understand
+the floating-point format along with the byte ordering for your compiler (this
+is the challenging part).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution</B></FONT>:<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This problem is greatly complicated by the fact that most PCs
+are &#147;little-endian&#148; machines, which means that bytes are stored in
+memory backwards from what one thinks of logically. So instead of visiting the
+bytes of a <B>float</B> in ascending byte order, you must visit them backwards.
+Since most compilers use IEEE-754 floating-point format for real numbers (and
+since that&#146;s what my compilers use), that is what this solution will
+illustrate.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>IEEE-754 single-precision floating-point numbers are stored in
+three parts: 1) the sign bit, 2) the exponent (8 bits), and 3) the mantissa (23
+bits). On a little-endian machine, the sign bit is in the high-bit of byte
+number 3 (the last byte). Then the 7 remaining bits plus the high bit of byte 2
+comprise the exponent, and the rest is the mantissa. It&#146;s harder to
+explain than it is to solve, so here&#146;s a solution:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:IEEEFloat.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;climits&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>void</font> ieeePrint(<font color=#0000ff>float</font> x) {
+    <font color=#0000ff>unsigned</font> <font color=#0000ff>char</font>* p = <font color=#0000ff>reinterpret_cast</font>&lt;<font color=#0000ff>unsigned</font> <font color=#0000ff>char</font>*&gt;(&amp;x);
+    <font color=#0000ff>int</font> bitno = 0;
+        
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = <font color=#0000ff>sizeof</font>(<font color=#0000ff>float</font>)-1; i &gt;= 0; --i) {
+        <font color=#0000ff>for</font> (<font color=#0000ff>int</font> j = CHAR_BIT-1; j &gt;= 0; --j, ++bitno) {
+            cout &lt;&lt; !!(p[i] &amp; (1 &lt;&lt; j));
+            <font color=#0000ff>if</font> (bitno == 0 || bitno == 8)  <font color=#009900>// IEEE boundaries</font>
+                cout &lt;&lt; ' ';
+        }
+    }
+    cout &lt;&lt; endl;
+}
+
+<font color=#0000ff>int</font> main() {
+    ieeePrint(2.0);
+    ieeePrint(6.5);
+    ieeePrint(-6.5);
+}
+
+<font color=#009900>/* Output:
+0 10000000 00000000000000000000000
+0 10000001 10100000000000000000000
+1 10000001 10100000000000000000000
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Since I&#146;m extracting bits in IEEE order, I can just
+count as I go (via the variable <B>bitno</B>) and insert spaces as needed. You
+also need to understand that the exponents are normalized such that you need to
+subtract 127 to get the correct one. Also, the mantissas are normalized so there
+is always an implied 1 before the decimal. For 6.5, for example, the exponent
+10000001 (129 decimal) represents an actual exponent of 2 (i.e., 129 &#150;
+127). We add a 1.0 to the extracted mantissa to get the actual mantissa of 1.101
+(binary), giving 1.101 (binary) x 4 = 1.625 x 4 = 6.5.<BR></P></DIV>
+<A NAME="Heading43"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-30</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>makefile</B> that not only compiles
+<B>YourPets1.cpp</B> and <B>YourPets2.cpp</B> (for your particular compiler) but
+also executes both programs as part of the default target behavior. Make sure
+you use suffix rules.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading44"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-31</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>StringizingExpressions.cpp</B> so that <B>P(A)</B>
+is conditionally <B>#ifdef</B>ed to allow the debugging code to be automatically
+stripped out by setting a command-line flag. You will need to consult your
+compiler&#146;s documentation to see how to define and undefine preprocessor
+values on the compiler command line.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading45"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-32</H2></FONT>
+<DIV ALIGN="LEFT"><P>Define a function that takes a <B>double</B> argument and
+returns an <B>int</B>. Create and initialize a pointer to this function, and
+call the function through your pointer.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution</B></FONT>:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:FPtr1.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>int</font> round(<font color=#0000ff>double</font> x) {
+    <font color=#009900>// round to nearest int:</font>
+    <font color=#0000ff>return</font> <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>int</font>&gt;(x + 0.5);
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>int</font> (*fp)(<font color=#0000ff>double</font>) = round;
+    cout &lt;&lt; fp(2.5) &lt;&lt; endl;   <font color=#009900>// 3</font>
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This function rounds its <B>double</B> to the nearest integer,
+just for fun. Since all you can really do with a function pointer is call it,
+ANSI C allows you to use normal function-call syntax, like I did above. Before
+ANSI C, you had to use indirection syntax, as in<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>cout &lt;&lt; (*fp)(2.5) &lt;&lt; endl;</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Yuck!<BR></P></DIV>
+<A NAME="Heading46"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-33</H2></FONT>
+<DIV ALIGN="LEFT"><P>Declare a pointer to a function taking an <B>int</B> argument
+and returning a pointer to a function that takes a <B>char </B>argument and
+returns a <B>float</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution</B></FONT>:<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This a good example of where <B>typedef</B>s come in handy.
+First consider the return type declaration: &#147;a function that takes a
+<B>char</B> and returns a <B>float</B>&#148;. The following <B>typedef</B>
+defines <B>RT</B> as such a type:<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>  <BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>typedef</font> <font color=#0000ff>float</font> (*RT)(<font color=#0000ff>char</font>);</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Now we can define our function pointer as follows:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>RT (*fp)(<font color=#0000ff>int</font>);</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This is considerably clearer than doing it all at once
+as:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>float</font> (*(*fp)(<font color=#0000ff>int</font>))(<font color=#0000ff>char</font>);</PRE></FONT></BLOCKQUOTE>
+<A NAME="Heading47"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-34</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>FunctionTable.cpp</B> so that each function returns
+a <B>string</B> (instead of printing out a message) <A NAME="BBB"></A>and so
+that this value is printed inside of <B>main(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading48"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+3-35</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>makefile</B> for one of the previous exercises (of
+your choice) that allows you to type <B>make</B> for a production build of the
+program, and <B>make debug</B> for a build of the program including debugging
+information<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading49"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Additional Exercise</H2></FONT>
+<DIV ALIGN="LEFT"><P>(From Dan Forhan) Write a Java program that will find all the
+possible &#147;vampire numbers.&#148;  A vampire number is defined as a four
+digit numbers in which the two numbers multiplied are in the product, for
+example, 15 x 93 = 1395.   The program should produce no duplicates, and be less
+than 50-60 lines of code.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S03:Vampire.cpp</font>
+#include&lt;iostream.h&gt;
+
+<font color=#0000ff>int</font> main() {
+  <font color=#0000ff>int</font> num1, num2, product, startDigit[4], 
+    productDigit[4], count = 0, vampCount = 0, 
+    x, y;
+  <font color=#0000ff>for</font>(num1 = 10; num1 &lt;= 99; num1++) {
+    <font color=#0000ff>for</font>(num2 = 10; num2 &lt;= 99; num2++) {
+      product = num1 * num2;
+      startDigit[0] = num1 / 10;
+      startDigit[1] = num1 % 10;
+      startDigit[2] = num2 / 10;
+      startDigit[3] = num2 % 10;
+      productDigit[0] = product / 1000;
+      productDigit[1] = (product % 1000) / 100;
+      productDigit[2] = product % 1000 % 100/10;
+      productDigit[3] = product % 1000 % 100%10;
+      count = 0;
+      <font color=#0000ff>for</font>(x = 0; x &lt; 4; x++) {
+        <font color=#0000ff>for</font>(y = 0; y &lt; 4; y++) {
+          <font color=#0000ff>if</font> (productDigit[x] == startDigit[y]) {
+            count++;
+            productDigit[x] = -1;
+            startDigit[y] = -2;
+            <font color=#0000ff>if</font> (count == 4) {
+              vampCount++;
+              <font color=#0000ff>if</font> (vampCount &lt; 10)
+                cout &lt;&lt; <font color=#004488>"Vampire number  "</font> 
+                  &lt;&lt; vampCount &lt;&lt; <font color=#004488>" is "</font> 
+                  &lt;&lt; product &lt;&lt; <font color=#004488>"  "</font> &lt;&lt; num1 
+                  &lt;&lt; num2 &lt;&lt; endl;
+              <font color=#0000ff>else</font>
+                cout &lt;&lt; <font color=#004488>"Vampire number "</font> 
+                  &lt;&lt; vampCount &lt;&lt; <font color=#004488>" is "</font> 
+                  &lt;&lt; product &lt;&lt; <font color=#004488>"  "</font> &lt;&lt; num1 
+                  &lt;&lt; num2 &lt;&lt; endl;
+            }
+          }
+        }
+      }
+    }
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap02.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap04.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

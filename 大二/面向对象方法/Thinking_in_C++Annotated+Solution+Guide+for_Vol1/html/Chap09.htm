@@ -1,0 +1,594 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:46
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap09.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 9</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap08.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap10.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 9</H1></FONT>
+<A NAME="Heading144"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program that uses the <B>F(&#160;)</B> macro shown at
+the beginning of the chapter and demonstrates that it does not expand properly,
+as described in the text. Repair the macro and show that it works
+correctly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading145"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program that uses the <B>FLOOR(&#160;)</B> macro shown
+at the beginning of the chapter. Show the conditions under which it does not
+work properly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to reader)<BR></P></DIV>
+<A NAME="Heading146"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>MacroSideEffects.cpp</B> so that <B>BAND(&#160;)</B>
+works properly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:FixMacroSideEffects.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>inline</font> <font color=#0000ff>int</font> band(<font color=#0000ff>int</font> x) {
+    <font color=#0000ff>return</font> (x &gt; 5 &amp;&amp; x &lt; 10) ? x : 0;
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 4; i &lt; 11; i++) {
+        <font color=#0000ff>int</font> a = i;
+        cout &lt;&lt; <font color=#004488>"a = "</font> &lt;&lt; a &lt;&lt; endl &lt;&lt; '\t';
+        cout &lt;&lt; <font color=#004488>"band(++a)="</font> &lt;&lt; band(++a) &lt;&lt; endl;
+        cout &lt;&lt; <font color=#004488>"\t a = "</font> &lt;&lt; a &lt;&lt; endl;
+    }
+}
+ 
+<font color=#009900>/* Output:
+a = 4
+  band(++a)=0
+   a = 5
+a = 5
+  band(++a)=6
+   a = 6
+a = 6
+  band(++a)=7
+   a = 7
+a = 7
+  band(++a)=8
+   a = 8
+a = 8
+  band(++a)=9
+   a = 9
+a = 9
+  band(++a)=0
+   a = 10
+a = 10
+  band(++a)=0
+   a = 11
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>With <B>band(&#160;)</B> implemented as an inline function
+instead of a macro, two good things happen: 1) It works! (you don&#146;t have
+the multiple-increment problem explained in the book), and 2) you don&#146;t
+have to use extraneous parentheses to guard against text replacement surprises.
+I put parentheses around the condition of the ternary statement just for
+clarity.<BR></P></DIV>
+<A NAME="Heading147"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create two identical functions, <B>f1(&#160;)</B> and
+<B>f2(&#160;)</B>. Inline <B>f1(&#160;)</B> and leave <B>f2(&#160;)</B> as an
+out-of-line function. Use the Standard C Library function <B>clock(&#160;)</B>
+that is found in <B>&lt;ctime&gt;</B> to mark the starting point and ending
+points and compare the two functions to see which one is faster. You may need to
+make repeated calls to the functions inside your timing loop in order to get
+useful numbers.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:TrackTime.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;ctime&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>void</font> f1() {
+    <font color=#0000ff>int</font> i = 1;
+    <font color=#0000ff>float</font> x = i;
+    i = <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>int</font>&gt;(x);
+}
+
+<font color=#0000ff>inline</font> <font color=#0000ff>void</font> f2() {
+    <font color=#0000ff>int</font> i = 1;
+    <font color=#0000ff>float</font> x = i;
+    i = <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>int</font>&gt;(x);
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#009900>// Time f1:</font>
+    clock_t start = clock();
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 10000000; ++i)
+        f1();
+    clock_t stop = clock();
+    <font color=#0000ff>float</font> ticks = stop - start;
+    cout &lt;&lt; <font color=#004488>"Time for f1: "</font> &lt;&lt; ticks / CLOCKS_PER_SEC &lt;&lt; endl;
+    
+    <font color=#009900>// Time f1:</font>
+    start = clock();
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 10000000; ++i)
+        f2();
+    stop = clock();
+    ticks = stop - start;
+    cout &lt;&lt; <font color=#004488>"Time for f2: "</font> &lt;&lt; ticks / CLOCKS_PER_SEC &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output: Compiler A
+Time for f1: 0.43
+Time for f2: 0.165
+
+   Output: Compiler B:
+Time for f1: 2.25
+Time for f2: 1.87
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The <B>clock(&#160;)</B> function returns the current
+&#147;tick&#148; of the internal system clock in some platform-dependent
+measure. To get the number of seconds between two clock ticks, you just divide
+by the macro CLOCKS_PER_SEC. Unfortunately, some compilers forget to make
+CLOCK_PER_SEC a floating-point value, so the variable ticks above solves that
+problem.<BR></P></DIV>
+<A NAME="Heading148"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Experiment with the size and complexity of the code inside the
+functions in Exercise 4 to see if you can find a break-even point where the
+inline function and the non-inline function take the same amount of time. If you
+have them available, try this with different compilers and note the
+differences.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading149"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Prove that inline functions default to internal
+linkage.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Just try to compile and link the following two programs.
+You&#146;ll get a link error because <B>f(&#160;)</B> is not visible outside
+its file.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:InternalLinkage.cpp {O}</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>inline</font> <font color=#0000ff>void</font> f() {
+    cout &lt;&lt; <font color=#004488>"f() in InternalLinkage.cpp\n"</font>;
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:LinkError.cpp</font>
+<font color=#009900>//=M @echo compile and link LinkError.cpp by hand</font>
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>extern</font> <font color=#0000ff>void</font> f();
+    f();
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading150"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class that contains an array of <B>char</B>. Add an
+inline constructor that uses the Standard C library function
+<B>memset(&#160;)</B> to initialize the array to the constructor argument
+(default this to ' '), and an inline member function called <B>print(&#160;)</B>
+to print out all the characters in the array.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Since we&#146;re asked to make the constructor inline, it
+needs to go in the header file:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:CharArray.h</font>
+#include &lt;cstring&gt;  <font color=#009900>// for memset()</font>
+
+<font color=#009900>// VC++ doesn&#146;t put memset in std</font>
+#ifndef _MSC_VER
+<font color=#0000ff>using</font> std::memset;
+#endif
+
+<font color=#0000ff>class</font> CharArray {
+    <font color=#0000ff>enum</font> {MAX = 5};
+    <font color=#0000ff>char</font> data[5];
+<font color=#0000ff>public</font>:
+    CharArray(<font color=#0000ff>char</font> = ' ');
+    <font color=#0000ff>void</font> print() <font color=#0000ff>const</font>;
+};
+
+<font color=#0000ff>inline</font> CharArray::CharArray(<font color=#0000ff>char</font> c) {
+    memset(data, c, MAX);
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Be aware that some compilers which haven&#146;t yet caught up
+with the definition of the C++ standard do not put <B>memset(&#160;)</B> in the
+<B>std</B> namespace. If your compiler falls into this category, just remove the
+<B>std::</B> prefix above. Here&#146;s the class implementation file:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:CharArray.cpp {O}</font>
+#include <font color=#004488>"CharArray.h"</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>void</font> CharArray::print() <font color=#0000ff>const</font> {
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; MAX; ++i)
+        cout &lt;&lt; data[i];
+    cout &lt;&lt; endl;
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>and here&#146;s the test program:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:Exercise7.cpp</font>
+<font color=#009900>//{L} CharArray</font>
+#include <font color=#004488>"CharArray.h"</font>
+
+<font color=#0000ff>int</font> main() {
+    CharArray a('x');
+    a.print();
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading151"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Take the <B>NestFriend.cpp</B> example from Chapter 5 and
+replace all the member functions with inlines. Make them non-<I>in situ</I>
+inline functions. Also change the <B>initialize(&#160;)</B> functions to
+constructors.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading152"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>StringStack.cpp</B> from Chapter 8 to use inline
+functions.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading153"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create an <B>enum</B> called <B>Hue</B> containing <B>red,
+blue</B>,<B> </B>and <B>yellow</B>. Now create a class called <B>Color</B>
+containing a data member of type <B>Hue </B>and a constructor that sets the
+<B>Hue</B> from its argument. Add access functions to &#147;get&#148; and
+&#147;set&#148; the <B>Hue</B>. Make all of the functions inlines.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading154"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify Exercise 10 to use the &#147;accessor&#148; and
+&#147;mutator&#148; approach.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:ColorAndHue.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+
+<font color=#0000ff>enum</font> Hue {RED, BLUE, YELLOW};
+
+<font color=#0000ff>const</font> <font color=#0000ff>char</font>* printHue(Hue h) {
+    <font color=#0000ff>static</font> <font color=#0000ff>const</font> <font color=#0000ff>char</font>* hues[] = {<font color=#004488>"red"</font>, <font color=#004488>"blue"</font>, <font color=#004488>"yellow"</font>};
+    assert(RED &lt;= h &amp;&amp; h &lt;= YELLOW);
+    <font color=#0000ff>return</font> hues[h];
+}
+            
+<font color=#0000ff>class</font> Color {
+    Hue hue_;
+<font color=#0000ff>public</font>:
+    Color(Hue h) : hue_(h){}
+    Hue hue() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> hue_;
+    }
+    <font color=#0000ff>void</font> hue(Hue h) {
+        hue_ = h;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    Color c(BLUE);
+    cout &lt;&lt; printHue(c.hue()) &lt;&lt; endl;
+    c.hue(RED);
+    cout &lt;&lt; printHue(c.hue()) &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+blue
+red
+*/</font>
+<font color=#009900>///:~</font>
+        </PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>I&#146;ve included <B>printHue(&#160;)</B> for convenience.
+The standard conversion from enumerations to <B>int</B> makes easy work of
+returning a C-style string from <B>printHue(&#160;)</B>. You could also use
+objects of class <B>std::string</B>, but the version above is more
+efficient.<BR></P></DIV>
+<A NAME="Heading155"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Cpptime.cpp</B> so that it measures the time from
+the time that the program begins running to the time when the user presses the
+&#147;Enter&#148; or &#147;Return&#148; key.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading156"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with two inline member functions, such that the
+first function that&#146;s defined in the class calls the second function,
+without the need for a forward declaration. Write a main that creates an object
+of the class and calls the first function.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading157"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class <B>A </B>with an inline default constructor
+that announces itself. Now make a new class <B>B</B> and put an object of <B>A
+</B>as<B> </B>a member of <B>B</B>, and give <B>B</B> an inline constructor.
+Create an array of <B>B</B> objects and see what happens.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:MemberObject.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> A {
+<font color=#0000ff>public</font>:
+    A() {cout &lt;&lt; <font color=#004488>"A()\n"</font>;}
+};
+
+<font color=#0000ff>class</font> B {
+    A a;
+<font color=#0000ff>public</font>:
+    B() {cout &lt;&lt; <font color=#004488>"B()\n"</font>;}
+};
+
+<font color=#0000ff>int</font> main() {
+    B b;
+}
+
+<font color=#009900>/* Output:
+A()
+B()
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This program illustrates that the member object is constructed
+before the containing object, and its default constructor is called.<BR></P></DIV>
+<A NAME="Heading158"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-15</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a large quantity of the objects from the previous
+Exercise, and use the <B>Time</B> class to time the difference between
+non-inline constructors and inline constructors. (If you have a profiler, also
+try using that.) <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading159"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-16</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program that takes a <B>string</B> as the command-line
+argument. Write a <B>for</B> loop that removes one character from the
+<B>string</B> with each pass, and use the <B>DEBUG(&#160;)</B> macro from this
+chapter to print the <B>string</B> each time.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:UseDEBUG.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+#define DEBUG(x) cout &lt;&lt; #x <font color=#004488>" = "</font> &lt;&lt; x &lt;&lt; endl
+
+<font color=#0000ff>int</font> main(<font color=#0000ff>int</font> argc, <font color=#0000ff>char</font>* argv[]) {
+    <font color=#0000ff>if</font> (argc &gt; 1) {
+        string s(argv[1]);
+        size_t siz = s.size();
+        <font color=#0000ff>for</font> (size_t n = 0; n &lt; siz; ++n) {
+            s = s.erase(siz - n - 1, 1);
+            DEBUG(s);
+        }
+    }
+}
+
+<font color=#009900>/* Sample execution:
+&gt; UseDEBUG disappear
+s = disappea
+s = disappe
+s = disapp
+s = disap
+s = disa
+s = dis
+s = di
+s = d
+s = 
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading160"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-17</H2></FONT>
+<DIV ALIGN="LEFT"><P>Correct the <B>TRACE(&#160;)</B> macro as specified in this
+chapter, and prove that it works correctly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:UseTRACE.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+#define TRACE(s) cout &lt;&lt; #s &lt;&lt; endl, s
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>int</font> x;
+    TRACE(x = 7);
+    cout &lt;&lt; x &lt;&lt; endl;
+    TRACE(++x);
+    cout &lt;&lt; x &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+x = 7
+7
+++x
+8
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>You needed to replace the semi-colon in <B>TRACE</B> as
+defined in the book with a comma. You can&#146;t put declarations inside of
+<B>TRACE</B>, by the way. If you tried <B>TRACE (int x);</B>, for example, the
+expansion would become:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>cout &lt;&lt; <font color=#004488>"int x"</font> &lt;&lt; endl, <font color=#0000ff>int</font> x;</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>and declarations can&#146;t appear where a value is expected,
+such as after the comma in this case.<BR></P></DIV>
+<A NAME="Heading161"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-18</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify the <B>FIELD(&#160;)</B> macro so that it also contains
+an <B>index</B> number. Create a class whose members are composed of calls to
+the <B>FIELD(&#160;)</B> macro. Add a member function that allows you to look up
+a field using its index number. Write a <B>main(&#160;)</B> to test the
+class.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading162"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-19</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify the <B>FIELD(&#160;)</B> macro so that it automatically
+generates access functions for each field (the data should still be private,
+however). Create a class whose members are composed of calls to the
+<B>FIELD(&#160;)</B> macro. Write a <B>main(&#160;)</B> to test the
+class.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S09:FieldAccessors.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+#define FIELD(type, name)                   \
+<font color=#0000ff>private</font>:                                    \
+    type name ## _;                         \
+<font color=#0000ff>public</font>:                                     \
+    type name() <font color=#0000ff>const</font> {<font color=#0000ff>return</font> name ## _;}   \
+    <font color=#0000ff>void</font> name(type val) {name ## _ = val;}
+
+<font color=#0000ff>class</font> C {
+FIELD(<font color=#0000ff>int</font>, foo);
+FIELD(<font color=#0000ff>float</font>, bar);
+FIELD(string, baz);
+};
+
+<font color=#0000ff>int</font> main() {
+    C c;
+    c.foo(1);
+    c.bar(2.0);
+    c.baz(<font color=#004488>"three"</font>);
+    cout &lt;&lt; c.foo() &lt;&lt; endl;
+    cout &lt;&lt; c.bar() &lt;&lt; endl;
+    cout &lt;&lt; c.baz() &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+1
+2
+three
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>You continue a macro definition on the next line by ending the
+current line with a backslash. The trick here is to use <B>private</B> and
+<B>public</B> repeatedly as needed. The preprocessor output from the expansion
+of class C above is:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> C {
+<font color=#0000ff>private</font>: <font color=#0000ff>int</font> foo_; <font color=#0000ff>public</font>: <font color=#0000ff>int</font> foo() <font color=#0000ff>const</font> {<font color=#0000ff>return</font> foo_;} <font color=#0000ff>void</font> foo(<font color=#0000ff>int</font> val) {foo_ = val;};
+<font color=#0000ff>private</font>: <font color=#0000ff>float</font> bar_; <font color=#0000ff>public</font>: <font color=#0000ff>float</font> bar() <font color=#0000ff>const</font> {<font color=#0000ff>return</font> bar_;} <font color=#0000ff>void</font> bar(<font color=#0000ff>float</font> val) {bar_ = val;};
+<font color=#0000ff>private</font>: string baz_; <font color=#0000ff>public</font>: string baz() <font color=#0000ff>const</font> {<font color=#0000ff>return</font> baz_;} <font color=#0000ff>void</font> baz(string val) {baz_ = val;};
+};</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>which after a little reformatting looks like the
+following:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> C {
+<font color=#0000ff>private</font>:
+    <font color=#0000ff>int</font> foo_;
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>int</font> foo() <font color=#0000ff>const</font> {<font color=#0000ff>return</font> foo_;}
+    <font color=#0000ff>void</font> foo(<font color=#0000ff>int</font> val) {foo_ = val;};
+<font color=#0000ff>private</font>:
+    <font color=#0000ff>float</font> bar_;
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>float</font> bar() <font color=#0000ff>const</font> {<font color=#0000ff>return</font> bar_;}
+    <font color=#0000ff>void</font> bar(<font color=#0000ff>float</font> val) {bar_ = val;};
+<font color=#0000ff>private</font>:
+    string baz_;
+<font color=#0000ff>public</font>:
+    string baz() <font color=#0000ff>const</font> {<font color=#0000ff>return</font> baz_;}
+    <font color=#0000ff>void</font> baz(string val) {baz_ = val;};
+};</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>There&#146;s an extra semi-colon at the end of each
+field&#146;s section, but the compiler doesn&#146;t complain about an empty
+statement in a class definition, just like it doesn&#146;t mind an empty
+statement inside of a function body.<BR></P></DIV>
+<A NAME="Heading163"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-20</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program that takes two command-line arguments: the
+first is an <B>int</B> and the second is a file name. Use <B>require.h</B> to
+ensure that you have the right number of arguments, that the <B>int</B> is
+between 5 and 10, and that the file can successfully be opened.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading164"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-21</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program that uses the <B>IFOPEN(&#160;)</B> macro to
+open a file as an input stream. Note the creation of the <B>ifstream</B> object
+and its scope.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading165"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+9-22</H2></FONT>
+<DIV ALIGN="LEFT"><P>(Challenging) Determine how to get your compiler to generate
+assembly code. Create a file containing a very small function and a
+<B>main(&#160;)</B> that calls the function. Generate assembly code when the
+function is inlined and not inlined, and demonstrate that the inlined version
+does not have the function call overhead.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap08.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap10.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

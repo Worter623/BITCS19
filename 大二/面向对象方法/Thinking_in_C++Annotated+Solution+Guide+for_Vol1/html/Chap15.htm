@@ -1,0 +1,836 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:47
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap15.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 15</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap14.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap16.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 15</H1></FONT>
+<DIV ALIGN="LEFT"><P>(Exercises 15-1 through 15-9 are left to the
+reader.)<BR></P></DIV>
+<A NAME="Heading308"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a simple &#147;shape&#148; hierarchy: a base class
+called <B>Shape</B> and derived classes called <B>Circle</B>, <B>Square</B>, and
+<B>Triangle</B>. In the base class, make a virtual function called
+<B>draw(&#160;),</B> and override this in the derived classes. Make an array of
+pointers to <B>Shape</B> objects that you create on the heap (and thus perform
+upcasting of the pointers), and call <B>draw(&#160;)</B> through the base-class
+pointers, to verify the behavior of the virtual function. If your debugger
+supports it, single-step through the code.<BR></P></DIV>
+<A NAME="Heading309"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify Exercise 1 so <B>draw(&#160;)</B> is a pure virtual
+function. Try creating an object of type <B>Shape</B>.<B> </B>Try to call the
+pure virtual function inside the constructor and see what happens. Leaving it as
+a pure virtual, give <B>draw(&#160;)</B> a definition.<BR></P></DIV>
+<A NAME="Heading310"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Expanding on Exercise 2, create a function that takes a
+<B>Shape</B> object <I>by value</I> and try to upcast a derived object in as an
+argument. See what happens. Fix the function by taking a reference to the
+<B>Shape</B> object.<BR></P></DIV>
+<A NAME="Heading311"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>C14:Combined.cpp</B> so that <B>f(&#160;)</B> is
+<B>virtual</B> in the base class. Change <B>main(&#160;)</B> to perform an
+upcast and a virtual call.<BR></P></DIV>
+<A NAME="Heading312"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Instrument3.cpp</B> by adding a <B>virtual</B>
+<B>prepare(&#160;)</B> function. Call <B>prepare(&#160;)</B> inside
+<B>tune(&#160;)</B>.<BR></P></DIV>
+<A NAME="Heading313"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create an inheritance hierarchy of <B>Rodent</B>:
+<B>Mouse</B>, <B>Gerbil</B>, <B>Hamster</B>, etc. In the base class, provide
+methods that are common to all <B>Rodent</B>s, and redefine these in the derived
+classes to perform different behaviors depending on the specific type of
+<B>Rodent</B>. Create an array of pointers to <B>Rodent</B>, fill it with
+different specific types of <B>Rodent</B>s, and call your base-class methods to
+see what happens.<BR></P></DIV>
+<A NAME="Heading314"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify Exercise 6 so that you use a
+<B>vector&lt;Rodent*&gt;</B> instead of an array of pointers. Make sure that
+memory is cleaned up properly.<BR></P></DIV>
+<A NAME="Heading315"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Starting with the previous <B>Rodent</B> hierarchy, inherit
+<B>BlueHamster</B> from <B>Hamster</B> (yes, there is such a thing; I had one
+when I was a kid), override the base-class methods, and show that the code that
+calls the base-class methods doesn&#146;t need to change in order to
+accommodate the new type. <BR></P></DIV>
+<A NAME="Heading316"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Starting with the previous <B>Rodent</B> hierarchy, add a non
+virtual destructor, create an object of class <B>Hamster</B> using <B>new</B>,
+upcast the pointer to a <B>Rodent*</B>, and <B>delete</B> the pointer to show
+that it doesn&#146;t call all the destructors in the hierarchy. Change the
+destructor to be <B>virtual</B> and demonstrate that the behavior is now
+correct.<BR></P></DIV>
+<A NAME="Heading317"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Starting with the previous <B>Rodent</B> hierarchy, modify
+<B>Rodent</B> so it is a pure abstract base class.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S15:AllMyRodents.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Rodent {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>virtual</font> ~Rodent() {cout &lt;&lt; <font color=#004488>"~Rodent\n"</font>;}
+    <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> eat() = 0;
+    <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> infest() = 0;
+    <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> squeak() = 0;
+};
+
+<font color=#0000ff>class</font> Mouse : <font color=#0000ff>public</font> Rodent {
+<font color=#0000ff>public</font>:
+    ~Mouse() {cout &lt;&lt; <font color=#004488>"~Mouse\n"</font>;}
+    <font color=#0000ff>void</font> eat() {cout &lt;&lt; <font color=#004488>"Mouse::eat\n"</font>;}
+    <font color=#0000ff>void</font> infest() {cout &lt;&lt; <font color=#004488>"Mouse::infest\n"</font>;}
+    <font color=#0000ff>void</font> squeak() {cout &lt;&lt; <font color=#004488>"Mouse::squeak\n"</font>;}
+};
+
+<font color=#0000ff>class</font> Gerbil : <font color=#0000ff>public</font> Rodent {
+<font color=#0000ff>public</font>:
+    ~Gerbil() {cout &lt;&lt; <font color=#004488>"~Gerbil\n"</font>;}
+    <font color=#0000ff>void</font> eat() {cout &lt;&lt; <font color=#004488>"Gerbil::eat\n"</font>;}
+    <font color=#0000ff>void</font> infest() {cout &lt;&lt; <font color=#004488>"Gerbil::infest\n"</font>;}
+    <font color=#0000ff>void</font> squeak() {cout &lt;&lt; <font color=#004488>"Gerbil::squeak\n"</font>;}
+};
+
+<font color=#0000ff>class</font> Hamster : <font color=#0000ff>public</font> Rodent {
+<font color=#0000ff>public</font>:
+    ~Hamster() {cout &lt;&lt; <font color=#004488>"~Hamster\n"</font>;}
+    <font color=#0000ff>void</font> eat() {cout &lt;&lt; <font color=#004488>"Hamster::eat\n"</font>;}
+    <font color=#0000ff>void</font> infest() {cout &lt;&lt; <font color=#004488>"Hamster::infest\n"</font>;}
+    <font color=#0000ff>void</font> squeak() {cout &lt;&lt; <font color=#004488>"Hamster::squeak\n"</font>;}
+};
+
+<font color=#0000ff>void</font> doRodentThings(vector&lt;Rodent*&gt;&amp; v) {
+    <font color=#0000ff>for</font> (size_t i = 0; i &lt; v.size(); ++i)
+    {
+        v[i]-&gt;eat();
+        v[i]-&gt;infest();
+        v[i]-&gt;squeak();
+    }
+}
+
+<font color=#0000ff>int</font> main() {
+    vector&lt;Rodent*&gt; v;
+    v.push_back(<font color=#0000ff>new</font> Mouse);
+    v.push_back(<font color=#0000ff>new</font> Gerbil);
+    v.push_back(<font color=#0000ff>new</font> Hamster);
+    doRodentThings(v);
+
+    <font color=#009900>// Clean up:</font>
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; v.size(); ++i)
+        <font color=#0000ff>delete</font> v[i];
+}
+
+<font color=#009900>/* Output:
+Mouse::eat
+Mouse::infest
+Mouse::squeak
+Gerbil::eat
+Gerbil::infest
+Gerbil::squeak
+Hamster::eat
+Hamster::infest
+Hamster::squeak
+~Mouse
+~Rodent
+~Gerbil
+~Rodent
+~Hamster
+~Rodent
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This program illustrates the polymorphic behavior of virtual
+functions. Even though I have a vector of pointers to <B>Rodent</B>, the actual
+code executed is according to the dynamic type of the <B>Rodent*</B> (i.e., the
+type of derived object actually being pointed to). Since <B>Rodent</B> has a
+pure virtual function (by virtue of the &#147;<B>= 0</B>&#148; above), it is
+an abstract class, meaning that no instances of <B>Rodent</B> can be created
+&#150; it only exists to define an interface for derived classes to implement.
+It is possible in C++, however, to have data and function bodies in an abstract
+class (a good idea if there is implementation for the derived classes to share).
+For example, if you wanted <B>Mouse::Eat(&#160;)</B> to always <B>call
+Rodent::eat(&#160;)</B> first, you could implement <B>Rodent::eat(&#160;)</B>
+and change <B>Mouse::eat(&#160;)</B> to the following:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>// Inside of class Mouse:</font>
+<font color=#0000ff>void</font> eat() {
+    Rodent::eat();
+    cout &lt;&lt; <font color=#004488>"Mouse::eat\n"</font>;
+}</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Note that the virtual destructor works as expected. Even
+though we use pointers to base to delete the objects, the derived destructors
+execute as well.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>You can add <B>BlueHamster</B> or any other class anywhere in
+this hierarchy. As long as the 3 functions declared in <B>Rodent</B> are
+implemented, objects of the new type can be processed with no change at all to
+<B>doRodentThings(&#160;)</B>. That&#146;s the utility of object-oriented
+programming!<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Exercises 15-11 through 15-17 are left to the
+reader.)<BR></P></DIV>
+<A NAME="Heading318"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create an air-traffic control system with base-class
+<B>Aircraft</B> and various derived types. Create a <B>Tower</B> class with a
+<B>vector&lt;Aircraft*&gt;</B> that sends the appropriate messages to the
+various aircraft under its control.<BR></P></DIV>
+<A NAME="Heading319"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a model of a greenhouse by inheriting various types of
+<B>Plant</B> and building mechanisms into your greenhouse that take care of the
+plants.<BR></P></DIV>
+<A NAME="Heading320"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>Early.cpp</B>, make <B>Pet</B> a pure abstract base
+class.<BR></P></DIV>
+<A NAME="Heading321"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>AddingVirtuals.cpp</B>, make all the member functions of
+<B>Pet</B> pure virtuals, but provide a definition for <B>name(&#160;)</B>. Fix
+<B>Dog</B> as necessary, using the base-class definition of
+<B>name(&#160;)</B>.<BR></P></DIV>
+<A NAME="Heading322"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-15</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a small program to show the difference between calling a
+virtual function inside a normal member function and calling a virtual function
+inside a constructor. The program should prove that the two calls produce
+different results.<BR></P></DIV>
+<A NAME="Heading323"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-16</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>VirtualsInDestructors.cpp</B> by inheriting a class
+from <B>Derived</B> and overriding <B>f(&#160;)</B> and the destructor. In
+<B>main(&#160;)</B>, create and upcast an object of your new type, then
+<B>delete</B> it.<BR></P></DIV>
+<A NAME="Heading324"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-17</H2></FONT>
+<DIV ALIGN="LEFT"><P>Take Exercise 16 and add calls to <B>f(&#160;)</B> in each
+destructor. Explain what happens.<BR></P></DIV>
+<A NAME="Heading325"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-18</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class that has a data member and a derived class that
+adds another data member. Write a non-member function that takes an object of
+the base class <I>by value</I> and prints out the size of that object using
+<B>sizeof(&#160;)</B>. In <B>main(&#160;)</B> create an object of the derived
+class, print out its size, and then call your function. Explain what
+happens.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S15:SliceTheBase.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Base {
+    <font color=#0000ff>int</font> x;
+};
+
+<font color=#0000ff>class</font> Derived : <font color=#0000ff>public</font> Base {
+    <font color=#0000ff>float</font> y;
+};
+
+<font color=#0000ff>void</font> mySize(Base b) {
+    cout &lt;&lt; <font color=#004488>"mySize == "</font> &lt;&lt; <font color=#0000ff>sizeof</font> b &lt;&lt; endl;
+}
+
+<font color=#0000ff>int</font> main() {
+    Base b;
+    Derived d;
+    cout &lt;&lt; <font color=#004488>"sizeof b == "</font> &lt;&lt; <font color=#0000ff>sizeof</font> b &lt;&lt; endl;
+    cout &lt;&lt; <font color=#004488>"sizeof d == "</font> &lt;&lt; <font color=#0000ff>sizeof</font> d &lt;&lt; endl;
+    mySize(b);
+    mySize(d);
+}
+
+<font color=#009900>/* Output:
+sizeof b == 4
+sizeof d == 8
+mySize == 4
+mySize == 4
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>As the name of this source file suggest, the <B>Derived</B>
+object <B>d</B> is &#147;sliced&#148; down to a <B>Base</B> class object,
+since that is what <B>mySize</B> takes off the stack. If you want a polymorphic
+<B>sizeof</B> function you could define a virtual function something like the
+following.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S15:PolymorphicSizeof.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Base {
+    <font color=#0000ff>int</font> x;
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>virtual</font> size_t mySize() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> <font color=#0000ff>sizeof</font> *<font color=#0000ff>this</font>;
+    }
+};
+
+<font color=#0000ff>class</font> Derived : <font color=#0000ff>public</font> Base {
+    <font color=#0000ff>float</font> y;
+<font color=#0000ff>public</font>:
+    size_t mySize() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> <font color=#0000ff>sizeof</font> *<font color=#0000ff>this</font>;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    Base b;
+    Derived d;
+    cout &lt;&lt; <font color=#004488>"b.mySize() == "</font> &lt;&lt; b.mySize() &lt;&lt; endl;
+    cout &lt;&lt; <font color=#004488>"d.mySize() == "</font> &lt;&lt; d.mySize() &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+b.mySize() == 8
+d.mySize() == 12
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<A NAME="Heading326"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-19</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a simple example of a virtual function call and
+generate assembly output. Locate the assembly code for the virtual call and
+trace and explain the code.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader.)<BR></P></DIV>
+<A NAME="Heading327"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-20</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a class with one virtual function and one non-virtual
+function. Inherit a new class, make an object of this class, and upcast to a
+pointer of the base-class type. Use the <B>clock(&#160;)</B> function found in
+<B>&lt;ctime&gt;</B> (you&#146;ll need to look this up in your local C library
+guide) to measure the difference between a virtual call and non-virtual call.
+You&#146;ll need to make multiple calls to each function inside your timing
+loop in order to see the difference.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S15:VirtualHit.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;ctime&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Base {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> nonvirt();
+    <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> virt();
+};
+
+<font color=#0000ff>void</font> Base::nonvirt() {}
+<font color=#0000ff>void</font> Base::virt() {}
+
+<font color=#0000ff>class</font> Derived : <font color=#0000ff>public</font> Base {};
+
+<font color=#0000ff>double</font> measure(Base* bp, <font color=#0000ff>void</font> (Base::* f)()) {
+    clock_t start = clock();
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 10000000L; ++i)
+        (bp-&gt;*f)();
+    clock_t stop = clock();
+    <font color=#0000ff>return</font> <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>double</font>&gt;(stop - start) / CLOCKS_PER_SEC;
+}
+
+<font color=#0000ff>int</font> main() {
+    Derived d;
+    cout &lt;&lt; measure(&amp;d, &amp;Base::nonvirt) &lt;&lt; endl;
+    cout &lt;&lt; measure(&amp;d, &amp;Base::virt) &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output (yours will vary):
+.34
+.395
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This program records the time it takes to invoke each function
+10,000,000 times. Both functions bodies are identical (empty), and I defined
+<B>nonvirt</B> outside the class definition so it wasn&#146;t inline (since
+virtual functions can&#146;t be inlined, that would be an unfair advantage). As
+you can see, the overhead of virtual function calls is quite minimal. The use of
+<B>clock(&#160;)</B> and pointers-to-members appeared in previous
+chapters.<BR></P></DIV>
+<A NAME="Heading328"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-21</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>C14:Order.cpp</B> by adding a virtual function in
+the base class of the <B>CLASS</B> macro (have it print something) and by making
+the destructor virtual. Make objects of the various subclasses and upcast them
+to the base class. Verify that the virtual behavior works and that proper
+construction and destruction takes place.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader.)<BR></P></DIV>
+<A NAME="Heading329"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-22</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a class with three overloaded virtual functions. Inherit
+a new class from this and override one of the functions. Create an object of
+your derived class. Can you call all the base class functions through the
+derived-class object? Upcast the address of the object to the base. Can you call
+all three functions through the base? Remove the overridden definition in the
+derived class. Now can you call all the base class functions through the
+derived-class object?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The answers are; yes, yes, yes! Virtual functions are
+inherited. Only if you override one will it replace the inherited one. The
+compiler generates the virtual function table with the most-derived functions
+that apply to a class, as you would expect. In the example below, if you were to
+remove the definition of <B>Derived::f(&#160;)</B>, then <B>Base::f(&#160;)</B>
+would be called automatically.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S15:InheritVirtuals.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Base {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> f() {
+        cout &lt;&lt; <font color=#004488>"Base::f()\n"</font>;
+    }
+    <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> g() {
+        cout &lt;&lt; <font color=#004488>"Base::g()\n"</font>;
+    }
+    <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> h() {
+        cout &lt;&lt; <font color=#004488>"Base::h()\n"</font>;
+    }
+};
+
+<font color=#0000ff>class</font> Derived : <font color=#0000ff>public</font> Base {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> f() {
+        cout &lt;&lt; <font color=#004488>"Derived::f()\n"</font>;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    Derived d;
+    Base* bp = &amp;d;
+    bp-&gt;f();
+    bp-&gt;g();
+    bp-&gt;h();
+}
+
+<font color=#009900>/* Output:
+Derived::f()
+Base::g()
+Base::h()
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading330"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-23</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>VariantReturn.cpp</B> to show that its behavior
+works with references as well as pointers.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader.)<BR></P></DIV>
+<A NAME="Heading331"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-24</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>Early.cpp</B>, how can you tell whether the compiler
+makes the call using early or late binding? Determine the case for your own
+compiler.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader.)<BR></P></DIV>
+<A NAME="Heading332"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-25</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a base class containing a <B>clone(&#160;)</B> function
+that returns a pointer to a <I>copy</I> of the current object. Derive two
+subclasses that override <B>clone(&#160;)</B> to return copies of their specific
+types. In <B>main(&#160;)</B>, create and upcast objects of your two derived
+types, then call <B>clone(&#160;)</B> for each and verify that the cloned copies
+are the correct subtypes. Experiment with your <B>clone(&#160;)</B> function so
+that you return the base type, then try returning the exact derived type. Can
+you think of situations in which the latter approach is necessary?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S15:VirtualClone.cpp</font>
+<font color=#009900>//{-msc} VC++ doesn&#146;t implement the covariant return type</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Base {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>virtual</font> ~Base(){}
+    <font color=#0000ff>virtual</font> Base* clone() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> <font color=#0000ff>new</font> Base(*<font color=#0000ff>this</font>);
+    }
+    <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> f() {
+        cout &lt;&lt; <font color=#004488>"Base::f()\n"</font>;
+    }
+};
+
+<font color=#0000ff>class</font> Derived : <font color=#0000ff>public</font> Base {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>virtual</font> Derived* clone() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> <font color=#0000ff>new</font> Derived(*<font color=#0000ff>this</font>);
+    }
+    <font color=#0000ff>virtual</font> <font color=#0000ff>void</font> f() {
+        cout &lt;&lt; <font color=#004488>"Derived::f()\n"</font>;
+    }
+};
+
+<font color=#0000ff>void</font> invoke_f_and_die(Derived* d) {
+    d-&gt;f();
+    <font color=#0000ff>delete</font> d;
+}
+
+<font color=#0000ff>int</font> main() {
+    Derived d;
+    Base* d2 = d.clone();
+    d2-&gt;f();
+    <font color=#0000ff>delete</font> d2;
+    
+    invoke_f_and_die(d.clone());
+}
+
+<font color=#009900>/* Output:
+Derived::f()
+Derived::f()
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Only one derived class is needed to illustrate the concepts of
+this exercise. <B>Derived::clone</B> returns a <B>Derived*</B> instead of a
+<B>Base</B>. Most of the time a <B>Base*</B> is sufficient, but if you have a
+context that requires a <B>Derived*</B>, such as <B>invoke_f_and_die(&#160;)</B>
+above, then you can use <B>Derived::f(&#160;)</B> because of its covariant
+return type. Notice the virtual destructor so <B>d2</B> is destroyed
+properly.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Exercises 15-26 through 15-32 are left to the
+reader.)<BR></P></DIV>
+<A NAME="Heading333"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-26</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>OStackTest.cpp</B> by creating your own class, then
+multiply-inheriting it with <B>Object</B> to create something that can be placed
+into the <B>Stack</B>. Test your class in <B>main(&#160;)</B>.<BR></P></DIV>
+<A NAME="Heading334"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-27</H2></FONT>
+<DIV ALIGN="LEFT"><P>Add a type called <B>Tensor</B> to
+<B>OperatorPolymorphism.cpp</B>.<BR></P></DIV>
+<A NAME="Heading335"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-28</H2></FONT>
+<DIV ALIGN="LEFT"><P>(Intermediate) Create a base <B>class X</B> with no data
+members and no constructor, but with a virtual function. Create a <B>class Y
+</B>that inherits from <B>X</B>, but without an explicit constructor. Generate
+assembly code and examine it to determine if a constructor is created and called
+for <B>X</B>, and if so, what the code does. Explain what you discover. <B>X</B>
+has no default constructor, so why doesn&#146;t the compiler
+complain?<BR></P></DIV>
+<A NAME="Heading336"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-29</H2></FONT>
+<DIV ALIGN="LEFT"><P>(Intermediate) Modify Exercise 28 by writing constructors for
+both classes so that each constructor calls a virtual function. Generate
+assembly code. Determine where the VPTR is being assigned inside each
+constructor. Is the virtual mechanism being used by your compiler inside the
+constructor? Establish why the local version of the function is still being
+called.<BR></P></DIV>
+<A NAME="Heading337"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-30</H2></FONT>
+<DIV ALIGN="LEFT"><P>(Advanced) If function calls to an object passed by value
+<I>weren&#146;t</I> early-bound, a virtual call might access parts that
+didn&#146;t exist. Is this possible? Write some code to force a virtual call,
+and see if this causes a crash. To explain the behavior, examine what happens
+when you pass an object by value.<BR></P></DIV>
+<A NAME="Heading338"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-31</H2></FONT>
+<DIV ALIGN="LEFT"><P>(Advanced) Find out exactly how much more time is required for
+a virtual function call by going to your processor&#146;s assembly-language
+information or other technical manual and finding out the number of clock states
+required for a simple call versus the number required for the virtual function
+instructions.<BR></P></DIV>
+<A NAME="Heading339"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-32</H2></FONT>
+<DIV ALIGN="LEFT"><P>Determine the <B>sizeof</B> the VPTR for your implementation.
+Now multiply-inherit two classes that contain virtual functions. Did you get one
+VPTR or two in the derived class?<BR></P></DIV>
+<A NAME="Heading340"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-33</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with data members and virtual functions. Write
+a function that looks at the memory in an object of your class and prints out
+the various pieces of it. To do this you will need to experiment and iteratively
+discover where the VPTR is located in the object.<BR></P></DIV>
+<A NAME="Heading341"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-34</H2></FONT>
+<DIV ALIGN="LEFT"><P>Pretend that virtual functions don&#146;t exist, and modify
+<B>Instrument4.cpp</B> so that it uses <B>dynamic_cast</B> to make the
+equivalent of the virtual calls. Explain why this is a bad idea.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S15:Instrument4.cpp</font>
+<font color=#009900>// From "Thinking in C++, 2nd Edition, Volume 1, Annotated Solutions Guide"</font>
+<font color=#009900>// www.BruceEckel.com. See copyright notice in CopyRight.txt.</font>
+<font color=#009900>// Simulate Virtual Functions (sort of)</font>
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>enum</font> note { middleC, Csharp, Cflat }; <font color=#009900>// Etc.</font>
+
+<font color=#0000ff>class</font> Instrument {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>virtual</font> ~Instrument(){}
+  <font color=#0000ff>void</font> play(note) <font color=#0000ff>const</font>;
+  <font color=#0000ff>const</font> <font color=#0000ff>char</font>* what() <font color=#0000ff>const</font>;
+};
+
+<font color=#0000ff>class</font> Wind : <font color=#0000ff>public</font> Instrument {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>void</font> play(note) <font color=#0000ff>const</font> {
+    cout &lt;&lt; <font color=#004488>"Wind::play"</font> &lt;&lt; endl;
+  }
+  <font color=#0000ff>const</font> <font color=#0000ff>char</font>* what() <font color=#0000ff>const</font> { <font color=#0000ff>return</font> <font color=#004488>"Wind"</font>; }
+};
+
+<font color=#0000ff>class</font> Percussion : <font color=#0000ff>public</font> Instrument {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>void</font> play(note) <font color=#0000ff>const</font> {
+    cout &lt;&lt; <font color=#004488>"Percussion::play"</font> &lt;&lt; endl;
+  }
+  <font color=#0000ff>const</font> <font color=#0000ff>char</font>* what() <font color=#0000ff>const</font> { <font color=#0000ff>return</font> <font color=#004488>"Percussion"</font>; }
+};
+
+<font color=#0000ff>class</font> Stringed : <font color=#0000ff>public</font> Instrument {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>void</font> play(note) <font color=#0000ff>const</font> {
+    cout &lt;&lt; <font color=#004488>"Stringed::play"</font> &lt;&lt; endl;
+  }
+  <font color=#0000ff>const</font> <font color=#0000ff>char</font>* what() <font color=#0000ff>const</font> { <font color=#0000ff>return</font> <font color=#004488>"Stringed"</font>; }
+};
+
+<font color=#0000ff>class</font> Brass : <font color=#0000ff>public</font> Wind {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>void</font> play(note) <font color=#0000ff>const</font> {
+    cout &lt;&lt; <font color=#004488>"Brass::play"</font> &lt;&lt; endl;
+  }
+  <font color=#0000ff>const</font> <font color=#0000ff>char</font>* what() <font color=#0000ff>const</font> { <font color=#0000ff>return</font> <font color=#004488>"Brass"</font>; }
+};
+
+<font color=#0000ff>class</font> Woodwind : <font color=#0000ff>public</font> Wind {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>void</font> play(note) <font color=#0000ff>const</font> {
+    cout &lt;&lt; <font color=#004488>"Woodwind::play"</font> &lt;&lt; endl;
+  }
+  <font color=#0000ff>const</font> <font color=#0000ff>char</font>* what() <font color=#0000ff>const</font> { <font color=#0000ff>return</font> <font color=#004488>"Woodwind"</font>; }
+};
+
+<font color=#0000ff>void</font> Instrument::play(note n) <font color=#0000ff>const</font> {
+  <font color=#0000ff>if</font> (<font color=#0000ff>const</font> Woodwind* pww = 
+    <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Woodwind*&gt;(<font color=#0000ff>this</font>))
+      pww-&gt;play(n);
+  <font color=#0000ff>else</font> <font color=#0000ff>if</font> (<font color=#0000ff>const</font> Percussion* pp =
+    <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Percussion*&gt;(<font color=#0000ff>this</font>))
+      pp-&gt;play(n);
+  <font color=#0000ff>else</font> <font color=#0000ff>if</font> (<font color=#0000ff>const</font> Stringed* ps =
+    <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Stringed*&gt;(<font color=#0000ff>this</font>))
+      ps-&gt;play(n);
+  <font color=#0000ff>else</font> <font color=#0000ff>if</font> (<font color=#0000ff>const</font> Brass* pb = 
+    <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Brass*&gt;(<font color=#0000ff>this</font>))
+      pb-&gt;play(n);
+    <font color=#0000ff>else</font> <font color=#0000ff>if</font> (<font color=#0000ff>const</font> Wind* pw = 
+      <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Wind*&gt;(<font color=#0000ff>this</font>))
+        pw-&gt;play(n);
+    <font color=#0000ff>else</font>
+        cout &lt;&lt; <font color=#004488>"Instrument::play"</font> &lt;&lt; endl;
+}
+
+<font color=#0000ff>const</font> <font color=#0000ff>char</font>* Instrument::what() <font color=#0000ff>const</font> {
+  <font color=#0000ff>if</font> (<font color=#0000ff>const</font> Woodwind* pww = 
+    <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Woodwind*&gt;(<font color=#0000ff>this</font>))
+      <font color=#0000ff>return</font> pww-&gt;what();
+  <font color=#0000ff>else</font> <font color=#0000ff>if</font> (<font color=#0000ff>const</font> Percussion* pp =
+    <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Percussion*&gt;(<font color=#0000ff>this</font>))
+      <font color=#0000ff>return</font> pp-&gt;what();
+  <font color=#0000ff>else</font> <font color=#0000ff>if</font> (<font color=#0000ff>const</font> Stringed* ps =
+    <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Stringed*&gt;(<font color=#0000ff>this</font>))
+      <font color=#0000ff>return</font> ps-&gt;what();
+  <font color=#0000ff>else</font> <font color=#0000ff>if</font> (<font color=#0000ff>const</font> Brass* pb = 
+    <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Brass*&gt;(<font color=#0000ff>this</font>))
+      <font color=#0000ff>return</font> pb-&gt;what();
+  <font color=#0000ff>else</font> <font color=#0000ff>if</font> (<font color=#0000ff>const</font> Wind* pw = 
+    <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Wind*&gt;(<font color=#0000ff>this</font>))
+      <font color=#0000ff>return</font> pw-&gt;what();
+  <font color=#0000ff>else</font>
+    <font color=#0000ff>return</font> <font color=#004488>"Instrument"</font>;
+}
+
+<font color=#0000ff>void</font> play(Instrument&amp; i) {
+  cout &lt;&lt; <font color=#004488>"Playing a "</font> &lt;&lt; i.what() &lt;&lt; <font color=#004488>"... "</font>;
+  i.play(middleC);
+}
+
+<font color=#0000ff>int</font> main() {
+  Wind flute;
+  Percussion drum;
+  Stringed violin;
+  Brass flugelhorn;
+  Woodwind recorder;
+  play(flute);
+  play(drum);
+  play(violin);
+  play(flugelhorn);
+  play(recorder);
+}
+
+<font color=#009900>/* Output:
+Playing a Wind... Wind::play
+Playing a Percussion... Percussion::play
+Playing a Stringed... Stringed::play
+Playing a Brass... Brass::play
+Playing a Woodwind... Woodwind::play
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>What a mess, no? The obvious problem is that whenever you add
+a new type, you need to be sure to update the logic in both
+<B>Instrument::play(&#160;)</B> and <B>Instrument::what(&#160;)</B>. And since
+these functions must know about the derived classes (which is a Bad, Bad Thing),
+it&#146;s also necessary to reorder the class definitions. And if that
+wasn&#146;t bad enough, the order of the <B>if</B> statements in
+<B>play(&#160;)</B> and <B>what(&#160;)</B> is crucial. For example, if I had
+tested for a <B>Wind</B> before a <B>Woodwind</B>, then a <B>Woodwind</B> would
+never be caught. Long live virtual functions!!!<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>If you&#146;re wondering why the virtual destructor in
+<B>Instrument</B>, that&#146;s because a class must be polymorphic (i.e., have
+at least one virtual function) to support RTTI.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Note the use of declarations in the <B>if</B> statements. This
+feature was added to the language for the specific purpose of making
+<B>dynamic_cast</B>s more convenient. Otherwise you&#146;d have to do
+this:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>    <font color=#0000ff>const</font> Woodwind* p = <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Woodwind*&gt;(<font color=#0000ff>this</font>);
+    <font color=#0000ff>if</font> (p)
+        <font color=#0000ff>return</font> p-&gt;what();
+    <font color=#0000ff>else</font> {
+        <font color=#0000ff>const</font> Percussion* p =
+            <font color=#0000ff>dynamic_cast</font>&lt;<font color=#0000ff>const</font> Percussion*&gt;(<font color=#0000ff>this</font>);
+        <font color=#0000ff>if</font> (p)
+            <font color=#0000ff>return</font> p-&gt;what();
+...</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The scope of each declaration is the <B>if</B> statement
+alone. (Your compiler may not yet support this feature.)<BR></P></DIV>
+<A NAME="Heading342"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+15-35</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>StaticHierarchyNavigation.cpp</B> so that instead of
+using C++ RTTI you create your own RTTI via a virtual function in the base class
+called <B>whatAmI(&#160;)</B> and an <B>enum type { Circles, Squares
+};</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This technique was already illustrated in
+<B>PolymorphicSizeof.cpp</B> above (Exercise 18). All you need to do is create a
+<B>virtual</B> function <B>whatAmI( )</B>, similar to <B>mySize( )</B> in that
+exercise, which returns the appropriate enumerated value, as follows:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S15:PolymorphicWhatAmI.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Shape {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>enum</font> Id {Circles, Squares}; <font color=#009900>// The IDs</font>
+Shape() {};
+  <font color=#0000ff>virtual</font> Id whatAmI() = 0;
+};
+<font color=#0000ff>class</font> Circle : <font color=#0000ff>public</font> Shape {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>virtual</font> Id whatAmI() {
+    <font color=#0000ff>return</font> Circles;
+  }
+};
+<font color=#0000ff>class</font> Square : <font color=#0000ff>public</font> Shape {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>virtual</font> Id whatAmI() {
+    <font color=#0000ff>return</font> Squares;
+  }
+};
+
+<font color=#0000ff>int</font> main() {
+  Circle c;
+  Shape* s = &amp;c;
+
+  <font color=#0000ff>if</font>(s-&gt;whatAmI() == Shape::Circles)
+    cout &lt;&lt; <font color=#004488>"It's a circle!"</font> &lt;&lt; endl;
+  <font color=#0000ff>else</font> <font color=#0000ff>if</font>(s-&gt;whatAmI() == Shape::Squares)
+    cout &lt;&lt; <font color=#004488>"It's a square!"</font> &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+It's a circle!
+*/</font> <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Notice that when you do your own RTTI, you have to put all of
+the type IDs the base class, which doesn't feel quite right according to the
+principles of object orientation (hence the real RTTI is better).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=4><B><I>15-36</I></B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Start with <B>PointerToMemberOperator.cpp</B> from Chapter 12
+and show that polymorphism still works with pointers-to-members, even if
+<B>operator-&gt;* </B>is overloaded.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader).<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap14.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap16.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

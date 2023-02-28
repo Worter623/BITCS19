@@ -1,0 +1,525 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:45
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap02.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 2</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Intro.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap03.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 2</H1></FONT>
+<A NAME="Heading3"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+2-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Hello.cpp</B> so that it prints out your name and
+age (or shoe size, or your dog&#146;s age, if that makes you feel better).
+Compile and run the program.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The original <B>Hello.cpp</B> appeared in the text as
+follows:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>// Saying Hello with C++</font>
+#include &lt;iostream&gt; <font color=#009900>// Stream declarations</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  cout &lt;&lt; <font color=#004488>"Hello, World! I am "</font> 
+    &lt;&lt; 8 &lt;&lt; <font color=#004488>" Today!"</font> &lt;&lt; endl;
+}</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Here&#146;s my rewrite:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S02:Hello2.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  cout &lt;&lt; <font color=#004488>"Hello, World! I am Chuck Allison."</font> &lt;&lt; endl;
+  cout &lt;&lt; <font color=#004488>"I have two dogs:"</font> &lt;&lt; endl;
+  cout &lt;&lt; <font color=#004488>"Sheba, who is "</font> &lt;&lt; 5 &lt;&lt; <font color=#004488>", and"</font> &lt;&lt; endl;
+  cout &lt;&lt; <font color=#004488>"Muffy, who is 8."</font> &lt;&lt; endl;
+  cout &lt;&lt; <font color=#004488>"(I feel much better!)"</font> &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+Hello, World! I am Chuck Allison.
+I have two dogs:
+Sheba, who is 5, and
+Muffy, who is 8.
+(I feel much better!)
+*/</font> <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>I chose to have separate statements that send output to
+<B>cout</B>, but I could have printed everything in a single statement if I had
+wanted, like the example in the text does. Note that in the case of
+Sheba&#146;s age, I printed 5 as an integer, but for Muffy I included the
+numeral in the literal text. In this case it makes no difference, but when you
+print floating-point numbers that have decimals, you get 6 decimals by default.
+Bruce discusses later in the text how to control output of floating-point
+numbers.<BR></P></DIV>
+<A NAME="Heading4"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+2-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Starting with <B>Stream2.cpp </B>and <B>Numconv.cpp</B>,
+create a program that asks for the radius of a circle and prints the area of
+that circle. You can just use the &#145;<B>*</B>&#146; operator to square the
+radius.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The two programs mentioned above show how to do numeric input
+and output. The following solution to this exercise likewise uses the left-shift
+and right-shift operators for input and output, respectively.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S02:Area.cpp</font>
+<font color=#009900>//{-T} @echo run Area by hand!</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  <font color=#0000ff>const</font> <font color=#0000ff>float</font> pi = 3.141592654;
+  cout &lt;&lt; <font color=#004488>"Enter the radius: "</font>;
+  
+  <font color=#0000ff>float</font> radius;
+  cin &gt;&gt; radius;
+  cout &lt;&lt; <font color=#004488>"The area is "</font> &lt;&lt; pi * radius * radius &lt;&lt; endl;
+}
+
+<font color=#009900>/* Sample Execution:
+c:&gt;area
+Enter the radius: 12
+The area is 452.389
+*/</font> <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The <B>const</B> keyword declares that the <B>float</B>
+variable <B>pi</B> will not be changed during the execution of the program. Note
+that it is not necessary to insert a newline (via <B>endl</B>, say) after
+printing the prompt. That&#146;s because <B>cin</B> is <I>tied</I> to
+<B>cout</B>, which means that <B>cout</B> always gets flushed right before you
+read from <B>cin</B>.<BR></P></DIV>
+<A NAME="Heading5"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+2-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a program that opens a file and counts the
+whitespace-separated words in that file.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The first version opens its own source file:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S02:Words.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  ifstream f(<font color=#004488>"Words.cpp"</font>);
+  <font color=#0000ff>int</font> nwords = 0;
+  string word;
+
+  <font color=#0000ff>while</font> (f &gt;&gt; word)
+    ++nwords;
+
+  cout &lt;&lt; <font color=#004488>"Number of words = "</font> &lt;&lt; nwords &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+Number of words = 42
+*/</font> <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The <B>&lt;fstream&gt;</B> header defines classes for file IO,
+including <B>ifstream</B>, whose constructor takes a file name an argument. The
+expression <B>f &gt;&gt; word</B> extracts the next non-whitespace token from
+the file and returns the stream. When a stream appears in a boolean context,
+such as the while statement above, it evaluates to <B>true</B> until end-of-file
+reached or an error occurs.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>It turns out that on many operating systems you can take
+advantage of <I>i/o redirection</I>, which allows you to map standard input or
+output to a file on the command line. If you rewrite <B>Words.cpp</B> to read
+from <B>cin</B>, then you can read any file you want, as the following
+illustrates.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S02:Words2.cpp</font>
+<font color=#009900>//{T} &lt; Area.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  <font color=#0000ff>int</font> nwords = 0;
+  string word;
+
+  <font color=#0000ff>while</font> (cin &gt;&gt; word) {
+    ++nwords;
+  }
+
+  cout &lt;&lt; <font color=#004488>"Number of words = "</font> &lt;&lt; nwords &lt;&lt; endl;
+}
+
+<font color=#009900>/* Sample Execution:
+c:&gt;words &lt; Area.cpp
+Number of words = 41
+*/</font> <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The less-than symbol redirects standard input to come from the
+file <B>Area.cpp</B>, so that when you run the program, <B>cin</B> is hooked to
+that file. The greater-than symbol does the same for <B>cout</B>.<BR></P></DIV>
+<A NAME="Heading6"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+2-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a program that counts the occurrence of a particular
+word in a file (use the <B>string</B> class&#146; operator
+&#145;<B>==</B>&#146; to find the word).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S02:WordCount.cpp</font>
+<font color=#009900>// Counts the occurrences of a word</font>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+
+<font color=#0000ff>int</font> main(<font color=#0000ff>int</font> argc, <font color=#0000ff>char</font>* argv[]) {
+  <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+  <font color=#009900>// Process command-line arguments:</font>
+  <font color=#0000ff>if</font> (argc &lt; 3) {
+    cerr &lt;&lt; <font color=#004488>"usage: WordCount word file\n"</font>;
+    <font color=#0000ff>return</font> -1;
+  }
+  string word(argv[1]);
+  ifstream file(argv[2]);
+
+  <font color=#009900>// Count occurrences:</font>
+  <font color=#0000ff>long</font> wcount = 0;
+  string token;
+  <font color=#0000ff>while</font> (file &gt;&gt; token)
+    <font color=#0000ff>if</font> (word == token)
+      ++wcount;
+
+  <font color=#009900>// Print result:</font>
+  cout &lt;&lt; '<font color=#004488>"' &lt;&lt; word &lt;&lt; "</font>\<font color=#004488>" appeared "</font>
+       &lt;&lt; wcount &lt;&lt; <font color=#004488>" times\n"</font>;
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This program uses the <B>argc</B> and <B>argv</B> arguments to
+<B>main</B>, which represent the argument count and array of pointers to the
+arguments, respectively. If you don&#146;t provide a word to search for and a
+file to search in, you get an error message and the program quits. The
+extraction operator for input streams skips whitespace when filling a string
+object, so token takes on each such &#147;word&#148; in the file in
+succession. When run on its own text you get the following output:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#004488>"word"</font> appeared 3 times</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Notice that in this example I chose to put the <B>using</B>
+directive in <B>main</B>, instead of at file scope. In these simple examples it
+really doesn&#146;t matter where you put it, but in examples where you have
+many functions, it&#146;s sometimes important to only put the directive inside
+the functions that need it, to minimize the possibility of name clashes. Bruce
+discusses this in more detail in Chapter 4.<BR></P></DIV>
+
+<A NAME="Heading7"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+2-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Change <B>Fillvector.cpp</B> so it prints the lines
+(backwards) from last to first.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This modification to <B>FillVector.cpp</B> from the book
+requires only that you change the index to the vector from <B>i</B> to
+<B>v.size()-i-1</B>.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S02:Fillvector.cpp</font>
+<font color=#009900>// Copy an entire file into a vector of string</font>
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;vector&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  vector&lt;string&gt; v;
+  ifstream in(<font color=#004488>"Fillvector.cpp"</font>);
+  string line;
+  <font color=#0000ff>while</font>(getline(in, line))
+    v.push_back(line);
+
+  <font color=#009900>// Print backwards:</font>
+  <font color=#0000ff>int</font> nlines = v.size();
+  <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; nlines; i++) {
+    <font color=#0000ff>int</font> lineno = nlines-i-1;
+    cout &lt;&lt; lineno &lt;&lt; <font color=#004488>": "</font> &lt;&lt; v[lineno] &lt;&lt; endl;
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading8"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+2-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Change <B>Fillvector.cpp</B> so it concatenates all the
+elements in the <B>vector</B> into a single string before printing it out, but
+don&#146;t try to add line numbering.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Following the example of <B>FillString.cpp</B>, the program
+below appends each string in the vector to a string variable (<B>lines</B>),
+following each with a newline.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S02:Fillvector2.cpp</font>
+<font color=#009900>// Copy an entire file into a vector of string</font>
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;vector&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  vector&lt;string&gt; v;
+  ifstream in(<font color=#004488>"Fillvector2.cpp"</font>);
+  string line;
+  <font color=#0000ff>while</font>(getline(in, line))
+    v.push_back(line);
+  
+  <font color=#009900>// Put lines into a single string:</font>
+  string lines;
+  <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; v.size(); i++)
+    lines += v[i] + <font color=#004488>"\n"</font>;
+  cout &lt;&lt; lines;
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading9"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+2-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Display a file a line at a time, waiting for the user to press
+the &#147;Enter&#148; key after each line.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>To make this program work as advertised, it&#146;s important
+to <I>not</I> follow each display of a line with a newline character, otherwise
+the output will appear double-spaced.<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S02:FileView.cpp</font>
+<font color=#009900>// Displays a file a line at a time</font>
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  ifstream in(<font color=#004488>"FileView.cpp"</font>);
+  string line;
+  <font color=#0000ff>while</font>(getline(in, line)) {
+    cout &lt;&lt; line;  <font color=#009900>// No endl!</font>
+    cin.get();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The call to <B>cin.get(&#160;)</B> waits for you to press
+Enter and consumes a single character (the newline that results from pressing
+Enter).<BR></P></DIV>
+<A NAME="Heading10"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+2-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>vector&lt;float&gt;</B> and put 25 floating-point
+numbers into it using a <B>for</B> loop. Display the <B>vector</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S02:FloatVector.cpp</font>
+<font color=#009900>// Fills a vector of floats</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  <font color=#009900>// Fill vector:</font>
+  vector&lt;<font color=#0000ff>float</font>&gt; v;
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 25; ++i)
+    v.push_back(i + 0.5);
+
+  <font color=#009900>// Display</font>
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; v.size(); ++i) {
+    <font color=#0000ff>if</font> (i &gt; 0)
+      cout &lt;&lt; ' ';
+    cout &lt;&lt; v[i];
+  }
+  cout &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+0.5 1.5 2.5 3.5 4.5 5.5 6.5 7.5 8.5 9.5 10.5 11.5
+12.5 13.5 14.5 15.5 16.5 17.5 18.5 19.5 20.5 21.5
+22.5 23.5 24.5
+*/</font> <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>In this solution I decided to separate the numbers by spaces,
+to take up fewer lines in the output. I could have used 25 as the limit of the
+second <B>for</B> loop, but it&#146;s better to use
+<B>vector::size(&#160;)</B>, since that works no matter how many elements you
+process.<BR></P></DIV>
+<A NAME="Heading11"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+2-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create three <B>vector&lt;float&gt;</B> objects and fill the
+first two as in the previous exercise. Write a <B>for</B> loop that adds each
+corresponding element in the first two <B>vector</B>s and puts the result in the
+corresponding element of the third <B>vector</B>. Display all three
+<B>vector</B>s.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S02:FloatVector2.cpp</font>
+<font color=#009900>// Adds vectors</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  vector&lt;<font color=#0000ff>float</font>&gt; v1, v2;
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 25; ++i) {
+    v1.push_back(i);
+    v2.push_back(25-i-1);
+  }
+
+  <font color=#009900>// Form sum:</font>
+  vector&lt;<font color=#0000ff>float</font>&gt; v3;
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; v1.size(); ++i)
+    v3.push_back(v1[i] + v2[i]);
+
+  <font color=#009900>// Display:</font>
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; v1.size(); ++i) {
+    cout &lt;&lt; v1[i] &lt;&lt; <font color=#004488>" + "</font> &lt;&lt; v2[i]
+         &lt;&lt; <font color=#004488>" = "</font> &lt;&lt; v3[i] &lt;&lt; endl;
+  }
+}
+
+<font color=#009900>/* Output:
+0 + 24 = 24
+1 + 23 = 24
+2 + 22 = 24
+3 + 21 = 24
+4 + 20 = 24
+5 + 19 = 24
+6 + 18 = 24
+7 + 17 = 24
+8 + 16 = 24
+9 + 15 = 24
+10 + 14 = 24
+11 + 13 = 24
+12 + 12 = 24
+13 + 11 = 24
+14 + 10 = 24
+15 + 9 = 24
+16 + 8 = 24
+17 + 7 = 24
+18 + 6 = 24
+19 + 5 = 24
+20 + 4 = 24
+21 + 3 = 24
+22 + 2 = 24
+23 + 1 = 24
+24 + 0 = 24
+*/</font> <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>It is crucial, of course, that you use <B>push_back</B> to
+fill <B>v3</B>. Mathematically we think of the operation as:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>v3[i] = v1[i] + v2[i];  <font color=#009900>// wrong!</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>but <B>v3[i]</B> does not exist unless you make space for it,
+which is exactly what <B>push_back</B> does. If you want to use the above
+expression instead, you can &#147;size&#148; the vector with the <B>resize</B>
+method, as follows:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>  <font color=#009900>// Form sum:</font>
+  vector&lt;<font color=#0000ff>float</font>&gt; v3;
+  v3.resize(v1.size());  <font color=#009900>// pre-allocate space</font>
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; v1.size(); ++i)
+    v3[i] = v1[i] + v2[i];</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>When you call <B>resize</B> on a vector, it truncates the
+sequence if the new size is smaller, or it appends &#147;zeroes&#148;, if the
+number is larger, where &#147;zero&#148; means the appropriate value for the
+type of contained element. You can even resize vectors of strings and get empty
+strings added. Try it!<BR></P></DIV>
+<A NAME="Heading12"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+2-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>vector&lt;float&gt;</B> and put 25 numbers into it
+as in the previous exercises. Now square each number and put the result back
+into the same location in the <B>vector</B>. Display the <B>vector</B> before
+and after the multiplication.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S02:FloatVector3.cpp</font>
+<font color=#009900>// Squares a vector of floats</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  <font color=#009900>// Fill and print:</font>
+  vector&lt;<font color=#0000ff>float</font>&gt; v;
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 25; ++i)
+    v.push_back(i);
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; v.size(); ++i) {
+    <font color=#0000ff>if</font> (i &gt; 0)
+      cout &lt;&lt; ' ';
+    cout &lt;&lt; v[i];
+  }
+
+  <font color=#009900>// Square and print:</font>
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; v.size(); ++i)
+    v[i] = v[i] * v[i];
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; v.size(); ++i) {
+    <font color=#0000ff>if</font> (i &gt; 0)
+      cout &lt;&lt; ' ';
+    cout &lt;&lt; v[i];
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This might be a good time to mention a work-around for
+compilers that don&#146;t support reusing <B>for</B>-loop variables, like I did
+with <B>i</B> above. If you have such a compiler, simple define the following
+macro:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#define <font color=#0000ff>for</font> <font color=#0000ff>if</font>(0); <font color=#0000ff>else</font> <font color=#0000ff>for</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This puts all <B>for</B> statements in the <B>else</B>-part of
+an <B>if-else</B>, where the <B>if</B>-part is empty. As long as you compiler
+does proper scoping for <B>if-else</B> statements, this will allow you to reuse
+loop indices until your compiler comes up with a standards-compliant
+version.<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Intro.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap03.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

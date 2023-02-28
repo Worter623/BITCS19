@@ -1,0 +1,84 @@
+unit selectshow;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DB, ADODB, Grids, DBGrids;
+
+type
+  Tselectshowform = class(TForm)
+    MyADOq: TADOQuery;
+    ADOConnection1: TADOConnection;
+    DataSource1: TDataSource;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    DBGrid1: TDBGrid;
+    Button1: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    showplace: TEdit;
+    earlytime: TEdit;
+    latetime: TEdit;
+    moreprice: TEdit;
+    lessprice: TEdit;
+    Button2: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  selectshowform: Tselectshowform;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure Tselectshowform.Button1Click(Sender: TObject);
+begin
+  earlytime.Clear;
+  latetime.Clear;
+  moreprice.Clear;
+  lessprice.Clear;
+  showplace.Clear;
+  self.Close;
+end;
+
+procedure Tselectshowform.Button2Click(Sender: TObject);
+var
+  ssql:string;
+begin
+  ssql:='select "演出地点"=place,"演出时间"=showtime,"演出票价"=price,"总票数"=ticket,';
+  ssql:=ssql+'"余票"=case when buystatus=1 then ticket-sum(number) else ticket end,"演出名称"=title';
+  ssql:=ssql+' from shows left join sells on pid=id  ';
+  ssql:=ssql+' group by ticket,place,showtime,title,price,buystatus having 1=1 ';
+  if not ((showplace.Text='') and (earlytime.Text='') and (latetime.Text='') and (moreprice.Text='') and (lessprice.Text='')) then
+  begin
+    if showplace.Text<>'' then
+      ssql:=ssql+'and place='''+showplace.Text+''' ';
+    if earlytime.Text<>'' then
+      ssql:=ssql+'and showtime <='''+earlytime.Text+''' ';
+    if latetime.Text<>'' then
+      ssql:=ssql+'and showtime >='''+latetime.Text+''' ';
+    if lessprice.Text<>'' then
+      ssql:=ssql+'and price <='''+lessprice.Text+''' ';
+    if moreprice.Text<>'' then
+      ssql:=ssql+'and price >='''+moreprice.Text+''' ';
+  end;
+   ssql:=ssql+' order by showtime';
+   myadoq.Close;
+   myadoq.SQL.Clear;
+   myadoq.SQL.Text:=ssql;
+   myadoq.Open;
+   myadoq.First;
+end;
+
+end.

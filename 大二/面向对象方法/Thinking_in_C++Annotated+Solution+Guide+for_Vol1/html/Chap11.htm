@@ -1,0 +1,703 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:47
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap11.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 11</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap10.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap12.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 11</H1></FONT>
+<A NAME="Heading203"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Turn the &#147;bird &amp; rock&#148; code fragment at the
+beginning of this chapter into a C program (using <B>struct</B>s for the data
+types), and show that it compiles. Now try to compile it with the C++ compiler
+and see what happens.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading204"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Take the code fragments in the beginning of the section titled
+&#147;References in C++&#148; and put them into a <B>main(&#160;)</B>. Add
+statements to print output so that you can prove to yourself that references are
+like pointers that are automatically dereferenced.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading205"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program in which you try to (1) Create a reference
+that is not initialized when it is created. (2) Change a reference to refer to
+another object after it is initialized. (3) Create a NULL reference.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading206"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a function that takes a pointer argument, modifies what
+the pointer points to, and then returns the destination of the pointer as a
+reference.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading207"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with some member functions, and make that the
+object that is pointed to by the argument of Exercise 4. Make the pointer a
+<B>const</B> and make some of the member functions <B>const</B> and prove that
+you can only call the <B>const</B> member functions inside your function. Make
+the argument to your function a reference instead of a pointer.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading208"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Take the code fragments at the beginning of the section titled
+&#147;Pointer references&#148; and turn them into a program.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading209"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a function that takes an argument of a reference to a
+pointer to a pointer and modifies that argument. In <B>main(&#160;)</B>, call
+the function.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading210"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a function that takes a <B>char&amp;</B> argument and
+modifies that argument. In <B>main(&#160;)</B>, print out a <B>char</B>
+variable, call your function for that variable, and print it out again to prove
+to yourself that it has been changed. How does this affect program
+readability?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S11:CallByRef.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>void</font> nextc(<font color=#0000ff>char</font>&amp; c) {
+    <font color=#0000ff>static</font> <font color=#0000ff>char</font> letter = 'a';
+    c = letter++;
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    <font color=#0000ff>char</font> c = 'z';
+    cout &lt;&lt; <font color=#004488>"c == "</font> &lt;&lt; c &lt;&lt; endl;
+    nextc(c);
+    cout &lt;&lt; <font color=#004488>"c == "</font> &lt;&lt; c &lt;&lt; endl;
+    nextc(c);
+    cout &lt;&lt; <font color=#004488>"c == "</font> &lt;&lt; c &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+c == z
+c == a
+c == b
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>A C programmer will find it very strange indeed that <B>c</B>
+is changed in <B>main(&#160;)</B>, since a pointer wasn&#146;t passed.
+Pass-by-reference semantics have side effects and should be used sparingly. A
+good example is <B>istream::get(char&amp;c)</B>. Since stream functions return a
+reference to the stream itself so you can immediately test it for end-of-file,
+the character extracted from the input stream is stored via the reference
+argument <B>c</B>.<BR></P></DIV>
+<A NAME="Heading211"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a class that has a <B>const</B> member function and a
+non-<B>const</B> member function. Write three functions that take an object of
+that class as an argument; the first takes it by value, the second by reference,
+and the third by <B>const</B> reference. Inside the functions, try to call both
+member functions of your class and explain the results.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading212"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>(Somewhat challenging) Write a simple function that takes an
+<B>int</B> as an argument, increments the value, and returns it. In
+<B>main(&#160;)</B>, call your function. Now discover how your compiler
+generates assembly code and trace through the assembly statements so that you
+understand how arguments are passed and returned, and how local variables are
+indexed off the stack.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading213"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a function that takes as its arguments a <B>char</B>,
+<B>int</B>, <B>float</B>, and <B>double</B>. Generate assembly code with your
+compiler and find the statements that push the arguments on the stack before a
+function call.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading214"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a function that returns a <B>double</B>. Generate
+assembly code and determine how the value is returned.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading215"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>Produce assembly code for <B>PassingBigStructures.cpp</B>.
+Trace through and demystify the way your compiler generates code to pass and
+return large structures.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading216"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a simple recursive function that decrements its argument
+and returns zero if the argument becomes zero, otherwise it calls itself.
+Generate assembly code for this function and explain how the way that the
+assembly code is created by the compiler supports recursion.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading217"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-15</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write code to prove that the compiler automatically
+synthesizes a copy-constructor if you don&#146;t create one yourself. Prove
+that the synthesized copy-constructor performs a bitcopy of primitive types and
+calls the copy-constructor of user-defined types.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S11:AutoCopy.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Inner {
+    <font color=#0000ff>double</font> x;
+<font color=#0000ff>public</font>:
+    Inner(<font color=#0000ff>double</font> x) {
+        <font color=#0000ff>this</font>-&gt;x = x;
+    }
+    Inner(<font color=#0000ff>const</font> Inner&amp; i2) {
+        x = i2.x;
+        cout &lt;&lt; <font color=#004488>"Inner::Inner(const Inner&amp;)\n"</font>;
+    }
+    <font color=#0000ff>double</font> getX() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> x;
+    }
+};
+
+<font color=#0000ff>class</font> Outer {
+    Inner m;
+    <font color=#0000ff>int</font> n;
+<font color=#0000ff>public</font>:
+    Outer(<font color=#0000ff>double</font> x, <font color=#0000ff>int</font> i) : m(x), n(i) {}
+    <font color=#0000ff>void</font> print() {
+        cout &lt;&lt; '(' &lt;&lt; m.getX() &lt;&lt; ',' &lt;&lt; n &lt;&lt; <font color=#004488>")\n"</font>;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    Outer o1(10.0, 20);
+    o1.print();
+    Outer o2(o1);
+    o2.print();
+}
+
+<font color=#009900>/* Output:
+(10,20)
+Inner::Inner(const Inner&amp;)
+(10,20)
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Class <B>Outer</B> contains an instance of class <B>Inner</B>
+and an <B>int</B>, but it has no copy constructor, so the compiler will build
+one for us. Class <B>Inner</B> has a copy constructor that announces itself so
+you can see that it executes, and the subsequent call to
+<B>Outer::print(&#160;)</B> also reveals that the <B>int</B> member was copied
+correctly.<BR></P></DIV>
+<A NAME="Heading218"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-16</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a class with a copy-constructor that announces itself to
+<B>cout</B>. Now create a function that passes an object of your new class in by
+value and another one that creates a local object of your new class and returns
+it by value. Call these functions to prove to yourself that the copy-constructor
+is indeed quietly called when passing and returning objects by value. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S11:TraceCopies.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Trace {
+    <font color=#0000ff>int</font> n;
+<font color=#0000ff>public</font>:
+    Trace(<font color=#0000ff>int</font> n) {
+        cout &lt;&lt; <font color=#004488>"Trace::Trace("</font> &lt;&lt; n &lt;&lt; <font color=#004488>")\n"</font>;
+        <font color=#0000ff>this</font>-&gt;n = n;
+    }
+    Trace(<font color=#0000ff>const</font> Trace&amp; t) {
+        cout &lt;&lt; <font color=#004488>"Trace::Trace(const Trace&amp;)\n"</font>;
+        n = t.n;
+    }
+    <font color=#0000ff>int</font> getN() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> n;
+    }
+};
+
+<font color=#0000ff>void</font> f(Trace t) {
+    cout &lt;&lt; <font color=#004488>"f("</font> &lt;&lt; t.getN() &lt;&lt; <font color=#004488>")\n"</font>;
+}
+
+Trace g() {
+    Trace t(2);
+    <font color=#0000ff>return</font> t;
+}
+
+Trace h(<font color=#0000ff>int</font> n) {
+    <font color=#0000ff>return</font> n;
+}
+
+<font color=#0000ff>int</font> main() {
+    Trace t1 = 1;
+    f(t1);
+    Trace t2 = g();
+    Trace t3 = h(3);
+}
+
+<font color=#009900>/* Output:
+
+ * Compiler A:
+Trace::Trace(1)
+Trace::Trace(const Trace&amp;)
+f(1)
+Trace::Trace(2)
+Trace::Trace(const Trace&amp;)
+Trace::Trace(const Trace&amp;)
+Trace::Trace(3)
+Trace::Trace(const Trace&amp;)
+
+ * Compiler B:
+Trace::Trace(1)
+Trace::Trace(const Trace&amp;)
+f(1)
+Trace::Trace(2)
+Trace::Trace(const Trace&amp;)
+Trace::Trace(3)
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Simply define a copy constructor that announces itself.
+Remember that if you define any constructor at all (including a copy
+constructor), the compiler will not synthesize a default constructor for you, so
+I needed to define some constructor other than the copy constructor so I can
+create <B>Trace</B> objects. I chose to take an <B>int</B> argument so I can
+better trace through the hidden operations.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Compiler A performs no optimizations so you can see all the
+possible operations. The first line is the creation of <B>t1</B>, and the next
+two are the call that passes <B>t1</B> to <B>f(&#160;)</B>. The call to
+<B>g(&#160;)</B> invokes two calls to the copy constructor: one to create the
+return value, and another to initialize <B>t2</B> with that value. Notice that
+<B>h(&#160;)</B> returns a <B>Trace</B> object by value, but instead of using
+the copy constructor it uses the single-arg constructor that takes an
+<B>int</B>. That&#146;s because we&#146;re asking the compiler to create a
+<B>Trace</B> object from an <B>int</B>. The bottom line is, whenever an object
+is created, some constructor is called; which one depends on the
+context.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Compiler B is a lot smarter than Compiler A when it comes to
+creating copies.<BR></P></DIV>
+<A NAME="Heading219"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-17</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class that contains a <B>double*</B>. The constructor
+initializes the <B>double*</B> by calling <B>new double</B> and assigning a
+value to the resulting storage from the constructor argument. The destructor
+prints the value that&#146;s pointed to, assigns that value to -1, calls
+<B>delete </B>for the storage, and then sets the pointer to zero. Now create a
+function that takes an object of your class by value, and call this function in
+<B>main(&#160;)</B>. What happens? Fix the problem by writing a
+copy-constructor.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S11:ShallowCopy.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> HasPointer {
+    <font color=#0000ff>double</font>* p;
+<font color=#0000ff>public</font>:
+    HasPointer(<font color=#0000ff>double</font> x) {
+        p = <font color=#0000ff>new</font> <font color=#0000ff>double</font>(x);
+    }
+    ~HasPointer() {
+        cout &lt;&lt; <font color=#004488>"~HasPointer()\n"</font>;
+        <font color=#0000ff>delete</font> p;
+    }
+    <font color=#0000ff>void</font> print() {
+        cout &lt;&lt; *p &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>void</font> f(HasPointer hp)
+{
+    hp.print();
+}
+
+<font color=#0000ff>int</font> main() {
+    HasPointer hp(5);
+    f(hp);
+}
+
+<font color=#009900>/* Output:
+5
+~HasPointer()
+~HasPointer()
+&lt;access violation error...!!!&gt;
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>(As a side note, notice that you can use constructor syntax to
+initialize built-in types in <B>new</B> expressions, as in the constructor for
+<B>HasPointer.</B>)<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>When you call <B>f(hp)</B>, a copy of <B>hp</B> is passed to
+<B>f(&#160;)</B>, the destructor of which executes when that copy is no longer
+needed. Problem is, the destructor deletes <B>p</B>, so when the destructor runs
+again to destroy <B>hp</B> as <B>main(&#160;)</B> completes, it tries to delete
+<B>p</B> a second time! The solution is to have the compiler perform a deep copy
+of <B>HasPointer</B> objects via an appropriate copy constructor, such
+as:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE> HasPointer(<font color=#0000ff>const</font> HasPointer&amp; rhs) {
+    p = <font color=#0000ff>new</font> <font color=#0000ff>double</font>(*rhs.p);
+ }</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>As a rule, a class with a pointer member probably needs a copy
+constructor (and as you&#146;ll see in the next chapter, an appropriate
+assignment operator too).<BR></P></DIV>
+<A NAME="Heading220"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-18</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with a constructor that looks like a
+copy-constructor, but that has an extra argument with a default value. Show that
+this is still used as the copy-constructor.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S11:ExtraArgs.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> HasPointer {
+    <font color=#0000ff>double</font>* p;
+<font color=#0000ff>public</font>:
+    HasPointer(<font color=#0000ff>double</font> x) {
+        p = <font color=#0000ff>new</font> <font color=#0000ff>double</font>(x);
+    }
+    HasPointer(<font color=#0000ff>const</font> HasPointer&amp; rhs, <font color=#0000ff>bool</font> b = <font color=#0000ff>true</font>) {
+        p = <font color=#0000ff>new</font> <font color=#0000ff>double</font>(*rhs.p);
+        <font color=#0000ff>if</font> (b)
+            cout &lt;&lt; <font color=#004488>"copied a "</font> &lt;&lt; *p &lt;&lt; endl;
+    }
+    ~HasPointer() {
+        cout &lt;&lt; <font color=#004488>"~HasPointer()\n"</font>;
+        <font color=#0000ff>delete</font> p;
+    }
+    <font color=#0000ff>void</font> print() {
+        cout &lt;&lt; *p &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>void</font> f(HasPointer hp)
+{
+    hp.print();
+}
+
+<font color=#0000ff>int</font> main() {
+    HasPointer hp1(5);
+    f(hp1);
+    HasPointer hp2(hp1, <font color=#0000ff>false</font>);
+}
+
+<font color=#009900>/* Output:
+copied a 5
+5
+~HasPointer()
+~HasPointer()
+~HasPointer()
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This is just the previous exercise modified to take an
+optional second argument in its copy constructor. Notice that I don&#146;t get
+a trace for <B>hp2</B>, since I explicitly passed a <B>false</B> to the copy
+constructor.<BR></P></DIV>
+<A NAME="Heading221"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-19</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class with a copy-constructor that announces itself.
+Make a second class containing a member object of the first class, but do not
+create a copy-constructor. Show that the synthesized copy-constructor in the
+second class automatically calls the copy-constructor of the first
+class.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This was already illustrated in Exercise 15.<BR></P></DIV>
+<A NAME="Heading222"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-20</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a very simple class, and a function that returns an
+object of that class by value. Create a second function that takes a reference
+to an object of your class. Call the first function as the argument of the
+second function, and demonstrate that the second function must use a
+<B>const</B> reference as its argument.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S11:RefToTemp.cpp</font>
+<font color=#009900>//=M @echo compile RefToTemp.cpp by hand</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>class</font> Simple {
+    <font color=#0000ff>int</font> i;
+<font color=#0000ff>public</font>:
+    Simple() : i(1) {}
+    <font color=#0000ff>int</font> getI() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> i;
+    }
+    <font color=#0000ff>void</font> setI(<font color=#0000ff>int</font> n) {
+        i = n;
+    }
+};
+
+Simple f() {
+    <font color=#0000ff>return</font> Simple();
+}
+
+<font color=#0000ff>void</font> g(Simple&amp; s) {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    cout &lt;&lt; <font color=#004488>"before: "</font> &lt;&lt; s.getI() &lt;&lt; endl;
+    s.setI(2);
+    cout &lt;&lt; <font color=#004488>"after: "</font> &lt;&lt; s.getI() &lt;&lt; endl;
+}
+
+<font color=#0000ff>int</font> main() {
+    g(f());
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This should fail to compile unless you define the signature of
+g as <B>g(const Simple&amp; )</B>. The reason is that a non-<B>const</B>
+reference may alter the contents of its argument, so it needs writable storage
+connected to it. A temporary like the return from <B>f(&#160;)</B> is destroyed
+as soon as it is no longer needed (i.e., at the end of its containing
+expression), hence trying to write to such temporary storage is a mistake. Some
+compilers still allow this, unfortunately.<BR></P></DIV>
+<A NAME="Heading223"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-21</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a simple class without a copy-constructor, and a simple
+function that takes an object of that class by value. Now change your class by
+adding a <B>private </B>declaration (only) for the copy-constructor. Explain
+what happens when your function is compiled.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading224"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-22</H2></FONT>
+<DIV ALIGN="LEFT"><P>This exercise creates an alternative to using the
+copy-constructor. Create a class <B>X </B>and declare (but don&#146;t define) a
+<B>private</B> copy-constructor. Make a public <B>clone(&#160;)</B> function as
+a <B>const</B> member function that returns a copy of the object that is created
+using <B>new</B>. Now write a function that takes as an argument a <B>const
+X&amp;</B> and clones a local copy that can be modified. The drawback to this
+approach is that you are responsible for explicitly destroying the cloned object
+(using <B>delete</B>) when you&#146;re done with it.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading225"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-23</H2></FONT>
+<DIV ALIGN="LEFT"><P>Explain what&#146;s wrong with both <B>Mem.cpp</B> and
+<B>MemTest.cpp</B> from Chapter 7. Fix the problem.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading226"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-24</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class containing a <B>double</B> and a
+<B>print(&#160;)</B> function that prints the <B>double</B>. In
+<B>main(&#160;)</B>, create pointers to members for both the data member and the
+function in your class. Create an object of your class and a pointer to that
+object, and manipulate both class elements via your pointers to members, using
+both the object and the pointer to the object.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S11:MemPtr.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> HasDouble {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>double</font> x;
+    HasDouble(<font color=#0000ff>double</font> x) {
+        <font color=#0000ff>this</font>-&gt;x = x;
+    }
+    <font color=#0000ff>void</font> print() {
+        <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+        cout &lt;&lt; x &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    HasDouble h(3);
+    HasDouble* hp = &amp;h;
+    
+    <font color=#009900>// Define pointers-to-members:</font>
+    <font color=#0000ff>double</font> HasDouble::* px = &amp;HasDouble::x;
+    <font color=#0000ff>void</font> (HasDouble::*pmf)() = &amp;HasDouble::print;
+    
+    <font color=#009900>// Call via object:</font>
+    cout &lt;&lt; h.*px &lt;&lt; endl;
+    (h.*pmf)();
+    
+    <font color=#009900>// Call via pointer-to-object:</font>
+    cout &lt;&lt; hp-&gt;*px &lt;&lt; endl;
+    (hp-&gt;*pmf)();
+}
+
+<font color=#009900>/* Output:
+3
+3
+3
+3
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Things to remember:<BR></P></DIV>
+<UL>
+<LI><FONT FACE="Symbol">	</FONT>Wherever you would normally put a <B>*</B> in a
+regular pointer declaration, use <B>C::*</B> instead, where <B>C</B> is your
+class name.<LI><FONT FACE="Symbol">	</FONT>Wherever you would normally use
+<B>&amp;</B> to get a pointer, use <B>&amp;C::</B>
+instead.<LI><FONT FACE="Symbol">	</FONT>Use parentheses around the
+pointer-to-member function expression, both in the call as well as in the
+declaration.</UL><A NAME="Heading227"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-25</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class containing an array of <B>int</B>. Can you
+index through this array using a pointer to member?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Yes, you can. The declaration of the pointer is a little
+tricky, though. It has to do with the fact that pointers to arrays are different
+than pointers to objects. In the following example, <B>pa</B> is a
+pointer-to-member that refers to an array of 5 <B>int</B>s.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S11:PointerToMemArray.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>class</font> HasArray {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>enum</font> {LEN = 5};
+    <font color=#0000ff>int</font> a[LEN];
+    HasArray() {
+        <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; LEN; ++i)
+            a[i] = i;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    HasArray h;
+    <font color=#0000ff>int</font> (HasArray::* pa)[5] = &amp;HasArray::a;
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; HasArray::LEN; ++i)
+        cout &lt;&lt; (h.*pa)[i] &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+0 1 2 3 4
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>If I had defined <B>a</B> as an <B>int*</B> and allocated its
+space dynamically in the <B>HasArray</B> constructor, then the program would
+look like the following:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S11:PointerToMemArray.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+
+<font color=#0000ff>class</font> HasArray {
+    size_t siz;
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>int</font>* a;
+    HasArray(size_t siz) {
+        a = <font color=#0000ff>new</font> <font color=#0000ff>int</font>[siz];
+        <font color=#0000ff>for</font> (size_t i = 0; i &lt; siz; ++i)
+            a[i] = i;
+        <font color=#0000ff>this</font>-&gt;siz = siz;
+    }
+    ~HasArray() {
+        <font color=#0000ff>delete</font> a;
+    }
+    size_t size() <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> siz;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    HasArray h(5);
+    <font color=#0000ff>int</font>* HasArray::* pa = &amp;HasArray::a;
+    <font color=#0000ff>for</font> (size_t i = 0; i &lt; h.size(); ++i)
+        cout &lt;&lt; (h.*pa)[i] &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+0 1 2 3 4
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><A NAME="Heading228"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-26</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>PmemFunDefinition.cpp</B> by adding an overloaded
+member function <B>f(&#160;)</B> (you can determine the argument list that
+causes the overload). Now make a second pointer to member, assign it to the
+overloaded version of <B>f(&#160;)</B>, and call the function through that
+pointer. How does the overload resolution happen in this case?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading229"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-27</H2></FONT>
+<DIV ALIGN="LEFT"><P>Start with <B>FunctionTable.cpp</B> from Chapter 3. Create a
+class that contains a <B>vector</B> of pointers to functions, with
+<B>add(&#160;)</B> and <B>remove(&#160;)</B> member functions to add and remove
+pointers to functions. Add a <B>run(&#160;)</B> function that moves through the
+<B>vector</B> and calls all of the functions.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading230"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+11-28</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify the above Exercise 27 so that it works with pointers to
+member functions instead.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap10.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap12.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

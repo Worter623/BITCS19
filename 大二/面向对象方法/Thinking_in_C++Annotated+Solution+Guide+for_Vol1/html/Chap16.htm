@@ -1,0 +1,840 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:48
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap16.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 16</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap15.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+    
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 16</H1></FONT>
+<DIV ALIGN="LEFT"><P>(Exercises 16-1 through 16-4 are left to the
+reader.)<BR></P></DIV>
+<A NAME="Heading344"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>Implement the inheritance hierarchy in the <B>OShape</B>
+diagram in this chapter.<BR></P></DIV>
+<A NAME="Heading345"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify the result of Exercise 1 from Chapter 15 to use the 
+<B>Stack</B> and <B>iterator </B>in <B>TStack2.h</B> instead of an array of
+<B>Shape</B> pointers. Add destructors to the class hierarchy so you can see
+that the <B>Shape</B> objects are destroyed when the <B>Stack</B> goes out of
+scope.<BR></P></DIV>
+<A NAME="Heading346"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>TPStash.h</B> so that the increment value used by
+<B>inflate(&#160;)</B> can be changed throughout the lifetime of a particular
+container object.<BR></P></DIV>
+<A NAME="Heading347"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>TPStash.h </B>so that the increment value used by
+<B>inflate(&#160;)</B> automatically resizes itself to reduce the number of
+times it needs to be called. For example, each time it is called it could double
+the increment value for use in the next call. Demonstrate this functionality by
+reporting whenever an <B>inflate(&#160;)</B> is called, and write test code in
+<B>main(&#160;)</B>.<BR></P></DIV>
+<A NAME="Heading348"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Templatize the <B>fibonacci(&#160;)</B> function on the type
+of value that it produces (so it can produce <B>long</B>, <B>float</B>, etc.
+instead of just <B>int</B>).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S16:fibonacci.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>template</font>&lt;<font color=#0000ff>typename</font> T&gt;
+T Fib(<font color=#0000ff>const</font> T&amp; n) {
+    <font color=#0000ff>const</font> size_t sz = 100;
+    <font color=#0000ff>static</font> T f[sz];         <font color=#009900>// Initialized to zero</font>
+    
+    <font color=#0000ff>static</font> size_t nFilled = 2;
+    f[0] = f[1] = 1;        <font color=#009900>// T must be convertible from int</font>
+    size_t int_n = size_t(n);
+    assert(n &lt; sz);
+    
+    <font color=#0000ff>while</font> (int_n &gt;= nFilled) {
+        cout &lt;&lt; <font color=#004488>"growing to "</font> &lt;&lt; n &lt;&lt; <font color=#004488>" (sizeof(T) == "</font>
+             &lt;&lt; <font color=#0000ff>sizeof</font>(T) &lt;&lt; <font color=#004488>")\n"</font>;
+        f[nFilled] = f[nFilled-1] + f[nFilled-2];
+        nFilled++;
+    }
+    <font color=#0000ff>return</font> f[int_n];
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>for</font> (<font color=#0000ff>double</font> x = 8.0; x &gt;= 0.0; --x)
+        cout &lt;&lt; <font color=#004488>"Fib("</font> &lt;&lt; x &lt;&lt; <font color=#004488>") == "</font> &lt;&lt; Fib(x) &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+growing to 8 (sizeof(T) == 8)
+growing to 8 (sizeof(T) == 8)
+growing to 8 (sizeof(T) == 8)
+growing to 8 (sizeof(T) == 8)
+growing to 8 (sizeof(T) == 8)
+growing to 8 (sizeof(T) == 8)
+growing to 8 (sizeof(T) == 8)
+Fib(8) == 34
+Fib(7) == 21
+Fib(6) == 13
+Fib(5) == 8
+Fib(4) == 5
+Fib(3) == 3
+Fib(2) == 2
+Fib(1) == 1
+Fib(0) == 1
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>For this problem to make sense the type <B>T</B> needs to be
+convertible to a <B>size_t</B>, since it&#146;s used as an index. It must also
+be convertible <B>from</B> <B>int</B>, so we can assign 0 and 1 as the seed
+values. I inserted a trace statement in the loop that extends the array so you
+can see when it executes, and included the <B>sizeof(T)</B> so you can verify
+that a <B>double</B> is being used in this example. I printed it backwards so
+the array is grown only once (iterating 7 times, of course). To be able to
+templatize only on the return value (not the index argument), you need a special
+template feature discussed in Volume 2 (&#147;explicit function template
+specialization&#148;). To whet your appetite for fancy template features,
+here&#146;s how it&#146;s done:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S16:SpecializeReturn.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>template</font>&lt;<font color=#0000ff>typename</font> T&gt;
+T Fib(size_t n) {
+    <font color=#0000ff>const</font> size_t sz = 100;
+    <font color=#0000ff>static</font> T f[sz];         <font color=#009900>// Initialized to zero</font>
+    
+    <font color=#0000ff>static</font> size_t nFilled = 2;
+    f[0] = f[1] = 1;        <font color=#009900>// T must be convertible from int</font>
+    assert(n &lt; sz);
+    
+    <font color=#0000ff>while</font> (n &gt;= nFilled) {
+        cout &lt;&lt; <font color=#004488>"growing to "</font> &lt;&lt; n &lt;&lt; <font color=#004488>" (sizeof(T) == "</font>
+             &lt;&lt; <font color=#0000ff>sizeof</font>(T) &lt;&lt; <font color=#004488>")\n"</font>;
+        f[nFilled] = f[nFilled-1] + f[nFilled-2];
+        nFilled++;
+    }
+    <font color=#0000ff>return</font> f[n];
+}
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>for</font> (size_t x = 9; x &gt; 0; --x)
+        cout &lt;&lt; <font color=#004488>"Fib("</font> &lt;&lt; x &lt;&lt; <font color=#004488>") == "</font> &lt;&lt; Fib&lt;<font color=#0000ff>double</font>&gt;(x-1)
+             &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+(same as before)
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The appearance of <B>&lt;double&gt;</B> in the call to
+<B>Fib</B> is needed because <B>Fib</B>&#146;s argument is fixed (i.e., not a
+template argument), and there is therefore no other way to tell the compiler
+which version to instantiate. I had to change the loop limits too since a
+<B>size_t</B> can&#146;t go negative and I wanted to include 0.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Exercises 16-6 through 16-10 are left to the
+reader.)<BR></P></DIV>
+<A NAME="Heading349"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Using the Standard C++ Library <B>vector</B> as an underlying
+implementation, create a <B>Set</B> template class that accepts only one of each
+type of object that you put into it. Make a nested <B>iterator </B>class that
+supports the &#147;end sentinel&#148; concept in this chapter. Write test code
+for your <B>Set</B> in <B>main(&#160;)</B>, and then substitute the Standard C++
+Library <B>set</B> template to verify that the behavior is correct.<BR></P></DIV>
+<A NAME="Heading350"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>AutoCounter.h</B> so that it can be used as a member
+object inside any class whose creation and destruction you want to trace. Add a
+<B>string</B> member to hold the name of the class. Test this tool inside a
+class of your own.<BR></P></DIV>
+<A NAME="Heading351"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a version of <B>OwnerStack.h</B> that uses a Standard
+C++ Library <B>vector</B> as its underlying implementation. You may need to look
+up some of the member functions of <B>vector</B> in order to do this (or just
+look at the <B>&lt;vector&gt;</B> header file).<BR></P></DIV>
+<A NAME="Heading352"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>ValueStack.h</B> so that it dynamically expands as
+you <B>push(&#160;)</B> more objects and it runs out of space. Change
+<B>ValueStackTest.cpp</B> to test the new functionality.<BR></P></DIV>
+<A NAME="Heading353"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repeat Exercise 9 but use a Standard C++ Library <B>vector</B>
+as the internal implementation of the <B>ValueStack</B>. Notice how much easier
+this is. <BR></P></DIV>
+<A NAME="Heading354"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>ValueStackTest.cpp</B> so that it uses an STL
+<B>vector</B> instead of a <B>Stack</B> in <B>main(&#160;)</B>. Notice the
+run-time behavior: Does the <B>vector</B> automatically create a bunch of
+default objects when it is created?<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The files <B>SelfCounter.h</B>, <B>SelfCounter.cpp</B>,
+<B>ValueStack.h</B> and <B>require.h</B> are copied here from the book (so that
+the code extractor will conveniently put them into the solutions
+directory):<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S16:SelfCounter.h</font>
+<font color=#009900>// From Thinking in C++, 2nd Edition, Volume 1</font>
+#ifndef SELFCOUNTER_H
+#define SELFCOUNTER_H
+#include <font color=#004488>"ValueStack.h"</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>class</font> SelfCounter {
+  <font color=#0000ff>static</font> <font color=#0000ff>int</font> counter;
+  <font color=#0000ff>int</font> id;
+<font color=#0000ff>public</font>:
+  SelfCounter() : id(counter++) {
+    std::cout &lt;&lt; <font color=#004488>"Created: "</font> &lt;&lt; id &lt;&lt; std::endl;
+  }
+  SelfCounter(<font color=#0000ff>const</font> SelfCounter&amp; rv) : id(rv.id){
+    std::cout &lt;&lt; <font color=#004488>"Copied: "</font> &lt;&lt; id &lt;&lt; std::endl;
+  }
+  SelfCounter <font color=#0000ff>operator</font>=(<font color=#0000ff>const</font> SelfCounter&amp; rv) {
+    std::cout &lt;&lt; <font color=#004488>"Assigned "</font> &lt;&lt; rv.id &lt;&lt; <font color=#004488>" to "</font> 
+              &lt;&lt; id &lt;&lt; std::endl;
+    <font color=#0000ff>return</font> *<font color=#0000ff>this</font>;
+  }
+  ~SelfCounter() {
+    std::cout &lt;&lt; <font color=#004488>"Destroyed: "</font>&lt;&lt; id &lt;&lt; std::endl;
+  }
+  <font color=#0000ff>friend</font> std::ostream&amp; <font color=#0000ff>operator</font>&lt;&lt;( 
+    std::ostream&amp; os, <font color=#0000ff>const</font> SelfCounter&amp; sc){
+    <font color=#0000ff>return</font> os &lt;&lt; <font color=#004488>"SelfCounter: "</font> &lt;&lt; sc.id;
+  }
+};
+#endif <font color=#009900>// SELFCOUNTER_H ///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S16:SelfCounter.cpp {O}</font>
+<font color=#009900>// From Thinking in C++, 2nd Edition, Volume 1</font>
+#include <font color=#004488>"SelfCounter.h"</font>
+<font color=#0000ff>int</font> SelfCounter::counter = 0; <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S16:ValueStack.h</font>
+<font color=#009900>// From Thinking in C++, 2nd Edition, Volume 1</font>
+<font color=#009900>// Holding objects by value in a Stack</font>
+#ifndef VALUESTACK_H
+#define VALUESTACK_H
+#include <font color=#004488>"..</font><font color=#004488>/require.h"</font>
+
+<font color=#0000ff>template</font>&lt;<font color=#0000ff>class</font> T, <font color=#0000ff>int</font> ssize = 100&gt;
+<font color=#0000ff>class</font> Stack {
+  <font color=#009900>// Default constructor performs object</font>
+  <font color=#009900>// initialization for each element in array:</font>
+  T stack[ssize];
+  <font color=#0000ff>int</font> top;
+<font color=#0000ff>public</font>:
+  Stack() : top(0) {}
+  <font color=#009900>// Copy-constructor copies object into array:</font>
+  <font color=#0000ff>void</font> push(<font color=#0000ff>const</font> T&amp; x) {
+    require(top &lt; ssize, <font color=#004488>"Too many push()es"</font>);
+    stack[top++] = x;
+  }
+  T peek() <font color=#0000ff>const</font> { <font color=#0000ff>return</font> stack[top]; }
+  <font color=#009900>// Object still exists when you pop it; </font>
+  <font color=#009900>// it just isn't available anymore:</font>
+  T pop() {
+    require(top &gt; 0, <font color=#004488>"Too many pop()s"</font>);
+    <font color=#0000ff>return</font> stack[--top];
+  }
+};
+#endif <font color=#009900>// VALUESTACK_H ///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: :require.h</font>
+<font color=#009900>// From Thinking in C++, 2nd Edition, Volume 1</font>
+<font color=#009900>// Test for error conditions in programs</font>
+<font color=#009900>// Local "using namespace std" for old compilers</font>
+#ifndef REQUIRE_H
+#define REQUIRE_H
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+
+<font color=#0000ff>inline</font> <font color=#0000ff>void</font> require(<font color=#0000ff>bool</font> requirement, 
+  <font color=#0000ff>const</font> std::string&amp; msg = <font color=#004488>"Requirement failed"</font>){
+  <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+  <font color=#0000ff>if</font> (!requirement) {
+    fputs(msg.c_str(), stderr);
+    fputs(<font color=#004488>"\n"</font>, stderr);
+    exit(1);
+  }
+}
+
+<font color=#0000ff>inline</font> <font color=#0000ff>void</font> requireArgs(<font color=#0000ff>int</font> argc, <font color=#0000ff>int</font> args, 
+  <font color=#0000ff>const</font> std::string&amp; msg = 
+    <font color=#004488>"Must use %d arguments"</font>) {
+  <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+   <font color=#0000ff>if</font> (argc != args + 1) {
+     fprintf(stderr, msg.c_str(), args);
+     fputs(<font color=#004488>"\n"</font>, stderr);
+     exit(1);
+   }
+}
+
+<font color=#0000ff>inline</font> <font color=#0000ff>void</font> requireMinArgs(<font color=#0000ff>int</font> argc, <font color=#0000ff>int</font> minArgs,
+  <font color=#0000ff>const</font> std::string&amp; msg =
+    <font color=#004488>"Must use at least %d arguments"</font>) {
+  <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+  <font color=#0000ff>if</font>(argc &lt; minArgs + 1) {
+    fprintf(stderr, msg.c_str(), minArgs);
+    fputs(<font color=#004488>"\n"</font>, stderr);
+    exit(1);
+  }
+}
+  
+<font color=#0000ff>inline</font> <font color=#0000ff>void</font> assure(std::ifstream&amp; in, 
+  <font color=#0000ff>const</font> std::string&amp; filename = <font color=#004488>""</font>) {
+  <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+  <font color=#0000ff>if</font>(!in) {
+    fprintf(stderr, <font color=#004488>"Could not open file %s\n"</font>,
+      filename.c_str());
+    exit(1);
+  }
+}
+
+<font color=#0000ff>inline</font> <font color=#0000ff>void</font> assure(std::ofstream&amp; out, 
+  <font color=#0000ff>const</font> std::string&amp; filename = <font color=#004488>""</font>) {
+  <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+  <font color=#0000ff>if</font>(!out) {
+    fprintf(stderr, <font color=#004488>"Could not open file %s\n"</font>, 
+      filename.c_str());
+    exit(1);
+  }
+}
+#endif <font color=#009900>// REQUIRE_H ///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Here is the solution:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S16:VectorTest.cpp</font>
+<font color=#009900>//{L} SelfCounter</font>
+#include <font color=#004488>"SelfCounter.h"</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>int</font> main() {
+  vector&lt;SelfCounter&gt; sc;
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 0; i &lt; 10; i++)
+    sc.push_back(SelfCounter());
+  <font color=#009900>// OK to peek(), result is a temporary:</font>
+  <font color=#0000ff>for</font> (<font color=#0000ff>int</font> k = 0; k &lt; 10; k++) {
+      cout &lt;&lt; sc.back() &lt;&lt; endl;
+      sc.pop_back();
+  }
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The output from the old and new versions of this program is
+too large to include here, but the important lesson is that the <B>vector</B>
+does NOT create needless elements like <B>ValueStack</B> did. It makes a copy of
+everything you insert into it, but it only adds the elements you explicitly
+request. <B>ValueStack</B> always fills out to the size indicated by its second
+template argument (100 in the book).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Exercises 16-12 through 16-17 are left to the
+reader.)<BR></P></DIV>
+<A NAME="Heading355"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>TStack2.h </B>so that it uses a Standard C++ Library
+<B>vector</B> as its underlying implementation. Make sure that you don&#146;t
+change the interface, so that <B>TStack2Test.cpp</B> works unchanged.<BR></P></DIV>
+<A NAME="Heading356"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repeat Exercise 12 using a Standard C++ Library <B>stack</B>
+instead of a <B>vector</B> (you may need to look up information about the
+<B>stack</B>, or hunt through the <B>&lt;stack&gt; </B>header file).<BR></P></DIV>
+<A NAME="Heading357"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>TPStash2.h</B> so that it uses a Standard C++
+Library <B>vector</B> as its underlying implementation. Make sure that you
+don&#146;t change the interface, so that <B>TPStash2Test.cpp</B> works
+unchanged.<BR></P></DIV>
+<A NAME="Heading358"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-15</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>IterIntStack.cpp</B>, modify <B>IntStackIter</B> to give
+it an &#147;end sentinel&#148; constructor, and add <B>operator==</B> and
+<B>operator!=</B>. In <B>main(&#160;)</B>, use an iterator to move through the
+elements of the container until you reach the end sentinel.<BR></P></DIV>
+<A NAME="Heading359"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-16</H2></FONT>
+<DIV ALIGN="LEFT"><P>Using <B>TStack2.h</B>, <B>TPStash2.h</B>, and <B>Shape.h</B>,
+instantiate <B>Stack</B> and <B>PStash</B> containers for <B>Shape*</B>, fill
+them each with an assortment of upcast <B>Shape</B> pointers, then use iterators
+to move through each container and call <B>draw(&#160;)</B> for each
+object.<BR></P></DIV>
+<A NAME="Heading360"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-17</H2></FONT>
+<DIV ALIGN="LEFT"><P>Templatize the <B>Int</B> class in <B>TPStash2Test.cpp</B> so
+that it holds any type of object (feel free to change the name of the class to
+something more appropriate).<BR></P></DIV>
+<A NAME="Heading361"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-18</H2></FONT>
+<DIV ALIGN="LEFT"><P>Templatize the <B>IntArray</B> class in
+<B>IostreamOperatorOverloading.cpp</B> from Chapter 12, templatizing both the
+type of object that is contained and the size of the internal array.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S16:TemplateArray.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+#include &lt;cassert&gt;
+#include &lt;cstring&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>template</font>&lt;<font color=#0000ff>typename</font> T, size_t N&gt;
+<font color=#0000ff>class</font> Array {
+    T i[N];
+<font color=#0000ff>public</font>:
+    Array() { memset(i, 0, N*<font color=#0000ff>sizeof</font>(*i)); }
+    T&amp; <font color=#0000ff>operator</font>[](<font color=#0000ff>int</font> x) {
+        assert(x &gt;= 0 &amp;&amp; x &lt; N);
+        <font color=#0000ff>return</font> i[x];
+    }
+    <font color=#009900>// Inline member template definitions</font>
+    <font color=#009900>// (Tends to work with most compilers):</font>
+    <font color=#0000ff>friend</font> ostream&amp; 
+    <font color=#0000ff>operator</font>&lt;&lt;(ostream&amp; os, <font color=#0000ff>const</font> Array&lt;T, N&gt;&amp; ia) {
+        <font color=#0000ff>for</font> (<font color=#0000ff>int</font> j = 0; j &lt; N; j++) {
+            os &lt;&lt; ia.i[j];
+            <font color=#0000ff>if</font> (j != N - 1)
+                os &lt;&lt; <font color=#004488>", "</font>;
+        }
+        os &lt;&lt; endl;
+        <font color=#0000ff>return</font> os;
+    }
+    
+    <font color=#0000ff>friend</font> istream&amp; 
+    <font color=#0000ff>operator</font>&gt;&gt;(istream&amp; is, Array&lt;T, N&gt;&amp; ia){
+        <font color=#0000ff>for</font>(<font color=#0000ff>int</font> j = 0; j &lt; N; j++)
+            is &gt;&gt; ia.i[j];
+        <font color=#0000ff>return</font> is;
+    }
+    
+    <font color=#009900>// Declarations for out-of line definitions</font>
+    <font color=#009900>// (Which don't work with many compilers):</font>
+    #<font color=#0000ff>if</font> 0
+    <font color=#0000ff>friend</font> ostream&amp;
+    <font color=#0000ff>operator</font>&lt;&lt;(ostream&amp; os, <font color=#0000ff>const</font> Array&lt;T, N&gt;&amp; ia);
+    <font color=#0000ff>friend</font> istream&amp;
+    <font color=#0000ff>operator</font>&gt;&gt;(istream&amp; is, Array&lt;T, N&gt;&amp; ia);
+    #endif
+};
+
+<font color=#009900>// Out of line definitions:</font>
+#<font color=#0000ff>if</font> 0
+<font color=#0000ff>template</font>&lt;<font color=#0000ff>typename</font> T, size_t N&gt;
+ostream&amp; 
+<font color=#0000ff>operator</font>&lt;&lt;(ostream&amp; os, <font color=#0000ff>const</font> Array&lt;T, N&gt;&amp; ia) {
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> j = 0; j &lt; N; j++) {
+        os &lt;&lt; ia.i[j];
+        <font color=#0000ff>if</font> (j != N - 1)
+            os &lt;&lt; <font color=#004488>", "</font>;
+    }
+    os &lt;&lt; endl;
+    <font color=#0000ff>return</font> os;
+}
+
+<font color=#0000ff>template</font>&lt;<font color=#0000ff>typename</font> T, size_t N&gt;
+istream&amp; <font color=#0000ff>operator</font>&gt;&gt;(istream&amp; is, Array&lt;T, N&gt;&amp; ia){
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> j = 0; j &lt; N; j++)
+        is &gt;&gt; ia.i[j];
+    <font color=#0000ff>return</font> is;
+}
+#endif 
+
+<font color=#0000ff>int</font> main() {
+    stringstream input(<font color=#004488>"47 34 56 92 103"</font>);
+    Array&lt;<font color=#0000ff>int</font>, 5&gt; I;
+    input &gt;&gt; I;
+    I[4] = -1; <font color=#009900>// Use overloaded operator[]</font>
+    cout &lt;&lt; I;
+}
+ 
+<font color=#009900>/* Output:
+47, 34, 56, 92, -1
+*/</font> 
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>You need to use the template type parameter (<B>T</B>)
+wherever the type of the array element applies. Remember also that the name of
+the class is <B>Array&lt;T,&#160;N&gt;</B>, not <B>Array</B>. <B>Array</B> is a
+template name. So wherever a class name is required, use the former. Be aware
+that some compilers don&#146;t handle friend functions of templates very well,
+so you may have to define the bodies for those functions (the stream operators
+above) <I>in situ</I>, as is shown above. I&#146;ve also included the commented
+out-of-line definitions so that you can see the proper form.<BR></P></DIV>
+<A NAME="Heading362"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-19</H2></FONT>
+<DIV ALIGN="LEFT"><P>Turn <B>ObjContainer </B>in<B> NestedSmartPointer.cpp</B> from
+Chapter 12 into a template. Test it with two different classes.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S16:NestedSmartPointerTemplate.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cassert&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Obj {
+  <font color=#0000ff>static</font> <font color=#0000ff>int</font> i, j;
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>void</font> f() { cout &lt;&lt; i++ &lt;&lt; endl; }
+  <font color=#0000ff>void</font> g() { cout &lt;&lt; j++ &lt;&lt; endl; }
+};
+
+<font color=#009900>// Static member definitions:</font>
+<font color=#0000ff>int</font> Obj::i = 47;
+<font color=#0000ff>int</font> Obj::j = 11;
+
+<font color=#009900>// Container:</font>
+<font color=#0000ff>template</font>&lt;<font color=#0000ff>typename</font> T&gt;
+<font color=#0000ff>class</font> ObjContainer {
+  vector&lt;T*&gt; a;
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>void</font> add(T* obj) { a.push_back(obj); }
+  <font color=#0000ff>class</font> SmartPointer;
+  <font color=#0000ff>friend</font> <font color=#0000ff>class</font> SmartPointer;
+  <font color=#0000ff>class</font> SmartPointer {
+    ObjContainer&amp; oc;
+    <font color=#0000ff>unsigned</font> <font color=#0000ff>int</font> index;
+  <font color=#0000ff>public</font>:
+    SmartPointer(ObjContainer&amp; objc) : oc(objc) {
+      index = 0;
+    }
+    <font color=#009900>// Return value indicates end of list:</font>
+    <font color=#0000ff>bool</font> <font color=#0000ff>operator</font>++() { <font color=#009900>// Prefix</font>
+      <font color=#0000ff>if</font>(index &gt;= oc.a.size()) <font color=#0000ff>return</font> <font color=#0000ff>false</font>;
+      <font color=#0000ff>if</font>(oc.a[++index] == 0) <font color=#0000ff>return</font> <font color=#0000ff>false</font>;
+      <font color=#0000ff>return</font> <font color=#0000ff>true</font>;
+    }
+    <font color=#0000ff>bool</font> <font color=#0000ff>operator</font>++(<font color=#0000ff>int</font>) { <font color=#009900>// Postfix</font>
+      <font color=#0000ff>return</font> <font color=#0000ff>operator</font>++(); <font color=#009900>// Use prefix version</font>
+    }
+    T* <font color=#0000ff>operator</font>-&gt;() <font color=#0000ff>const</font> {
+      assert(oc.a[index] != 0);
+      <font color=#0000ff>return</font> oc.a[index];
+    }
+  };
+  <font color=#009900>// Function to produce a smart pointer that </font>
+  <font color=#009900>// points to the beginning of the ObjContainer:</font>
+  SmartPointer begin() { 
+    <font color=#0000ff>return</font> SmartPointer(*<font color=#0000ff>this</font>);
+  }
+};
+
+<font color=#0000ff>int</font> main() {
+  <font color=#0000ff>const</font> <font color=#0000ff>int</font> sz = 10;
+  Obj o[sz];
+  ObjContainer&lt;Obj&gt; oc;
+  <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; sz; i++)
+    oc.add(&amp;o[i]); <font color=#009900>// Fill it up</font>
+  ObjContainer&lt;Obj&gt;::SmartPointer sp = oc.begin();
+  <font color=#0000ff>do</font> {
+    sp-&gt;f(); <font color=#009900>// Pointer dereference operator call</font>
+    sp-&gt;g();
+  } <font color=#0000ff>while</font>(++sp);
+}
+
+<font color=#009900>/* Output:
+47
+11
+48
+12
+49
+13
+50
+14
+51
+15
+52
+16
+53
+17
+54
+18
+55
+19
+56
+20
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Again, you just need to replace the name of the contained type
+to the template parameter, and add the desired type to the definition in
+<B>main(&#160;)</B>. Don&#146;t forget to use template syntax in the
+declaration of <B>sp</B> in <B>main(&#160;)</B> also.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Exercises 16-20 through 16-21 are left to the
+reader.)<BR></P></DIV>
+<A NAME="Heading363"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-20</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>C15:OStack.h</B> and <B>C15:OStackTest.cpp</B> by
+templatizing<A NAME="C"></A> <B>class Stack</B> so that it automatically
+multiply inherits from the contained class and from <B>Object</B>. The generated
+<B>Stack</B> should accept and produce only pointers of the contained
+type.<BR></P></DIV>
+<A NAME="Heading364"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-21</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repeat Exercise 20 using <B>vector</B> instead of
+<B>Stack</B>.<BR></P></DIV>
+<A NAME="Heading365"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-22</H2></FONT>
+<DIV ALIGN="LEFT"><P>Inherit a class <B>StringVector</B> from
+<B>vector&lt;void*&gt;</B> and redefine the <B>push_back(&#160;)</B> and
+<B>operator[]</B> member functions to accept and produce only <B>string*
+</B>(and perform the proper casting). Now create a template that will
+automatically make a container class to do the same thing for pointers to any
+type. This technique is often used to reduce code bloat from too many template
+instantiations.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S16:SafeVector.cpp</font>
+<font color=#009900>//{-msc} VC++ only fakes reinterpret_cast</font>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>template</font>&lt;<font color=#0000ff>typename</font> T&gt;
+<font color=#0000ff>class</font> SafeVector : <font color=#0000ff>private</font> vector&lt;<font color=#0000ff>void</font>*&gt; {
+<font color=#0000ff>public</font>:
+    <font color=#0000ff>void</font> push_back(T* s) {
+        vector&lt;<font color=#0000ff>void</font>*&gt;::push_back(s);
+    }
+    T*&amp; <font color=#0000ff>operator</font>[](size_t n) {
+        <font color=#0000ff>return</font> <font color=#0000ff>reinterpret_cast</font>&lt;T*&gt;
+                               (vector&lt;<font color=#0000ff>void</font>*&gt;::<font color=#0000ff>operator</font>[](n));
+    }
+    <font color=#0000ff>const</font> T* <font color=#0000ff>operator</font>[](size_t n) <font color=#0000ff>const</font> {
+        <font color=#0000ff>return</font> <font color=#0000ff>reinterpret_cast</font>&lt;<font color=#0000ff>const</font> T*&gt; 
+                               (vector&lt;<font color=#0000ff>void</font>*&gt;::<font color=#0000ff>operator</font>[](n));
+    }
+    <font color=#0000ff>using</font> vector&lt;<font color=#0000ff>void</font>*&gt;::size;
+};
+
+<font color=#0000ff>int</font> main() {
+    SafeVector&lt;string&gt; v;
+    string s1(<font color=#004488>"live"</font>), s2(<font color=#004488>"long"</font>), s3(<font color=#004488>"and"</font>), s4(<font color=#004488>"prosper"</font>);
+    v.push_back(&amp;s1);
+    v.push_back(&amp;s2);
+    v.push_back(&amp;s3);
+    v.push_back(&amp;s4);
+    <font color=#0000ff>for</font> (size_t i = 0; i &lt; v.size(); ++i)
+        cout &lt;&lt; *v[i] &lt;&lt; endl;
+        
+    <font color=#009900>// void* p = &amp;s1;</font>
+    <font color=#009900>// v.push_back(p);  // error!!!</font>
+}
+
+<font color=#009900>/* Outout:
+live
+long
+and
+prosper
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The class <B>StringVector</B> was implemented in Chapter 14
+exercise 9. The class template above is made by just changing string to the
+template parameter <B>T</B>. See the explanation in Chapter 14 for why private
+inheritance is used. This technique reduces code bloat because the template
+instantiations are small wrappers for just one instantiation of
+<B>SafeArray&lt;void*&gt;</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Exercises 16-23 through 16-25 are left to the
+reader.)<BR></P></DIV>
+<A NAME="Heading366"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-23</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>TPStash2.h</B>, add and test an <B>operator-</B> to
+<B>PStash::iterator</B>, following the logic of <B>operator+</B>.<BR></P></DIV>
+<A NAME="Heading367"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-24</H2></FONT>
+<DIV ALIGN="LEFT"><P>In <B>Drawing.cpp</B>, add and test a function template to
+call <B>erase(&#160;)</B> member functions.<BR></P></DIV>
+<A NAME="Heading368"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-25</H2></FONT>
+<DIV ALIGN="LEFT"><P>(Advanced) Modify the <B>Stack</B> class in <B>TStack2.h</B>
+to allow full granularity of ownership: Add a flag to each link indicating
+whether that link owns the object it points to, and support this information in
+the <B>push(&#160;)</B> function and destructor. Add member functions to read
+and change the ownership for each link.<BR></P></DIV>
+<A NAME="Heading369"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+16-26</H2></FONT>
+<DIV ALIGN="LEFT"><P> (Advanced) Modify <B>PointerToMemberOperator.cpp</B> from
+Chapter 12 so that the <B>FunctionObject</B> and <B>operator-&gt;*</B> are
+templatized to work with any return type (for <B>operator-&gt;*</B>,
+you&#146;ll have to use <I>member templates</I>, described in Volume 2). Add
+and test support for zero, one and two arguments in <B>Dog</B> member
+functions.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S16:PointerToMemberOperatorTemplate.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>class</font> Dog {
+<font color=#0000ff>public</font>:
+  <font color=#0000ff>int</font> run() <font color=#0000ff>const</font> { 
+    cout &lt;&lt; <font color=#004488>"run\n"</font>;  
+    <font color=#0000ff>return</font> 0; 
+  }
+  <font color=#0000ff>int</font> eat(<font color=#0000ff>int</font> i) <font color=#0000ff>const</font> { 
+     cout &lt;&lt; <font color=#004488>"eat\n"</font>;  
+     <font color=#0000ff>return</font> i; 
+  }
+  <font color=#0000ff>int</font> sleep(<font color=#0000ff>int</font> i, <font color=#0000ff>int</font> j) <font color=#0000ff>const</font> { 
+    cout &lt;&lt; <font color=#004488>"ZZZ\n"</font>; 
+    <font color=#0000ff>return</font> i+j; 
+  }
+  <font color=#0000ff>typedef</font> <font color=#0000ff>int</font> (Dog::*PMF0)() <font color=#0000ff>const</font>;
+  <font color=#0000ff>typedef</font> <font color=#0000ff>int</font> (Dog::*PMF1)(<font color=#0000ff>int</font>) <font color=#0000ff>const</font>;
+  <font color=#0000ff>typedef</font> <font color=#0000ff>int</font> (Dog::*PMF2)(<font color=#0000ff>int</font>, <font color=#0000ff>int</font>) <font color=#0000ff>const</font>;
+  <font color=#009900>// operator-&gt;* must return an object </font>
+  <font color=#009900>// that has an operator():</font>
+  <font color=#0000ff>template</font>&lt;<font color=#0000ff>typename</font> PMF&gt;
+  <font color=#0000ff>class</font> FunctionObject {
+    Dog* ptr;
+    PMF pmem;
+  <font color=#0000ff>public</font>:
+    <font color=#009900>// Save the object pointer and member pointer</font>
+    FunctionObject(Dog* wp, PMF pmf) 
+      : ptr(wp), pmem(pmf) { 
+      cout &lt;&lt; <font color=#004488>"FunctionObject constructor\n"</font>;
+    }
+    <font color=#009900>// Make the call using the object pointer</font>
+    <font color=#009900>// and member pointer</font>
+    <font color=#0000ff>int</font> <font color=#0000ff>operator</font>()() <font color=#0000ff>const</font> {
+      cout &lt;&lt; <font color=#004488>"FunctionObject::operator()\n"</font>;
+      <font color=#0000ff>return</font> (ptr-&gt;*pmem)(); <font color=#009900>// Make the call</font>
+    }
+    <font color=#0000ff>int</font> <font color=#0000ff>operator</font>()(<font color=#0000ff>int</font> i) <font color=#0000ff>const</font> {
+      cout &lt;&lt; <font color=#004488>"FunctionObject::operator(int)\n"</font>;
+      <font color=#0000ff>return</font> (ptr-&gt;*pmem)(i); <font color=#009900>// Make the call</font>
+    }
+    <font color=#0000ff>int</font> <font color=#0000ff>operator</font>()(<font color=#0000ff>int</font> i, <font color=#0000ff>int</font> j) <font color=#0000ff>const</font> {
+      cout &lt;&lt; <font color=#004488>"FunctionObject::operator(int, int)\n"</font>;
+      <font color=#0000ff>return</font> (ptr-&gt;*pmem)(i, j); <font color=#009900>// Make the call</font>
+    }
+  };
+  
+  <font color=#0000ff>template</font>&lt;<font color=#0000ff>typename</font> PMF&gt;
+  FunctionObject&lt;PMF&gt; <font color=#0000ff>operator</font>-&gt;*(PMF pmf) { 
+    cout &lt;&lt; <font color=#004488>"operator-&gt;*"</font> &lt;&lt; endl;
+    <font color=#0000ff>return</font> FunctionObject&lt;PMF&gt;(<font color=#0000ff>this</font>, pmf);
+  }
+};
+ 
+<font color=#0000ff>int</font> main() {
+  Dog w;
+  Dog::PMF0 pmf0 = &amp;Dog::run;
+  cout &lt;&lt; (w-&gt;*pmf0)() &lt;&lt; endl;
+  Dog::PMF1 pmf1 = &amp;Dog::eat;
+  cout &lt;&lt; (w-&gt;*pmf1)(2) &lt;&lt; endl;
+  Dog::PMF2 pmf2 = &amp;Dog::sleep;
+  cout &lt;&lt; (w-&gt;*pmf2)(3, 4) &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output: 
+operator-&gt;*
+FunctionObject constructor
+FunctionObject::operator()
+run
+0
+operator-&gt;*
+FunctionObject constructor
+FunctionObject::operator(int)
+eat
+2
+operator-&gt;*
+FunctionObject constructor
+FunctionObject::operator(int, int)
+ZZZ
+7
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Templatize both <B>FunctionObject</B> and
+<B>Dog::operator-&gt;*(&#160;)</B> on the type of pointer-to-member-function it
+will receive. The compiler infers the type when it is invoked in
+<B>main(&#160;)</B>. The definition of <B>Dog::Operator-&gt;*(&#160;)</B> is a
+member function template, i.e., a function template defined within a class (not
+all compilers support this feature). There is still a little bit of tedium here
+&#150; you still have to provide the different <B>typedef</B>s for the
+different types of member function pointers. But at least you don&#146;t have
+to write different <B>FunctionObject</B> classes. Viva templates! <BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap15.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+    
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

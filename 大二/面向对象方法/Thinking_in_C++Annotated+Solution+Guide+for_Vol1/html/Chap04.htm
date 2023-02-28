@@ -1,0 +1,652 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:45
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Chap04.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Chapter 4</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap03.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap05.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Chapter 4</H1></FONT>
+<A NAME="Heading51"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-1</H2></FONT>
+<DIV ALIGN="LEFT"><P>In the Standard C library, the function <B>puts(&#160;)</B>
+prints a <B>char</B> array to the console (so you can say <B>puts("hello")</B>).
+Write a C program that uses <B>puts(&#160;) </B>but does not include
+<B>&lt;stdio.h&gt; </B>or otherwise declare the function. Compile this program
+with your C compiler. (Some C++ compilers are not distinct from their C
+compilers; in this case you may need to discover a command-line flag that forces
+a C compilation.) Now compile it with the C++ compiler and note the
+difference.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading52"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-2</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>struct</B> declaration with a single member
+function, then create a definition for that member function. Create an object of
+your new data type, and call the member function.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(see the next exercise)<BR></P></DIV>
+<A NAME="Heading53"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-3</H2></FONT>
+<DIV ALIGN="LEFT"><P>Change your solution to Exercise 2 so the <B>struct</B> is
+declared in a properly &#147;guarded&#148; header file, with the definition in
+one <B>cpp</B> file and your <B>main(&#160;)</B> in another.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S04:MyStruct.h</font>
+#ifndef MYSTRUCT_H
+#define MYSTRUCT_H
+
+<font color=#0000ff>struct</font> MyStruct {
+    <font color=#0000ff>void</font> f();
+};
+
+#endif <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S04:MyStruct.cpp {O}</font>
+#include <font color=#004488>"MyStruct.h"</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>void</font> MyStruct::f() {
+    cout &lt;&lt; <font color=#004488>"MyStruct::f\n"</font>; 
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S04:Exercise3.cpp</font>
+<font color=#009900>//{L} MyStruct</font>
+#include <font color=#004488>"MyStruct.h"</font>
+
+<font color=#0000ff>int</font> main() {
+    MyStruct m;
+    m.f();
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The <B>#ifndef</B> statement in <B>MyStruct.h</B> guarantees
+that the file will not be included more than once in any compilation, which
+isn&#146;t an issue here, but in large projects it&#146;s not unusual for
+header files to be logically included multiple times. The defined preprocessor
+operator provides an alternate means of checking for defined preprocessor
+symbols, as follows:<BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#<font color=#0000ff>if</font> !defined(MYSTRUCT_H) </PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This form allows multiple conditions to be tested with logical
+connectives such as <B>|| </B>and <B>&amp;&amp;</B>.<BR></P></DIV>
+<A NAME="Heading54"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-4</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>struct</B> with a single <B>int</B> data member,
+and two global functions, each of which takes a pointer to that <B>struct</B>.
+The first function has a second <B>int</B> argument and sets the
+<B>struct</B>&#146;s <B>int</B> to the argument value, the second displays the
+<B>int</B> from the <B>struct</B>. Test the functions. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(see the next exercise...)<BR></P></DIV>
+<A NAME="Heading55"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-5</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repeat Exercise 4 but move the functions so they are member
+functions of the <B>struct</B>, and test again.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S04:GetSet.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>struct</font> HasInt {
+    <font color=#0000ff>int</font> x;
+    <font color=#0000ff>void</font> setInt(<font color=#0000ff>int</font> newX) {
+        x = newX;
+    }
+    <font color=#0000ff>int</font> getInt() {
+        <font color=#0000ff>return</font> x;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    HasInt h;
+    h.setInt(5);
+    cout &lt;&lt; h.getInt() &lt;&lt; endl; <font color=#009900>// 5</font>
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>It is very common for a class to have such get- and
+set-members like this one does. In this example I could have separated the class
+definition and the member function implementation like I did in exercise number
+3 above, but I didn&#146;t for two reasons: 1) I&#146;m lazy, and 2) I wanted
+to remind you that when you define member function bodies <I>in situ</I> like
+this (i.e., inside the class definition), they are implicitly <B>inline</B>
+functions.<BR></P></DIV>
+<A NAME="Heading56"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-6</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a class that (redundantly) performs data member
+selection and a member function call using the <B>this</B> keyword (which refers
+to the address of the current object).<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S04:UsesThis.cpp</font>
+#include &lt;iostream&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>struct</font> HasInt {
+    <font color=#0000ff>int</font> x;
+    <font color=#0000ff>void</font> setInt(<font color=#0000ff>int</font> x) {
+        <font color=#0000ff>this</font>-&gt;x = x;
+    }
+    <font color=#0000ff>int</font> getInt() {
+        <font color=#0000ff>return</font> <font color=#0000ff>this</font>-&gt;x;
+    }
+    <font color=#0000ff>void</font> display() {
+        cout &lt;&lt; <font color=#0000ff>this</font>-&gt;getInt() &lt;&lt; endl;
+    }
+};
+
+<font color=#0000ff>int</font> main() {
+    HasInt h;
+    h.setInt(5);
+    h.display(); <font color=#009900>// 5</font>
+}
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>This is a variation on the previous exercise. The use of this
+is actually necessary in <B>HasInt::setInt</B> to disambiguate the parameter
+<B>x</B> from the member <B>x</B>.<BR></P></DIV>
+<A NAME="Heading57"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-7</H2></FONT>
+<DIV ALIGN="LEFT"><P>Make a <B>Stash</B> that holds <B>double</B>s. Fill it with 25
+<B>double</B> values, then print them out to the console.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading58"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-8</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repeat Exercise 7 with <B>Stack</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading59"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-9</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a file containing a function <B>f(&#160;)</B> that
+takes an <B>int</B> argument and prints it to the console using the
+<B>printf(&#160;)</B> function in <B>&lt;stdio.h&gt;</B> by saying:
+<B>printf(&#147;%d\n&#148;, i)</B> in which<B> i</B> is the <B>int</B> you
+wish to print. Create a separate file containing <B>main(&#160;)</B>, and in
+this file declare <B>f(&#160;)</B> to take a <B>float</B> argument. Call
+<B>f(&#160;)</B> from inside <B>main(&#160;)</B>. Try to compile and link your
+program with the C++ compiler and see what happens. Now compile and link the
+program using the C compiler, and see what happens when it runs. Explain the
+behavior.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This exercise illustrates <I>type-safe linkage</I>. In C++
+function name are decorated (aka mangled) to include information about their
+arguments. The consequence is that the name the linker sees is actually quite
+different than what you see. For example, <B>f(int)</B> might appear to the
+linker as <B>f_F1i</B> (a function taking one int), say, and <B>f(double)</B> as
+<B>f_F1d</B>. Since the names are distinct, you get a linker error. In C the
+names are the same, allowing you to call <B>f(double)</B> with an <B>int</B>,
+which is an error.<BR></P></DIV>
+<A NAME="Heading60"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-10</H2></FONT>
+<DIV ALIGN="LEFT"><P>Find out how to produce assembly language from your C and C++
+compilers. Write a function in C and a <B>struct</B> with a single member
+function in C++. Produce assembly language from each and find the function names
+that are produced by your C function and your C++ member function, so you can
+see what sort of name decoration occurs inside the compiler.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>For <B>f(int)</B> one compiler generated the name
+<B>?f@@YAXH@Z</B>, and <B>?f@@YAXN@Z</B> for <B>f(double)</B>. Go
+figure.<BR></P></DIV>
+<A NAME="Heading61"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-11</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program with conditionally-compiled code in
+<B>main(&#160;)</B>, so that when a preprocessor value is defined one message is
+printed, but when it is not defined another message is printed. Compile this
+code experimenting with a <B>#define</B> within the program, then discover the
+way your compiler takes preprocessor definitions on the command line and
+experiment with that.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading62"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-12</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program that uses <B>assert(&#160;)</B> with an
+argument that is always false (zero) to see what happens when you run it. Now
+compile it with <B>#define NDEBUG</B> and run it again to see the
+difference.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading63"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-13</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create an abstract data type that represents a videotape in a
+video rental store. Try to consider all the data and operations that may be
+necessary for the <B>Video </B>type to work well within the video rental
+management system. Include a <B>print(&#160;)</B> member function that displays
+information about the <B>Video</B>. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading64"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-14</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>Stack</B> object to hold the <B>Video</B> objects
+from Exercise 13. Create several <B>Video</B> objects, store them in the
+<B>Stack</B>, then display them using <B>Video::print(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading65"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-15</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a program that prints out all the sizes for the
+fundamental data types on your computer using <B>sizeof(&#160;)</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S04:Sizeof.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    cout &lt;&lt; <font color=#0000ff>sizeof</font>(<font color=#0000ff>char</font>) &lt;&lt; endl;
+    cout &lt;&lt; <font color=#0000ff>sizeof</font>(<font color=#0000ff>short</font>) &lt;&lt; endl;
+    cout &lt;&lt; <font color=#0000ff>sizeof</font>(<font color=#0000ff>int</font>) &lt;&lt; endl;
+    cout &lt;&lt; <font color=#0000ff>sizeof</font>(<font color=#0000ff>long</font>) &lt;&lt; endl;
+    cout &lt;&lt; <font color=#0000ff>sizeof</font>(<font color=#0000ff>float</font>) &lt;&lt; endl;
+    cout &lt;&lt; <font color=#0000ff>sizeof</font>(<font color=#0000ff>double</font>) &lt;&lt; endl;
+    cout &lt;&lt; <font color=#0000ff>sizeof</font>(<font color=#0000ff>long</font> <font color=#0000ff>double</font>) &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+1
+2
+4
+4
+4
+8
+8
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>As you can see above, this particular (32-bit) compiler uses
+the same size for <B>int</B> and <B>long</B>, and for <B>double</B> and <B>long
+double</B>. Another compiler I have uses 10 bytes for a <B>long double</B>,
+giving greater precision for numeric calculations.<BR></P></DIV>
+<A NAME="Heading66"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-16</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify <B>Stash</B> to use a <B>vector&lt;char&gt;</B> as its
+underlying data structure.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading67"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-17</H2></FONT>
+<DIV ALIGN="LEFT"><P>Dynamically create pieces of storage of the following types,
+using <B>new</B>: <B>int</B>, <B>long</B>, an array of 100 <B>char</B>s, an
+array of 100 <B>float</B>s. Print the addresses of these and then free the
+storage using <B>delete</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S04:Storage.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+    <font color=#0000ff>int</font>* p_int = <font color=#0000ff>new</font> <font color=#0000ff>int</font>;
+    <font color=#0000ff>long</font>* p_long = <font color=#0000ff>new</font> <font color=#0000ff>long</font>;
+    <font color=#0000ff>char</font>* p_chars = <font color=#0000ff>new</font> <font color=#0000ff>char</font>[100];
+    <font color=#0000ff>float</font>* p_floats = <font color=#0000ff>new</font> <font color=#0000ff>float</font>[100];
+    
+    cout &lt;&lt; <font color=#004488>"p_int == "</font> &lt;&lt; p_int &lt;&lt; endl;
+    cout &lt;&lt; <font color=#004488>"p_long == "</font> &lt;&lt; p_long &lt;&lt; endl;
+    cout &lt;&lt; <font color=#004488>"p_chars == "</font> &lt;&lt; <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>void</font>*&gt;(p_chars) &lt;&lt; endl;
+    cout &lt;&lt; <font color=#004488>"p_floats == "</font> &lt;&lt; p_floats &lt;&lt; endl;
+    
+    <font color=#0000ff>delete</font> p_int;
+    <font color=#0000ff>delete</font> p_long;
+    <font color=#0000ff>delete</font> [] p_chars;
+    <font color=#0000ff>delete</font> [] p_floats;
+}
+
+<font color=#009900>/* Output:
+// Compiler A:
+p_int == 00673384
+p_long == 00673394
+p_chars == 006733A4
+p_floats == 0067340C
+// Compiler B:
+p_int == 00770950
+p_long == 00770940
+p_chars == 007708D0
+p_floats == 00770630
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The <B>static_cast</B> above is necessary because the output
+stream insertion operator is overloaded to treat a <B>char*</B> as a
+null-terminated string. All other pointers have their addresses printed out in
+hexadecimal. Don&#146;t forget to use the brackets with <B>delete</B> for
+arrays. Notice that the way a compiler allocates things on the stack is its
+business &#150; don&#146;t count on any common behavior across
+platforms.<BR></P></DIV>
+<A NAME="Heading68"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-18</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a function that takes a <B>char* </B>argument. Using
+<B>new</B>, dynamically allocate an array of <B>char </B>that is the size of the
+<B>char</B> array that&#146;s passed to the function. Using array indexing,
+copy the characters from the argument to the dynamically allocated array
+(don&#146;t forget the null terminator) and return the pointer to the copy. In
+your <B>main(&#160;)</B>, test the function by passing a static quoted character
+array, then take the result of that and pass it back into the function. Print
+both strings and both pointers so you can see they are different storage. Using
+<B>delete</B>, clean up all the dynamic storage.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S04:StringCopy.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;cstddef&gt; <font color=#009900>// For size_t</font>
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>char</font>* copy(<font color=#0000ff>char</font>* s1) {
+    size_t len = strlen(s1);
+    <font color=#0000ff>char</font>* s2 = <font color=#0000ff>new</font> <font color=#0000ff>char</font>[len + 1];
+    strcpy(s2, s1);
+    <font color=#0000ff>return</font> s2;
+}
+    
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>char</font>* first = <font color=#004488>"Read my lips"</font>;
+    <font color=#0000ff>char</font>* second = copy(first);
+    cout &lt;&lt; <font color=#004488>"first == \"</font><font color=#004488>" &lt;&lt; first &lt;&lt; "</font>\<font color=#004488>" at "</font>
+         &lt;&lt; <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>void</font>*&gt;(first) &lt;&lt; endl;
+    cout &lt;&lt; <font color=#004488>"second == \"</font><font color=#004488>" &lt;&lt; second &lt;&lt; "</font>\<font color=#004488>" at "</font>
+         &lt;&lt; <font color=#0000ff>static_cast</font>&lt;<font color=#0000ff>void</font>*&gt;(second) &lt;&lt; endl;
+    <font color=#0000ff>delete</font> [] second;
+}
+
+<font color=#009900>/* Output:
+first == "Read my lips" at 0041914C
+second == "Read my lips" at 00673384
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The <B>copy</B> function above uses two library functions
+defined in <B>&lt;cstring&gt;</B>: <B>strlen</B> to determine the length of the
+incoming string, and <B>strcpy</B> to copy one string to another (including the
+null terminator). <B>size_t</B> is an unsigned integer type (usually <B>unsigned
+int</B>) defined in various places, including <B>&lt;iostream&gt;</B>, and is
+the return type of <B>strlen</B>. See the previous exercise for an explanation
+of the casts used.<BR></P></DIV>
+<A NAME="Heading69"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-19</H2></FONT>
+<DIV ALIGN="LEFT"><P>Show an example of a structure declared within another
+structure (a <I>nested structure</I>). Declare data members in both
+<B>struct</B>s, and declare and define member functions in both <B>struct</B>s.
+Write a <B>main(&#160;)</B> that tests your new types.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S04:Nested.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>struct</font> Outer {
+    <font color=#0000ff>int</font> o;
+    <font color=#0000ff>void</font> setO(<font color=#0000ff>int</font> n) {
+        o = n;
+    }
+    <font color=#0000ff>int</font> getO() {
+        <font color=#0000ff>return</font> o;
+    }
+    <font color=#0000ff>struct</font> Inner {
+        <font color=#0000ff>int</font> i;
+        <font color=#0000ff>void</font> setI(<font color=#0000ff>int</font> n) {
+            i = n;
+        }
+        <font color=#0000ff>int</font> getI() {
+            <font color=#0000ff>return</font> i;
+        }
+    };
+};
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    
+    Outer o;
+    o.setO(1);
+    cout &lt;&lt; o.getO() &lt;&lt; endl;
+    
+    Outer::Inner i;
+    i.setI(2);
+    cout &lt;&lt; i.getI() &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+1
+2
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>Declaring a <B>struct</B> within a <B>struct</B> places the
+inner in the scope of the outer. For this reason I have to use the expression
+<B>Outer::Inner</B> above. Nesting structures in this fashion shows an ownership
+relationship between types and also minimizes the chance of name conflict in the
+global namespace.<BR></P></DIV>
+<A NAME="Heading70"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-20</H2></FONT>
+<DIV ALIGN="LEFT"><P>How big is a structure? Write a piece of code that prints the
+size of various structures. Create structures that have data members only and
+ones that have data members and function members. Then create a structure that
+has no members at all. Print out the sizes of all these. Explain the reason for
+the result of the structure with no data members at all.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S04:StructSize.cpp</font>
+#include &lt;iostream&gt;
+
+<font color=#0000ff>struct</font> DataOnly {
+    <font color=#0000ff>int</font> x;
+};
+
+<font color=#0000ff>struct</font> Both {
+    <font color=#0000ff>int</font> x;
+    <font color=#0000ff>void</font> setX(<font color=#0000ff>int</font>);
+    <font color=#0000ff>int</font> getX();
+};
+
+<font color=#0000ff>struct</font> Nothing {
+};
+
+<font color=#0000ff>int</font> main() {
+    <font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+    cout &lt;&lt; <font color=#0000ff>sizeof</font>(DataOnly) &lt;&lt; endl;
+    cout &lt;&lt; <font color=#0000ff>sizeof</font>(Both) &lt;&lt; endl;
+    cout &lt;&lt; <font color=#0000ff>sizeof</font>(Nothing) &lt;&lt; endl;
+}
+
+<font color=#009900>/* Output:
+4
+4
+1
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>As you can see in this program, the presence of a
+(non-virtual) member function does not affect the size of a <B>struct</B>.
+(NOTE: this is only true for classes with no <B>virtual</B> functions &#150;
+see Chapter 15). The standard requires all <B>struct</B>s to have non-zero size,
+even if they have no members. This is so that distinct objects of any type will
+have distinct memory addresses.<BR></P></DIV>
+<A NAME="Heading71"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-21</H2></FONT>
+<DIV ALIGN="LEFT"><P>C++ automatically creates the equivalent of a <B>typedef</B>
+for <B>struct</B>s, as you&#146;ve seen in this chapter. It also does this for
+enumerations and unions. Write a small program that demonstrates this.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading72"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-22</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>Stack</B> that holds <B>Stash</B>es. Each
+<B>Stash</B> will hold five lines from an input file. Create the <B>Stash</B>es
+using <B>new</B>. Read a file into your <B>Stack</B>, then reprint it in its
+original form by extracting it from the <B>Stack</B>. <BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading73"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-23</H2></FONT>
+<DIV ALIGN="LEFT"><P>Modify Exercise 22 so that you create a <B>struct</B> that
+encapsulates the <B>Stack</B> of <B>Stash</B>es. The user should only add and
+get lines via member functions, but under the covers the <B>struct </B>happens
+to use a <B>Stack</B> of <B>Stash</B>es.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading74"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-24</H2></FONT>
+<DIV ALIGN="LEFT"><P>Create a <B>struct</B> that holds an <B>int</B> and a pointer
+to another instance of the same <B>struct</B>. Write a function that takes the
+address of one of these <B>struct</B>s and an <B>int</B> indicating the length
+of the list you want created. This function will make a whole chain of these
+<B>struct</B>s (a <I>linked list</I>), starting from the argument (the
+<I>head</I> of the list), with each one pointing to the next. Make the new
+<B>struct</B>s using <B>new</B>, and put the count (which object number this is)
+in the <B>int</B>. In the last <B>struct </B>in the list, put a zero value in
+the pointer to indicate that it&#146;s the end. Write a second function that
+takes the head of your list and moves through to the end, printing out both the
+pointer value and the <B>int</B> value for each one.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<A NAME="Heading75"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-25</H2></FONT>
+<DIV ALIGN="LEFT"><P>Repeat Exercise 24, but put the functions inside a
+<B>struct</B> instead of using &#147;raw&#148; <B>struct</B>s and
+functions.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Arial" SIZE=5><B>Solution:</B></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: S04:LinkedList.cpp</font>
+#include &lt;iostream&gt;
+#include &lt;cassert&gt;
+<font color=#0000ff>using</font> <font color=#0000ff>namespace</font> std;
+
+<font color=#0000ff>struct</font> Node {
+    <font color=#0000ff>int</font> val;
+    Node* next;
+};
+
+<font color=#0000ff>void</font> create(Node* head, <font color=#0000ff>int</font> howMany) {
+    assert(head);
+    Node* p1 = head;
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> i = 1; i &lt; howMany; ++i) {
+        Node* p2 = <font color=#0000ff>new</font> Node;
+        p2-&gt;val = i;
+        p1-&gt;next = p2;
+        p1 = p2;
+    }
+    p1-&gt;next = 0;
+}
+
+<font color=#0000ff>void</font> display(Node* node) {
+    assert(node);
+    <font color=#0000ff>while</font> (node) {
+        cout &lt;&lt; node-&gt;val &lt;&lt; <font color=#004488>" (at "</font> &lt;&lt; node &lt;&lt; <font color=#004488>")\n"</font>;
+        node = node-&gt;next;
+    }
+}
+
+<font color=#0000ff>void</font> cleanup(Node* node) {
+    <font color=#0000ff>if</font> (node) {
+        cleanup(node-&gt;next);
+        cout &lt;&lt; <font color=#004488>"deleting Node at "</font> &lt;&lt; node &lt;&lt; endl;
+        <font color=#0000ff>delete</font> node;
+    }
+}
+
+<font color=#0000ff>int</font> main() {
+    Node* head = <font color=#0000ff>new</font> Node;
+    head-&gt;val = 0;
+    create(head, 10);
+    display(head);
+    cleanup(head);
+}
+
+<font color=#009900>/* Output:
+0 (at 00770950)
+1 (at 00770940)
+2 (at 00770930)
+3 (at 00770920)
+4 (at 00770910)
+5 (at 00770900)
+6 (at 007708F0)
+7 (at 007708E0)
+8 (at 007708D0)
+9 (at 007707C0)
+deleting Node at 007707C0
+deleting Node at 007708D0
+deleting Node at 007708E0
+deleting Node at 007708F0
+deleting Node at 00770900
+deleting Node at 00770910
+deleting Node at 00770920
+deleting Node at 00770930
+deleting Node at 00770940
+deleting Node at 00770950
+*/</font>
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P>The loop in <B>create(&#160;)</B> starts at 1 since I&#146;m
+assuming the head node to be the 0-th node. Inside the loop, <B>p2-next</B> is
+uninitialized, but it gets set (as <B>p1</B>) on the next iteration, and the
+last one (outside the loop) is set to 0 (the null pointer), marking the end of
+the list.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The <B>cleanup(&#160;)</B> function frees all the heap memory
+by recursively traversing the list until it hits the null pointer, then deletes
+each node as it traces back up the call stack. It is crucial in this version of
+<B>main(&#160;)</B> that the head node was also allocated from the heap.
+Otherwise I could just call <B>cleanup(head-&gt;next)</B> to ignore that node
+and deallocate the rest.<BR></P></DIV>
+<A NAME="Heading76"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+4-26</H2></FONT>
+<DIV ALIGN="LEFT"><P>Write a function that takes two <B>int</B> arguments,
+<B>rows</B> and <B>columns</B>. This function returns a pointer to a dynamically
+allocated two-dimensional array of <B>float</B>. As a hint, the first call to
+<B>new</B> is: <B>new float[rows][]</B>. This must be followed by multiple calls
+to <B>new</B> in order to create all the storage for the <B>rows</B>. Write a
+second function that takes this &#147;matrix&#148; and frees the storage using
+<B>delete</B>. Now convert the code into a <B>struct</B> called
+<B>matrix</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>(Left to the reader)<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Chap03.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap05.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

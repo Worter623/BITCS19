@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:C:\temp\TICSolutions\html\TICSolutions.rtf
+Application Directory:C:\ProgTools\rtf2html\
+Subject:
+Author:Chuck Allison
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:06/27/2002
+Translation Time:15:51:45
+Translation Platform:Win32
+Number of Output files:17
+This File:C:\temp\TICSolutions\html\Intro.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Introduction</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  <big>Annotated Solution Guide</big><br>
+  <small>Revision 1.0</small><br>
+  for Thinking in C++, 2nd edition, Volume 1</FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Chuck Allison<br>&copy;2001 MindView, Inc. All Rights Reserved.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap02.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Introduction</H1></FONT>
+<DIV ALIGN="LEFT"><P>This is the <I>Annotated Solution Guide</I> for the exercises
+in <I>Thinking in C++, 2<SUP>nd</SUP> Edition, Volume 1</I>. The book was
+written by Bruce Eckel and the solution guide was written by Chuck Allison. This
+solution guide may be purchased at
+<A HREF="http://www.mindview.net/Books/TICPP/Solutions/">http://www.mindview.net/Books/TICPP/Solutions/</A>.
+<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This guide contains solutions for selected exercises, leaving
+some exercises for the reader. You can find an online list of the exercises that
+have been solved at
+<A HREF="http://www.mindview.net/Books/TICPP/Solutions/SolnList">http://www.mindview.net/Books/TICPP/Solutions/SolnList</A>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>This guide is distributed as a zip file containing a set of
+HTML files in the subdirectory labeled <B>html</B>, and a source-code tree in
+the subdirectory <B>code</B>.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><B>Linux/Unix Users</B>: you must unzip the file using
+Info-Zip, which can be found for various platforms at
+<A HREF="http://www.info-zip.org">http://www.info-zip.org</A> or
+<A HREF="http://www.ibiblio.org/pub/packages/TeX/tools/info-zip/">http://www.ibiblio.org/pub/packages/TeX/tools/info-zip/</A>.
+This tool often comes pre-installed on Linux distributions. When you unzip the
+package, you must use the <B>&#150;a</B> option to correct for the difference
+between DOS and Unix newlines, like this:<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><B>unzip &#150;a TICSolutions.zip</B><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>In the zip file that you received upon purchasing this
+package, you will find a source-code directory tree that includes all the code
+listings shown here, along with <B>makefile</B>s to build all the listings using
+compilers from Gnu (g++), Borland, Microsoft or EDG (Edison Design Group). To
+build the listings, you must first find and install an appropriate <B>make</B>
+program. Borland comes with a <B>make</B>, as does Cygwin which runs the g++
+compiler under Windows &#150; see
+<A HREF="http://www.Cygwin.com">www.Cygwin.com</A>. Information about GNU
+<B>make</B> is at
+<A HREF="http://www.gnu.org/software/make/make.html">http://www.gnu.org/software/make/make.html</A>
+and you can get a pre-compiled DOS/Windows version of GNU <B>make</B> at
+<A HREF="ftp://ftp.simtel.net/pub/simtelnet/gnu/djgpp/v2gnu/mak3791b.zip">ftp://ftp.simtel.net/pub/simtelnet/gnu/djgpp/v2gnu/mak3791b.zip</A>.
+<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Once you have a <B>make</B> program installed, you can move to
+the &#145;code&#146; directory and type one of the following:<BR></P></DIV>
+<DIV ALIGN="LEFT"><P><B>make borland</B><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><B>make g++295</B><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><B>make g++3</B><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><B>make microsoft</B><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><B>make edg</B><BR></P></DIV>
+<DIV ALIGN="LEFT"><P>&#145;g++295&#146; is for Gnu C++ version 2.95, and
+&#145;g++3&#146; is for Gnu C++ version 3.0; it is presumed you are running
+these compilers under Unix, Linux or Cygwin (see
+<A HREF="http://www.Cygwin.com">http://www.Cygwin.com</A>). If you are using a
+different compiler you can look at the <B>makefile</B> in the &#145;code&#146;
+directory to see how to modify it to use your own compiler by providing the
+appropriate command-line flags.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>The Microsoft Visual C++ compiler, although popular, is a
+relatively poor implementation of ISO C++, and so some of the correct C++ files
+in this solution guide will not compile with that compiler. You can see which
+files these are by looking for the &#145;<B>//{-msc}</B>&#146; tags in the
+listings and in the document. The makefiles have been created to exclude those
+files when you run <B>make microsoft</B> so the whole process will run to
+completion without errors.<BR></P></DIV>
+<DIV ALIGN="LEFT"><P>Please note that this document is <I>not</I> freeware and so
+cannot be posted, resold or given away. It is copyrighted and sold only from the
+site <A HREF="http://www.BruceEckel.com">www.BruceEckel.com</A>. You can find
+copyright information in the file <B>CopyRight.txt</B> in the root directory of
+the unzipped document.<BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+     [ <a href="Chap02.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:06/27/2002</P></DIV>
+
+</BODY>
+
+</HTML>

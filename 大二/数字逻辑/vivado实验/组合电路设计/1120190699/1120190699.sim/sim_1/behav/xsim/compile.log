@@ -1,0 +1,23 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sqrt
+INFO: [VRFC 10-2458] undeclared symbol inva, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:29]
+INFO: [VRFC 10-2458] undeclared symbol invb, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:29]
+INFO: [VRFC 10-2458] undeclared symbol invc, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:29]
+INFO: [VRFC 10-2458] undeclared symbol invd, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:29]
+INFO: [VRFC 10-2458] undeclared symbol y_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:32]
+INFO: [VRFC 10-2458] undeclared symbol u1_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:33]
+INFO: [VRFC 10-2458] undeclared symbol invu1_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:35]
+INFO: [VRFC 10-2458] undeclared symbol invy_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:36]
+INFO: [VRFC 10-2458] undeclared symbol u2_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:38]
+INFO: [VRFC 10-2458] undeclared symbol u3_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:39]
+INFO: [VRFC 10-2458] undeclared symbol u4_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:40]
+INFO: [VRFC 10-2458] undeclared symbol u5_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:44]
+INFO: [VRFC 10-2458] undeclared symbol u6_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:45]
+INFO: [VRFC 10-2458] undeclared symbol u7_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:46]
+INFO: [VRFC 10-2458] undeclared symbol u8_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:47]
+INFO: [VRFC 10-2458] undeclared symbol invu8, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:48]
+INFO: [VRFC 10-2458] undeclared symbol u9_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:52]
+INFO: [VRFC 10-2458] undeclared symbol invu9, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:53]
+INFO: [VRFC 10-2458] undeclared symbol u10_out, assumed default net type wire [C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sources_1/new/sqrt.v:55]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/86137/Desktop/verilog/1120190699¹ØÏşÓî/1120190699¹ØÏşÓî.srcs/sim_1/new/testbench.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module testbench
